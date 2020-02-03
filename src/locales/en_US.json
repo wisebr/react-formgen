@@ -1,0 +1,15 @@
+{
+  "formSettings": "Form Settings",
+  "noSettings": "No Settings",
+  "name": "Name",
+  "varKey": "Variable Key",
+  "defaultValue": "Default Value",
+  "required": "Required",
+  "hidden": "Hidden",
+
+  "lib.title": "Form Library",
+  "lib.baseElements": "Base Elements",
+
+  "lib.TextField": "Text Field",
+  "lib.Select": "Dropdown"
+}
