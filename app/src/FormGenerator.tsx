@@ -1,9 +1,8 @@
 import { Grid } from '@material-ui/core';
-import React, { useReducer } from 'react';
+import React, { useCallback, useReducer } from 'react';
 import {
-  BASE_ELEMENT_MAP,
   BaseLibrary,
-  ElementMap,
+  ElementData,
   elementsReducer,
   ElementType,
   FormgenProvider,
@@ -11,18 +10,15 @@ import {
   LibItemData,
   Library,
   Previewer,
+  SettingPanel,
 } from 'react-formgen';
 
 const customLibItems: LibItemData[] = [{
   name: 'group1',
-  thumb: ''
-}];
-
-const elementMap: ElementMap = {
-  ...BASE_ELEMENT_MAP,
-  group1: {
+  thumb: '',
+  element: {
     type: 'group1',
-    items: [{
+    elements: [{
       type: ElementType.TextField,
       required: true,
       hidden: false,
@@ -42,22 +38,45 @@ const elementMap: ElementMap = {
       meta: {},
     }]
   }
-};
+}];
 
 const FormGenerator = () => {
   const [elements, dispatchElement] = useReducer(elementsReducer, []);
 
+  const handleAddElement = useCallback(
+    (element: ElementData) => dispatchElement({ type: 'ADD_ELEMENT', payload: element }),
+    []
+  );
+
+  const handleRemoveElement = useCallback(
+    (id: string) => dispatchElement({ type: 'REMOVE_ELEMENT', payload: id }),
+    []
+  );
+
+  const handleUpdateElement = useCallback(
+    (payload: Partial<ElementData>) => dispatchElement({ type: 'UPDATE_ELEMENT', payload }),
+    []
+  );
+
   return (
-    <FormgenProvider elements={elements} dispatchElement={dispatchElement} elementMap={elementMap}>
+    <FormgenProvider
+      elements={elements}
+      onAddElement={handleAddElement}
+      onRemoveElement={handleRemoveElement}
+      onUpdateElement={handleUpdateElement}
+    >
       <Grid container>
         <Grid item xs={2}>
           <LibContainer>
-            <BaseLibrary />
-            <Library name="custom" items={customLibItems} />
+            <BaseLibrary dragType="library" />
+            <Library dragType="library" name="custom" items={customLibItems} />
           </LibContainer>
         </Grid>
-        <Grid item xs={10}>
-          <Previewer />
+        <Grid item xs={8}>
+          <Previewer acceptDropType="library" />
+        </Grid>
+        <Grid item xs={2}>
+          <SettingPanel />
         </Grid>
       </Grid>
     </FormgenProvider>

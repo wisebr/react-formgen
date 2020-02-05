@@ -17,49 +17,34 @@ const useStyles = makeStyles({
 });
 
 const TextFieldSettings: React.FC<TextFieldSettingsProps> = ({data}) => {
-  const { dispatchElement, getLocale } = useContext(
+  const { onUpdateElement, getLocale } = useContext(
     FormgenContext,
   );
   const classes = useStyles();
   const handleChangeVarKey = ({
     target: { value },
   }: React.ChangeEvent<HTMLInputElement>) => {
-    dispatchElement({
-      type: 'UPDATE_ELEMENT',
-      payload: { id: data.id, name: value },
-    });
+    onUpdateElement({ id: data.id, name: value });
   };
   const handleChangeTitle = ({
     target: { value },
   }: React.ChangeEvent<HTMLInputElement>) => {
-    dispatchElement({
-      type: 'UPDATE_ELEMENT',
-      payload: { id: data.id, locales: { title: value } },
-    });
+    onUpdateElement({ id: data.id, locales: { title: value } });
   };
   const handleChangeValue = ({
     target: { value },
   }: React.ChangeEvent<HTMLInputElement>) => {
-    dispatchElement({
-      type: 'UPDATE_ELEMENT',
-      payload: { id: data.id, value },
-    });
+    onUpdateElement({ id: data.id, value });
   };
   const handleChangeRequired = ({
     target: { checked },
   }: React.ChangeEvent<HTMLInputElement>) => {
-    dispatchElement({
-      type: 'UPDATE_ELEMENT',
-      payload: { id: data.id, required: checked },
-    });
+    onUpdateElement({ id: data.id, required: checked });
   };
   const handleChangeHidden = ({
     target: { checked },
   }: React.ChangeEvent<HTMLInputElement>) => {
-    dispatchElement({
-      type: 'UPDATE_ELEMENT',
-      payload: { id: data.id, hidden: checked },
-    });
+    onUpdateElement({ id: data.id, hidden: checked });
   };
   return (
     <div>

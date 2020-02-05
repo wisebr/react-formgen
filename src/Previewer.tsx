@@ -1,17 +1,17 @@
-import { ClickAwayListener, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import classNames from 'classnames';
-import React, { useCallback, useContext } from 'react';
+import React, { useContext } from 'react';
 import { useDrop } from 'react-dnd';
 
+import { BASE_LIBRARY_TYPE } from './constants';
 import ElementSwitch from './ElementSwitch';
 import ElementWrapper from './ElementWrapper';
 import FormgenContext from './FormgenContext';
-import SettingPanel from './SettingPanel';
-import { ElementOptions, LibraryDragItem } from './types';
+import { ElementData, ElementOptions, LibraryDragItem } from './types';
 
 export interface PreviewerProps {
   className?: string;
+  acceptDropType?: string;
 }
 
 const useStyles = makeStyles({
@@ -22,79 +22,63 @@ const useStyles = makeStyles({
   },
 });
 
-const Previewer: React.FC<PreviewerProps> = ({ className }) => {
+const Previewer: React.FC<PreviewerProps> = ({ className, acceptDropType = BASE_LIBRARY_TYPE }) => {
   const classes = useStyles();
   const {
     elements,
-    elementMap,
-    dispatchElement,
+    onAddElement,
     activeElement,
     activedElement,
     getLocale,
   } = useContext(FormgenContext);
 
   const [collectedProps, drop] = useDrop<LibraryDragItem, void, {}>({
-    accept: 'library',
+    accept: acceptDropType,
     drop: item => {
-      (function addElement (element?: ElementOptions) {
-        if (!element) {
-          console.error(`there is no element ${item.name} config in "elementMap"`);
-          return;
-        }
-        if (element.items) {
-          element.items.forEach(el => {
+      (function addElement (element: ElementOptions) {
+        if (element.elements) {
+          element.elements.forEach(el => {
             addElement(el);
           });
         } else {
-          const payload = {
+          const payload: ElementData = {
+            id: '',
             order: 0,
             name: '',
             required: false,
             hidden: false,
             meta: {},
             props: {},
+            settings: {},
             ...element,
             locales: {
               ...element.locales,
               title: getLocale(`lib.${element.type}`),
             },
           };
-          dispatchElement({ type: 'ADD_ELEMENT', payload });
+          onAddElement(payload);
         }
-      })(elementMap[item.name]);
+      })(item.element);
       console.log('dropped item:', item);
     },
   });
 
   const createElementClickHandler = (id: string) => () => activeElement(id);
 
-  const handleClickAwayElements = useCallback(() => activeElement(''), []);
-
   console.log('render previewer, collectedProps:', collectedProps);
   return (
-    <Grid container className={classNames(classes.root, className)}>
-      <ClickAwayListener onClickAway={handleClickAwayElements}>
-        <>
-          <Grid item xs={activedElement ? 8 : 12} ref={drop}>
-            {elements.map(el => (
-              <ElementWrapper
-                key={el.id}
-                id={el.id}
-                actived={!!activedElement && activedElement.id === el.id}
-                onClick={createElementClickHandler(el.id)}
-              >
-                <ElementSwitch data={el} />
-              </ElementWrapper>
-            ))}
-          </Grid>
-          {!!activedElement && (
-            <Grid item xs={4}>
-              <SettingPanel />
-            </Grid>
-          )}
-        </>
-      </ClickAwayListener>
-    </Grid>
+    <div className={classNames(classes.root, className)} ref={drop}>
+      {elements.map(el => (
+        <ElementWrapper
+          key={el.id}
+          id={el.id}
+          actived={!!activedElement && activedElement.id === el.id}
+          onClick={createElementClickHandler(el.id)}
+        >
+          <ElementSwitch data={el} />
+        </ElementWrapper>
+      ))}
+    </div>
   );
 };
 

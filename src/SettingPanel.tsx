@@ -15,7 +15,7 @@ const SettingPanel: React.FC = () => {
   const classes = useStyles();
   const { activedElement, getLocale } = useContext(FormgenContext);
   if (!activedElement) {
-    return <div className={classes.root}>{getLocale('noSettings')}</div>;
+    return null;
   }
 
   const Component: React.ComponentType<any> = (settings as any)[

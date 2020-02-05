@@ -1,13 +1,23 @@
-import { ElementOptions, ElementType, LibItemData, LibraryData, ObjectMap } from './types';
+import { ElementOptions, ElementType, LibItemData, LibraryData } from './types';
+
+export const ELEMENT_TextField: ElementOptions = {
+  type: ElementType.TextField,
+};
+
+export const ELEMENT_Select: ElementOptions = {
+  type: ElementType.Select,
+};
 
 export const BASE_LIB_ITEMS: LibItemData[] = [
   {
     name: ElementType.TextField,
     thumb: '',
+    element: ELEMENT_TextField
   },
   {
     name: ElementType.Select,
     thumb: '',
+    element: ELEMENT_Select
   },
 ];
 
@@ -16,35 +26,5 @@ export const BASE_LIBRARY: LibraryData = {
   items: BASE_LIB_ITEMS,
 };
 
-export const ELEMENT_TextField: ElementOptions = {
-  name: '',
-  type: ElementType.TextField,
-  value: '',
-  required: false,
-  hidden: false,
-  locales: {
-    title: '',
-  },
-  props: {},
-  meta: {},
-};
 
-export const ELEMENT_Select: ElementOptions = {
-  name: '',
-  type: ElementType.Select,
-  value: '',
-  required: false,
-  hidden: false,
-  locales: {
-    title: '',
-  },
-  props: {},
-  meta: {},
-};
-
-export const BASE_ELEMENT_MAP: ObjectMap<ElementOptions> = {
-  [ElementType.TextField]: ELEMENT_TextField,
-  [ElementType.Select]: ELEMENT_Select,
-};
-
-export const DEF_INPUT_SETTING = {};
+export const BASE_LIBRARY_TYPE = 'baseLibrary';

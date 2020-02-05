@@ -2,42 +2,45 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { DndProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
-import { BASE_ELEMENT_MAP } from './constants.js';
 import enUs from './locales/en_US.json';
-import { ElementAction, ElementData, ElementMap, ObjectMap } from './types';
+import { ElementData, ObjectMap } from './types';
 
 export interface FormgenContextProps {
   locales: ObjectMap;
-  elementMap: ElementMap;
   elements: ElementData[];
-  dispatchElement: (action: ElementAction) => void;
   getLocale: (key: string) => string;
   activedElement?: ElementData;
   activeElement: (id: string) => void;
+  onAddElement: (element: ElementData) => void;
+  onUpdateElement: (payload: Partial<ElementData>) => void;
+  onRemoveElement: (id: string) => void;
 }
 
 export interface FormgenProviderProps {
   locales?: ObjectMap;
-  elementMap?: ElementMap;
   elements?: ElementData[];
-  dispatchElement: (action: ElementAction) => void;
+  onAddElement?: (element: ElementData) => void;
+  onUpdateElement?: (payload: Partial<ElementData>) => void;
+  onRemoveElement?: (id: string) => void;
 }
 
 const FormgenContext = React.createContext<FormgenContextProps>({
   locales: enUs,
-  elementMap: {},
   elements: [],
-  dispatchElement: () => undefined,
   getLocale: () => '',
   activeElement: () => undefined,
+  onAddElement: () => undefined,
+  onUpdateElement: () => undefined,
+  onRemoveElement: () => undefined,
 });
 
 export const FormgenProvider: React.FC<FormgenProviderProps> = ({
   children,
   locales = enUs,
-  elementMap = BASE_ELEMENT_MAP,
   elements = [],
-  dispatchElement,
+  onAddElement = () => undefined,
+  onUpdateElement = () => undefined,
+  onRemoveElement= () => undefined,
 }) => {
   const [activedId, setActivedId] = useState<string>();
   const activedElement = useMemo(
@@ -64,8 +67,9 @@ export const FormgenProvider: React.FC<FormgenProviderProps> = ({
         value={{
           locales,
           elements,
-          elementMap,
-          dispatchElement,
+          onAddElement,
+          onUpdateElement,
+          onRemoveElement,
           activedElement,
           activeElement,
           getLocale,

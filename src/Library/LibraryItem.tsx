@@ -5,10 +5,11 @@ import React, { useContext } from 'react';
 import { useDrag } from 'react-dnd';
 
 import { FormgenContext } from '..';
-import { LibraryDragItem } from '../types';
+import { ElementOptions, LibraryDragItem } from '../types';
 
 export interface LibraryItemProps {
-  name: string;
+  element: ElementOptions;
+  dragType: string;
 }
 
 const useStyles = makeStyles({
@@ -20,17 +21,17 @@ const useStyles = makeStyles({
   },
 });
 
-const LibraryItem: React.FC<LibraryItemProps> = ({ name }) => {
+const LibraryItem: React.FC<LibraryItemProps> = ({ element, dragType }) => {
   const { getLocale } = useContext(FormgenContext);
   const classes = useStyles();
   const [collectedProps, drag] = useDrag<LibraryDragItem, void, {}>({
-    item: { name, type: 'library' },
+    item: { element, type: dragType },
   });
   console.log(collectedProps);
 
   return (
     <ListItem className={classes.root} ref={drag}>
-      {getLocale(`lib.${name}`)}
+      {getLocale(`lib.${element.type}`)}
     </ListItem>
   );
 };

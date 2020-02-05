@@ -8,16 +8,17 @@ import LibraryItem from './LibraryItem';
 export interface ElementLibProps {
   name: string;
   items: LibItemData[];
+  dragType: string;
 }
 
-const Library: React.FC<ElementLibProps> = ({ name, items }) => {
+const Library: React.FC<ElementLibProps> = ({ name, items, dragType }) => {
   const { getLocale } = useContext(FormgenContext);
   return (
     <>
       <ListItem>{getLocale(`lib.${name}`)}</ListItem>
       <div>
         {items.map(item => (
-          <LibraryItem key={item.name} name={item.name} />
+          <LibraryItem key={item.name} element={item.element} dragType={dragType} />
         ))}
       </div>
     </>

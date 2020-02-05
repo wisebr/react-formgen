@@ -49,11 +49,11 @@ const ElementWrapper: React.FC<ElementWrapperProps> = ({
   onClick,
 }) => {
   const classes = useStyles();
-  const { dispatchElement } = useContext(FormgenContext);
+  const { onRemoveElement } = useContext(FormgenContext);
 
   const handleRemove = useCallback((ev: React.MouseEvent) => {
     ev.stopPropagation();
-    dispatchElement({ type: 'REMOVE_ELEMENT', payload: id });
+    onRemoveElement(id);
   }, []);
 
   return (
