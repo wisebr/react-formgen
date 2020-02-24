@@ -1,12 +1,13 @@
 import { Checkbox, FormControl, FormControlLabel, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import React, { useContext } from 'react';
+import React, { useCallback, useContext } from 'react';
 
 import FormgenContext from '../FormgenContext';
 import { ElementData } from '../types';
 
 export interface TextFieldSettingsProps {
   data: ElementData;
+  onUpdateElement?: (payload: Partial<ElementData>) => void;
 }
 
 const useStyles = makeStyles({
@@ -16,35 +17,41 @@ const useStyles = makeStyles({
   },
 });
 
-const TextFieldSettings: React.FC<TextFieldSettingsProps> = ({data}) => {
-  const { onUpdateElement, getLocale } = useContext(
-    FormgenContext,
-  );
+const TextFieldSettings: React.FC<TextFieldSettingsProps> = ({
+  data,
+  onUpdateElement,
+}) => {
+  const { getLocale } = useContext(FormgenContext);
   const classes = useStyles();
+  const updateElement = useCallback((payload: Partial<ElementData>) => {
+    if (onUpdateElement) {
+      onUpdateElement(payload);
+    }
+  }, []);
   const handleChangeVarKey = ({
     target: { value },
   }: React.ChangeEvent<HTMLInputElement>) => {
-    onUpdateElement({ id: data.id, name: value });
+    updateElement({ id: data.id, name: value });
   };
   const handleChangeTitle = ({
     target: { value },
   }: React.ChangeEvent<HTMLInputElement>) => {
-    onUpdateElement({ id: data.id, locales: { title: value } });
+    updateElement({ id: data.id, locales: { title: value } });
   };
   const handleChangeValue = ({
     target: { value },
   }: React.ChangeEvent<HTMLInputElement>) => {
-    onUpdateElement({ id: data.id, value });
+    updateElement({ id: data.id, value });
   };
   const handleChangeRequired = ({
     target: { checked },
   }: React.ChangeEvent<HTMLInputElement>) => {
-    onUpdateElement({ id: data.id, required: checked });
+    updateElement({ id: data.id, required: checked });
   };
   const handleChangeHidden = ({
     target: { checked },
   }: React.ChangeEvent<HTMLInputElement>) => {
-    onUpdateElement({ id: data.id, hidden: checked });
+    updateElement({ id: data.id, hidden: checked });
   };
   return (
     <div>
@@ -70,10 +77,7 @@ const TextFieldSettings: React.FC<TextFieldSettingsProps> = ({data}) => {
         <FormControlLabel
           label={getLocale('required')}
           control={
-            <Checkbox
-              checked={data.required}
-              onChange={handleChangeRequired}
-            />
+            <Checkbox checked={data.required} onChange={handleChangeRequired} />
           }
         />
       </FormControl>
@@ -81,10 +85,7 @@ const TextFieldSettings: React.FC<TextFieldSettingsProps> = ({data}) => {
         <FormControlLabel
           label={getLocale('hidden')}
           control={
-            <Checkbox
-              checked={data.hidden}
-              onChange={handleChangeHidden}
-            />
+            <Checkbox checked={data.hidden} onChange={handleChangeHidden} />
           }
         />
       </FormControl>

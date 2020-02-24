@@ -3,14 +3,13 @@ import { lightBlue } from '@material-ui/core/colors';
 import { Clear } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/styles';
 import classNames from 'classnames';
-import React, { useCallback, useContext } from 'react';
-
-import FormgenContext from './FormgenContext';
+import React, { useCallback } from 'react';
 
 export interface ElementWrapperProps {
   id: string;
   actived?: boolean;
   onClick?: (ev: React.MouseEvent) => void;
+  onRemoveElement?: (id: string) => void;
 }
 
 const useStyles = makeStyles(() => ({
@@ -47,13 +46,15 @@ const ElementWrapper: React.FC<ElementWrapperProps> = ({
   id,
   actived,
   onClick,
+  onRemoveElement,
 }) => {
   const classes = useStyles();
-  const { onRemoveElement } = useContext(FormgenContext);
 
   const handleRemove = useCallback((ev: React.MouseEvent) => {
     ev.stopPropagation();
-    onRemoveElement(id);
+    if (onRemoveElement) {
+      onRemoveElement(id);
+    }
   }, []);
 
   return (

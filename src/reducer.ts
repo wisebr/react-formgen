@@ -3,33 +3,40 @@ import shortId from 'shortid';
 
 import { ElementAction, ElementData } from './types';
 
+const createElement = (el: ElementData) => el.id
+? { ...el }
+: { ...el, id: shortId() };
+
 export const elementsReducer: Reducer<
   ElementData[],
   ElementAction
-> = (state, action) => {
-  switch (action.type) {
-    case 'ADD_ELEMENT':
-      const element = action.payload.id
-        ? { ...action.payload }
-        : { ...action.payload, id: shortId() };
-      return [...state, element];
-    case 'REMOVE_ELEMENT':
-      const index = state.findIndex(e => e.id === action.payload);
+> = (state, {type, payload}) => {
+  switch (type) {
+    case 'FORMGEN/ADD_ELEMENT':
+      return [...state, createElement(payload)];
+    case 'FORMGEN/REMOVE_ELEMENT':
+      const index = state.findIndex(e => e.id === payload);
       if (index >= 0) {
         const newState = [...state];
         newState.splice(index, 1);
         return newState;
       }
       break;
-    case 'UPDATE_ELEMENT':
-      const idx = state.findIndex(e => e.id === action.payload.id);
+    case 'FORMGEN/UPDATE_ELEMENT':
+      const idx = state.findIndex(e => e.id === payload.id);
       if (idx >= 0) {
         const newState = [...state];
-        const newElement = { ...state[idx], ...action.payload }; // shallow copy
+        const newElement = { ...state[idx], ...payload }; // shallow copy
         newState.splice(idx, 1, newElement);
         return newState;
       }
       break;
+    case 'FORMGEN/REMOVE_ALL_ELEMENTS':
+      return [];
+    case 'FORMGEN/ADD_ELEMENTS':
+      if (payload && payload.length) {
+        return [...state, ...payload.map((el: ElementData) => createElement(el))];
+      }
   }
   return state;
 };

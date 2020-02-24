@@ -10,6 +10,7 @@ export { default as Library } from './Library';
 export * from './Library';
 export { default as SettingPanel } from './SettingPanel';
 export * from './SettingPanel';
+export * from './hooks';
 export * from './reducer';
 export * from './types';
 export * from './constants';

@@ -4,6 +4,7 @@ import React, { useContext } from 'react';
 
 import FormgenContext from './FormgenContext';
 import * as settings from './settings';
+import { ElementData } from './types';
 
 const useStyles = makeStyles({
   root: {
@@ -11,15 +12,20 @@ const useStyles = makeStyles({
   },
 });
 
-const SettingPanel: React.FC = () => {
+export interface SettingPanel {
+  element?: ElementData;
+  onUpdateElement?: (payload: Partial<ElementData>) => void;
+}
+
+const SettingPanel: React.FC<SettingPanel> = ({element, onUpdateElement}) => {
   const classes = useStyles();
-  const { activedElement, getLocale } = useContext(FormgenContext);
-  if (!activedElement) {
+  const { getLocale } = useContext(FormgenContext);
+  if (!element) {
     return null;
   }
 
   const Component: React.ComponentType<any> = (settings as any)[
-    `${activedElement.type}Settings`
+    `${element.type}Settings`
   ];
 
   if (!Component) {
@@ -29,7 +35,7 @@ const SettingPanel: React.FC = () => {
   return (
     <div className={classes.root}>
       <Typography>{getLocale('formSettings')}</Typography>
-      <Component data={activedElement} />
+      <Component data={element} onUpdateElement={onUpdateElement} />
     </div>
   );
 };

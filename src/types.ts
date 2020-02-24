@@ -42,6 +42,7 @@ export interface ElementOptions<P extends ObjectMap = ObjectMap> {
 }
 
 export interface LibItemData {
+  id: string; // unique
   name: string; // unique, extends ElementType
   thumb: React.ReactNode;
   element: ElementOptions;
@@ -49,6 +50,7 @@ export interface LibItemData {
 
 export interface LibraryDragItem {
   type: string;
+  id: string; // LibItemData.id
   element: ElementOptions;
 }
 
@@ -61,7 +63,7 @@ export interface ElementData<P extends ObjectMap = ObjectMap> {
   id: string; // unique
   name: string; // unique
   value?: any; // default value
-  type: string; // LibItem.name, ElementType
+  type: string; // LibItemData.name, ElementType
   order: number; // span 10
   required: boolean;
   hidden: boolean;
@@ -75,6 +77,6 @@ export type ElementMap = ObjectMap<ElementOptions>;
 
 export interface ElementAction {
   type: string;
-  payload: any;
+  payload?: any;
   [key: string]: any;
 }

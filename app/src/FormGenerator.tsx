@@ -1,9 +1,7 @@
 import { Grid } from '@material-ui/core';
-import React, { useCallback, useReducer } from 'react';
+import React from 'react';
 import {
   BaseLibrary,
-  ElementData,
-  elementsReducer,
   ElementType,
   FormgenProvider,
   LibContainer,
@@ -11,60 +9,53 @@ import {
   Library,
   Previewer,
   SettingPanel,
+  useElementsState,
 } from 'react-formgen';
 
-const customLibItems: LibItemData[] = [{
-  name: 'group1',
-  thumb: '',
-  element: {
-    type: 'group1',
-    elements: [{
-      type: ElementType.TextField,
-      required: true,
-      hidden: false,
-      locales: {
-        title: 'var one'
-      },
-      props: {},
-      meta: {},
-    }, {
-      type: ElementType.TextField,
-      required: true,
-      hidden: false,
-      locales: {
-        title: 'var two'
-      },
-      props: {},
-      meta: {},
-    }]
-  }
-}];
+const customLibItems: LibItemData[] = [
+  {
+    name: 'group1',
+    thumb: '',
+    element: {
+      type: 'group1',
+      elements: [
+        {
+          type: ElementType.TextField,
+          required: true,
+          hidden: false,
+          locales: {
+            title: 'var one',
+          },
+          props: {},
+          meta: {},
+        },
+        {
+          type: ElementType.TextField,
+          required: true,
+          hidden: false,
+          locales: {
+            title: 'var two',
+          },
+          props: {},
+          meta: {},
+        },
+      ],
+    },
+  },
+];
 
 const FormGenerator = () => {
-  const [elements, dispatchElement] = useReducer(elementsReducer, []);
-
-  const handleAddElement = useCallback(
-    (element: ElementData) => dispatchElement({ type: 'ADD_ELEMENT', payload: element }),
-    []
-  );
-
-  const handleRemoveElement = useCallback(
-    (id: string) => dispatchElement({ type: 'REMOVE_ELEMENT', payload: id }),
-    []
-  );
-
-  const handleUpdateElement = useCallback(
-    (payload: Partial<ElementData>) => dispatchElement({ type: 'UPDATE_ELEMENT', payload }),
-    []
-  );
+  const {
+    elements,
+    addElement,
+    updateElement,
+    removeElement,
+    activedElement,
+    activeElement,
+  } = useElementsState();
 
   return (
-    <FormgenProvider
-      elements={elements}
-      onAddElement={handleAddElement}
-      onRemoveElement={handleRemoveElement}
-      onUpdateElement={handleUpdateElement}
-    >
+    <FormgenProvider>
       <Grid container>
         <Grid item xs={2}>
           <LibContainer>
@@ -73,10 +64,19 @@ const FormGenerator = () => {
           </LibContainer>
         </Grid>
         <Grid item xs={8}>
-          <Previewer acceptDropType="library" />
+          <Previewer
+            elements={elements}
+            onAddElement={addElement}
+            onRemoveElement={removeElement}
+            onActiveElement={activeElement}
+            acceptDropType="library"
+          />
         </Grid>
         <Grid item xs={2}>
-          <SettingPanel />
+          <SettingPanel
+            element={activedElement}
+            onUpdateElement={updateElement}
+          />
         </Grid>
       </Grid>
     </FormgenProvider>

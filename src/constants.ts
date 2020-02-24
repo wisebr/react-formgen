@@ -10,11 +10,13 @@ export const ELEMENT_Select: ElementOptions = {
 
 export const BASE_LIB_ITEMS: LibItemData[] = [
   {
+    id: ElementType.TextField,
     name: ElementType.TextField,
     thumb: '',
     element: ELEMENT_TextField
   },
   {
+    id: ElementType.Select,
     name: ElementType.Select,
     thumb: '',
     element: ELEMENT_Select
