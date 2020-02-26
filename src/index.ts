@@ -1,5 +1,7 @@
 export { default as FormgenContext } from './FormgenContext';
 export * from './FormgenContext';
+export { default as FormgenProvider } from './FormgenProvider';
+export * from './FormgenProvider';
 export { default as FormRenderer } from './FormRenderer';
 export * from './FormRenderer';
 export { default as Previewer } from './Previewer';

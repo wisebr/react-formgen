@@ -24,6 +24,8 @@ const SettingPanel: React.FC<SettingPanel> = ({element, onUpdateElement}) => {
     return null;
   }
 
+  console.log(`SettingPanel rendering:`, element);
+
   const Component: React.ComponentType<any> = (settings as any)[
     `${element.type}Settings`
   ];

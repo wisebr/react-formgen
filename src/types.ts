@@ -25,7 +25,7 @@ export interface SettingsOptions {
   varKey?: boolean;
   value?: boolean;
   required?: boolean;
-  hidden?: boolean;
+  disabled?: boolean;
 }
 
 export interface ElementOptions<P extends ObjectMap = ObjectMap> {
@@ -33,7 +33,7 @@ export interface ElementOptions<P extends ObjectMap = ObjectMap> {
   value?: any; // default value
   type: string; // form component name
   required?: boolean;
-  hidden?: boolean;
+  disabled?: boolean;
   locales?: ElementLocale;
   props?: P;
   meta?: ObjectMap;
@@ -62,11 +62,11 @@ export interface LibraryData {
 export interface ElementData<P extends ObjectMap = ObjectMap> {
   id: string; // unique
   name: string; // unique
-  value?: any; // default value
+  value: any; // default value
   type: string; // LibItemData.name, ElementType
   order: number; // span 10
   required: boolean;
-  hidden: boolean;
+  disabled: boolean;
   locales: ElementLocale;
   props: P;
   meta: ObjectMap;

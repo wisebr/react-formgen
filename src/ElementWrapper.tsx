@@ -1,6 +1,6 @@
 import { IconButton } from '@material-ui/core';
 import { lightBlue } from '@material-ui/core/colors';
-import { Clear } from '@material-ui/icons';
+import Clear from '@material-ui/icons/Clear';
 import { makeStyles } from '@material-ui/styles';
 import classNames from 'classnames';
 import React, { useCallback } from 'react';

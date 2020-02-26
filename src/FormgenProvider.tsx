@@ -2,24 +2,15 @@ import React, { useCallback } from 'react';
 import { DndProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
+import FormgenContext from './FormgenContext';
 import enUs from './locales/en_US.json';
 import { ObjectMap } from './types';
-
-export interface FormgenContextProps {
-  locales: ObjectMap;
-  getLocale: (key: string) => string;
-}
 
 export interface FormgenProviderProps {
   locales?: ObjectMap;
 }
 
-const FormgenContext = React.createContext<FormgenContextProps>({
-  locales: enUs,
-  getLocale: () => '',
-});
-
-export const FormgenProvider: React.FC<FormgenProviderProps> = ({
+const FormgenProvider: React.FC<FormgenProviderProps> = ({
   children,
   locales = enUs,
 }) => {
@@ -46,4 +37,4 @@ export const FormgenProvider: React.FC<FormgenProviderProps> = ({
   );
 };
 
-export default FormgenContext;
+export default FormgenProvider;

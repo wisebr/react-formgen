@@ -14,6 +14,7 @@ import {
 
 const customLibItems: LibItemData[] = [
   {
+    id: 'abc',
     name: 'group1',
     thumb: '',
     element: {
@@ -22,7 +23,7 @@ const customLibItems: LibItemData[] = [
         {
           type: ElementType.TextField,
           required: true,
-          hidden: false,
+          disabled: false,
           locales: {
             title: 'var one',
           },
@@ -32,7 +33,7 @@ const customLibItems: LibItemData[] = [
         {
           type: ElementType.TextField,
           required: true,
-          hidden: false,
+          disabled: false,
           locales: {
             title: 'var two',
           },

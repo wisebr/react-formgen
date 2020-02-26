@@ -5,7 +5,7 @@
   "varKey": "Variable Key",
   "defaultValue": "Default Value",
   "required": "Required",
-  "hidden": "Hidden",
+  "disabled": "Disable",
 
   "lib.title": "Form Library",
   "lib.baseElements": "Base Elements",

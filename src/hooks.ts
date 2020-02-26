@@ -7,7 +7,12 @@ export const useElementsState = (preloadedElements: ElementData[] = []) => {
   const [elements, dispatchElement] = useReducer(elementsReducer, preloadedElements);
   const [activedId, setActivedId] = useState<string>();
   const activedElement = useMemo(
-    () => elements.find(el => el.id === activedId),
+    () => {
+      if (activedId) {
+        return elements.find(el => el.id === activedId);
+      }
+      return;
+    },
     [elements, activedId],
   );
 
@@ -44,8 +49,12 @@ export const useElementsState = (preloadedElements: ElementData[] = []) => {
     }
   }, []);
 
+  const deactiveElement = useCallback(() => {
+    setActivedId('');
+  }, []);
+
   return {
     elements, addElement, removeElement, updateElement, removeAllElements, addElements,
-    activedElement, activeElement,
+    activedElement, activeElement, deactiveElement
   };
 };

@@ -64,8 +64,9 @@ const Previewer: React.FC<PreviewerProps> = ({
             id: '',
             order: 0,
             name: '',
+            value: '',
             required: false,
-            hidden: false,
+            disabled: false,
             meta: {},
             props: {},
             settings: {},
@@ -96,7 +97,7 @@ const Previewer: React.FC<PreviewerProps> = ({
   console.log('render previewer, collectedProps:', collectedProps);
   return (
     <div className={classNames(classes.root, className)} ref={drop}>
-      {elements.map(el => (
+      {elements.map((el: ElementData) => (
         <ElementWrapper
           key={el.id}
           id={el.id}

@@ -21,6 +21,7 @@ const TextFieldSettings: React.FC<TextFieldSettingsProps> = ({
   data,
   onUpdateElement,
 }) => {
+  console.log(`TextFieldSettings rendering:`, data);
   const { getLocale } = useContext(FormgenContext);
   const classes = useStyles();
   const updateElement = useCallback((payload: Partial<ElementData>) => {
@@ -48,47 +49,47 @@ const TextFieldSettings: React.FC<TextFieldSettingsProps> = ({
   }: React.ChangeEvent<HTMLInputElement>) => {
     updateElement({ id: data.id, required: checked });
   };
-  const handleChangeHidden = ({
+  const handleChangeDisabled = ({
     target: { checked },
   }: React.ChangeEvent<HTMLInputElement>) => {
-    updateElement({ id: data.id, hidden: checked });
+    updateElement({ id: data.id, disabled: checked });
   };
   return (
     <div>
-      <TextField
+      {data.settings.varKey === false || <TextField
         className={classes.field}
         label={getLocale('varKey')}
         value={data.name}
         onChange={handleChangeVarKey}
-      />
-      <TextField
+      />}
+      {data.settings.name === false || <TextField
         className={classes.field}
         label={getLocale('name')}
         value={data.locales.title}
         onChange={handleChangeTitle}
-      />
-      <TextField
+      />}
+      {data.settings.value === false || <TextField
         className={classes.field}
         label={getLocale('defaultValue')}
         value={data.value}
         onChange={handleChangeValue}
-      />
-      <FormControl>
+      />}
+      {data.settings.required === false || <FormControl>
         <FormControlLabel
           label={getLocale('required')}
           control={
             <Checkbox checked={data.required} onChange={handleChangeRequired} />
           }
         />
-      </FormControl>
-      <FormControl>
+      </FormControl>}
+      {data.settings.disabled === false || <FormControl>
         <FormControlLabel
-          label={getLocale('hidden')}
+          label={getLocale('disabled')}
           control={
-            <Checkbox checked={data.hidden} onChange={handleChangeHidden} />
+            <Checkbox checked={data.disabled} onChange={handleChangeDisabled} />
           }
         />
-      </FormControl>
+      </FormControl>}
     </div>
   );
 };

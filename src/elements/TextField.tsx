@@ -24,6 +24,7 @@ const TextField: React.FC<TextFieldProps> = ({ data, onChange }) => {
       label={data.locales.title}
       value={data.value}
       required={data.required}
+      disabled={data.disabled}
       onChange={onChange}
     />
   );

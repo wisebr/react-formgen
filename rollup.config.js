@@ -1,5 +1,6 @@
 import json from '@rollup/plugin-json';
 import typescript from 'rollup-plugin-typescript2';
+import visualizer from 'rollup-plugin-visualizer';
 
 import pkg from './package.json';
 
@@ -26,6 +27,7 @@ export function getConfig({
         tsconfig,
         clean: true,
       }),
+      visualizer(),
     ],
     output,
   };
