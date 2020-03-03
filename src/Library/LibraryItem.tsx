@@ -1,10 +1,9 @@
 import { ListItem } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/styles';
-import React, { useContext } from 'react';
+import React from 'react';
 import { useDrag } from 'react-dnd';
 
-import { FormgenContext } from '..';
 import { LibItemData, LibraryDragItem } from '../types';
 
 export interface LibraryItemProps {
@@ -22,8 +21,7 @@ const useStyles = makeStyles({
   },
 });
 
-const LibraryItem: React.FC<LibraryItemProps> = ({ data: {element, id}, dragType }) => {
-  const { getLocale } = useContext(FormgenContext);
+const LibraryItem: React.FC<LibraryItemProps> = ({ data: {element, id, name}, dragType }) => {
   const classes = useStyles();
   const [collectedProps, drag] = useDrag<LibraryDragItem, void, {}>({
     item: { element, type: dragType, id },
@@ -32,7 +30,7 @@ const LibraryItem: React.FC<LibraryItemProps> = ({ data: {element, id}, dragType
 
   return (
     <ListItem className={classes.root} ref={drag}>
-      {getLocale(`lib.${element.type}`)}
+      {name}
     </ListItem>
   );
 };

@@ -36,7 +36,6 @@ export interface ElementOptions<P extends ObjectMap = ObjectMap> {
   disabled?: boolean;
   locales?: ElementLocale;
   props?: P;
-  meta?: ObjectMap;
   elements?: ElementOptions[]; // if there are sub elements
   settings?: SettingsOptions;
 }
@@ -59,7 +58,7 @@ export interface LibraryData {
   items: LibItemData[];
 }
 
-export interface ElementData<P extends ObjectMap = ObjectMap> {
+export interface ElementData<P extends ObjectMap = ObjectMap, S extends SettingsOptions = SettingsOptions> {
   id: string; // unique
   name: string; // unique
   value: any; // default value
@@ -69,8 +68,7 @@ export interface ElementData<P extends ObjectMap = ObjectMap> {
   disabled: boolean;
   locales: ElementLocale;
   props: P;
-  meta: ObjectMap;
-  settings: SettingsOptions;
+  settings: S;
 }
 
 export type ElementMap = ObjectMap<ElementOptions>;

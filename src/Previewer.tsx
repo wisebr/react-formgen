@@ -67,7 +67,6 @@ const Previewer: React.FC<PreviewerProps> = ({
             value: '',
             required: false,
             disabled: false,
-            meta: {},
             props: {},
             settings: {},
             ...element,
