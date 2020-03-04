@@ -71,6 +71,16 @@ export interface ElementData<P extends ObjectMap = ObjectMap, S extends Settings
   settings: S;
 }
 
+export interface BaseElementProps<V = any, S extends SettingsOptions = SettingsOptions> {
+  name: string;
+  value: V;
+  type: string;
+  required: boolean;
+  disabled: boolean;
+  locales: ElementLocale;
+  settings: S;
+}
+
 export type ElementMap = ObjectMap<ElementOptions>;
 
 export interface ElementAction {

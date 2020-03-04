@@ -35,4 +35,4 @@ const LibraryItem: React.FC<LibraryItemProps> = ({ data: {element, id, name}, dr
   );
 };
 
-export default LibraryItem;
+export default React.memo(LibraryItem);

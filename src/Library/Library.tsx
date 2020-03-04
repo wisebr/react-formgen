@@ -25,4 +25,4 @@ const Library: React.FC<ElementLibProps> = ({ name, items, dragType }) => {
   );
 };
 
-export default Library;
+export default React.memo(Library);

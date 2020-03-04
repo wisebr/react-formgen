@@ -1,19 +1,37 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import * as elements from './elements';
 import { ElementData } from './types';
 
-export interface ElementSwitchProps {
-  data: ElementData;
+export interface ElementSwitchProps extends Partial<ElementData> {
+  type: ElementData['type'];
+  inputRef?: React.Ref<any>;
+  onChange?: (...args: any[]) => void;
 }
 
-const ElementSwitch: React.FC<ElementSwitchProps> = ({ data }) => {
-  const Component: React.ComponentType<any> = (elements as any)[data.type];
+const ElementSwitch: React.FC<ElementSwitchProps> = (
+  {id, name, value, type, required, disabled, locales, props, settings, onChange, inputRef},
+) => {
+  const Component: React.ComponentType<any> = useMemo(() => (elements as any)[type], [type]);
   if (!Component) {
-    console.error(`there is no element component named ${data.type}, please add one first`);
+    console.error(`there is no element component named ${type}, please add one first`);
     return null;
   }
-  return <Component data={data} key={data.id} />;
+  return (
+    <Component
+      {...props}
+      inputRef={inputRef}
+      key={id}
+      name={name}
+      value={value}
+      type={type}
+      required={required}
+      disabled={disabled}
+      locales={locales}
+      settings={settings}
+      onChange={onChange}
+    />
+  );
 };
 
-export default ElementSwitch;
+export default React.memo(ElementSwitch);

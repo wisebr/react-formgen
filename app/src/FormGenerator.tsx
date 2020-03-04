@@ -3,13 +3,13 @@ import React from 'react';
 import {
   BaseLibrary,
   ElementType,
+  FormgenElementsState,
   FormgenProvider,
   LibContainer,
   LibItemData,
   Library,
   Previewer,
   SettingPanel,
-  useElementsState,
 } from 'react-formgen';
 
 const customLibItems: LibItemData[] = [
@@ -43,7 +43,11 @@ const customLibItems: LibItemData[] = [
   },
 ];
 
-const FormGenerator = () => {
+interface FormGeneratorProps {
+  state: FormgenElementsState;
+}
+
+const FormGenerator = ({state}: FormGeneratorProps) => {
   const {
     elements,
     addElement,
@@ -51,7 +55,7 @@ const FormGenerator = () => {
     removeElement,
     activedElement,
     activeElement,
-  } = useElementsState();
+  } = state;
 
   return (
     <FormgenProvider>
@@ -68,6 +72,7 @@ const FormGenerator = () => {
             onAddElement={addElement}
             onRemoveElement={removeElement}
             onActiveElement={activeElement}
+            activedElement={activedElement}
             acceptDropType="library"
           />
         </Grid>

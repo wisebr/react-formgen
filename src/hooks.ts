@@ -58,3 +58,5 @@ export const useElementsState = (preloadedElements: ElementData[] = []) => {
     activedElement, activeElement, deactiveElement
   };
 };
+
+export type FormgenElementsState = ReturnType<typeof useElementsState>;

@@ -40,6 +40,7 @@
     "react-beautiful-dnd": "^12.2.0",
     "react-dnd": "^10.0.2",
     "react-dnd-html5-backend": "^10.0.2",
+    "react-hook-form": "4.10.1",
     "shortid": "^2.2.15"
   },
   "peerDependencies": {

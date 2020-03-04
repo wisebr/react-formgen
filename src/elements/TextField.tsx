@@ -2,7 +2,7 @@ import { TextField as MuiTextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import React from 'react';
 
-import { ElementData } from '../types';
+import { BaseElementProps } from '../types';
 
 const useStyles = makeStyles({
   root: {
@@ -10,24 +10,32 @@ const useStyles = makeStyles({
   },
 });
 
-export interface TextFieldProps {
-  data: ElementData;
-  onChange?: () => void;
+export interface TextFieldProps extends BaseElementProps<string> {
+  inputRef?: React.Ref<any>;
+  onChange?: (val: string) => void;
 }
 
-const TextField: React.FC<TextFieldProps> = ({ data, onChange }) => {
+const TextField: React.FC<TextFieldProps> = ({ value, required, disabled, locales, onChange, name, inputRef }) => {
   const classes = useStyles();
+
+  const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    if (onChange) {
+      onChange(ev.target.value);
+    }
+  };
 
   return (
     <MuiTextField
+      inputRef={inputRef}
       className={classes.root}
-      label={data.locales.title}
-      value={data.value}
-      required={data.required}
-      disabled={data.disabled}
-      onChange={onChange}
+      label={locales.title}
+      name={name}
+      value={value}
+      required={required}
+      disabled={disabled}
+      onChange={handleChange}
     />
   );
 };
 
-export default TextField;
+export default React.memo(TextField);

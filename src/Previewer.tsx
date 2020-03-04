@@ -104,11 +104,11 @@ const Previewer: React.FC<PreviewerProps> = ({
           onClick={createElementClickHandler(el.id)}
           onRemoveElement={onRemoveElement}
         >
-          <ElementSwitch data={el} />
+          <ElementSwitch {...el} />
         </ElementWrapper>
       ))}
     </div>
   );
 };
 
-export default Previewer;
+export default React.memo(Previewer);
