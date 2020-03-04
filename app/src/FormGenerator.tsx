@@ -28,7 +28,6 @@ const customLibItems: LibItemData[] = [
             title: 'var one',
           },
           props: {},
-          meta: {},
         },
         {
           type: ElementType.TextField,
@@ -38,7 +37,6 @@ const customLibItems: LibItemData[] = [
             title: 'var two',
           },
           props: {},
-          meta: {},
         },
       ],
     },
