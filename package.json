@@ -24,6 +24,9 @@
   },
   "homepage": "https://github.com/wisebr/react-formgen#readme",
   "devDependencies": {
+    "@material-ui/core": "^4.8.3",
+    "@material-ui/icons": "^4.5.1",
+    "@material-ui/styles": "^4.8.2",
     "@rollup/plugin-json": "^4.0.1",
     "@types/classnames": "^2.2.9",
     "@types/react": "^16.9.17",
@@ -31,6 +34,7 @@
     "@types/react-dom": "^16.9.4",
     "@types/shortid": "0.0.29",
     "prettier": "^1.19.1",
+    "react": "^16.12.0",
     "rollup": "^1.29.0",
     "rollup-plugin-typescript2": "^0.25.3",
     "rollup-plugin-visualizer": "^3.3.1",
