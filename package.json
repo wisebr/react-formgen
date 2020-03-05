@@ -6,6 +6,7 @@
   "module": "dist/react-formgen.es.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "prepare": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run build:modern",
     "build:modern": "rollup -c",
