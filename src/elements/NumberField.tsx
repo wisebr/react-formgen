@@ -15,7 +15,7 @@ export interface NumberFieldProps extends BaseElementProps<string> {
   onChange?: (val: string) => void;
 }
 
-const NumberField: React.FC<NumberFieldProps> = ({ value, required, disabled, locales, onChange, name, inputRef }) => {
+const NumberField: React.FC<NumberFieldProps> = ({ value, required, disabled, label, onChange, name, inputRef }) => {
   const classes = useStyles();
 
   const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,7 +28,7 @@ const NumberField: React.FC<NumberFieldProps> = ({ value, required, disabled, lo
     <MuiTextField
       inputRef={inputRef}
       className={classes.root}
-      label={locales.title}
+      label={label}
       name={name}
       value={value}
       type="number"

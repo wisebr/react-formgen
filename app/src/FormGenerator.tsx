@@ -24,18 +24,14 @@ const customLibItems: LibItemData[] = [
           type: ElementType.TextField,
           required: true,
           disabled: false,
-          locales: {
-            title: 'var one',
-          },
+          label: 'var one',
           props: {},
         },
         {
           type: ElementType.TextField,
           required: true,
           disabled: false,
-          locales: {
-            title: 'var two',
-          },
+          label: 'var two',
           props: {},
         },
       ],

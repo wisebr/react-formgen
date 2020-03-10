@@ -70,10 +70,7 @@ const Previewer: React.FC<PreviewerProps> = ({
             props: {},
             settings: {},
             ...element,
-            locales: {
-              ...element.locales,
-              title: getLocale(`lib.${element.type}`),
-            },
+            label: getLocale(`lib.${element.type}`),
           };
           if (onAddElement) {
             onAddElement(payload);

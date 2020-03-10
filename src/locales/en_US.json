@@ -1,8 +1,8 @@
 {
   "formSettings": "Form Settings",
   "noSettings": "No Settings",
-  "name": "Name",
-  "varKey": "Variable Key",
+  "label": "Label",
+  "varName": "Variable Name",
   "defaultValue": "Default Value",
   "required": "Required",
   "disabled": "Disable",

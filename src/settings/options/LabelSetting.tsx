@@ -5,7 +5,7 @@ import FormgenContext from '../../FormgenContext';
 import { BaseSettingProps } from '../../types';
 
 const LabelSetting: React.FC<BaseSettingProps> = ({data, className, update}) => {
-  if (data.settings.name === false) {
+  if (data.settings.label === false) {
     return null;
   }
   const { getLocale } = useContext(FormgenContext);
@@ -13,14 +13,14 @@ const LabelSetting: React.FC<BaseSettingProps> = ({data, className, update}) => 
   const handleChange = ({
     target: { value },
   }: React.ChangeEvent<HTMLInputElement>) => {
-    update({ id: data.id, locales: { title: value } });
+    update({ id: data.id, label: value });
   };
 
   return (
     <TextField
       className={className}
-      label={getLocale('name')}
-      value={data.locales.title}
+      label={getLocale('label')}
+      value={data.label}
       onChange={handleChange}
     />
   );

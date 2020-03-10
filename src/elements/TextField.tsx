@@ -15,7 +15,7 @@ export interface TextFieldProps extends BaseElementProps<string> {
   onChange?: (val: string) => void;
 }
 
-const TextField: React.FC<TextFieldProps> = ({ value, required, disabled, locales, onChange, name, inputRef }) => {
+const TextField: React.FC<TextFieldProps> = ({ value, required, disabled, label, onChange, name, inputRef }) => {
   const classes = useStyles();
 
   const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,7 +28,7 @@ const TextField: React.FC<TextFieldProps> = ({ value, required, disabled, locale
     <MuiTextField
       inputRef={inputRef}
       className={classes.root}
-      label={locales.title}
+      label={label}
       name={name}
       value={value}
       required={required}

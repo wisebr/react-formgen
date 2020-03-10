@@ -5,7 +5,7 @@ import FormgenContext from '../../FormgenContext';
 import { BaseSettingProps } from '../../types';
 
 const NameSetting: React.FC<BaseSettingProps> = ({data, className, update}) => {
-  if (data.settings.varKey === false) {
+  if (data.settings.name === false) {
     return null;
   }
   const { getLocale } = useContext(FormgenContext);
@@ -19,7 +19,7 @@ const NameSetting: React.FC<BaseSettingProps> = ({data, className, update}) => {
   return (
     <TextField
       className={className}
-      label={getLocale('varKey')}
+      label={getLocale('varName')}
       value={data.name}
       onChange={handleChange}
     />

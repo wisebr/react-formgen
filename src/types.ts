@@ -13,17 +13,9 @@ export enum ElementType {
   DateTime = 'DateTime',
 }
 
-export interface BaseLocale {
-  title: string;
-}
-
-export interface ElementLocale extends BaseLocale {
-  [key: string]: string;
-}
-
 export interface SettingsOptions {
+  label?: boolean;
   name?: boolean;
-  varKey?: boolean;
   value?: boolean;
   required?: boolean;
   disabled?: boolean;
@@ -31,11 +23,11 @@ export interface SettingsOptions {
 
 export interface ElementOptions<P extends ObjectMap = ObjectMap> {
   name?: string; // unique
+  label?: string;
   value?: any; // default value
   type: string; // form component name
   required?: boolean;
   disabled?: boolean;
-  locales?: ElementLocale;
   props?: P;
   elements?: ElementOptions[]; // if there are sub elements
   settings?: SettingsOptions;
@@ -62,23 +54,23 @@ export interface LibraryData {
 export interface ElementData<P extends ObjectMap = ObjectMap, S extends SettingsOptions = SettingsOptions> {
   id: string; // unique
   name: string; // unique
+  label: string;
   value: any; // default value
   type: string; // LibItemData.name, ElementType
   order: number; // span 10
   required: boolean;
   disabled: boolean;
-  locales: ElementLocale;
   props: P;
   settings: S;
 }
 
 export interface BaseElementProps<V = any, S extends SettingsOptions = SettingsOptions> {
   name: string;
+  label: string;
   value: V;
   type: string;
   required: boolean;
   disabled: boolean;
-  locales: ElementLocale;
   settings: S;
 }
 
