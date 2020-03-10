@@ -11,5 +11,7 @@
   "lib.baseElements": "Base Elements",
 
   "lib.TextField": "Text Field",
-  "lib.Select": "Dropdown"
+  "lib.NumberField": "Number Field",
+  "lib.Checkbox": "Checkbox",
+  "lib.Select": "Select"
 }

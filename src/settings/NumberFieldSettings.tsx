@@ -4,7 +4,7 @@ import React, { useCallback } from 'react';
 import { ElementData } from '../types';
 import { DefaultValueSetting, DisabledSetting, LabelSetting, NameSetting, RequiredSetting } from './options';
 
-export interface TextFieldSettingsProps {
+export interface NumberFieldSettingsProps {
   data: ElementData;
   onUpdateElement?: (payload: Partial<ElementData>) => void;
 }
@@ -16,7 +16,7 @@ const useStyles = makeStyles({
   },
 });
 
-const TextFieldSettings: React.FC<TextFieldSettingsProps> = ({
+const NumberFieldSettings: React.FC<NumberFieldSettingsProps> = ({
   data,
   onUpdateElement,
 }) => {
@@ -30,11 +30,11 @@ const TextFieldSettings: React.FC<TextFieldSettingsProps> = ({
     <div>
       <NameSetting className={classes.field} data={data} update={updateElement} />
       <LabelSetting className={classes.field} data={data} update={updateElement} />
-      <DefaultValueSetting className={classes.field} data={data} update={updateElement} />
+      <DefaultValueSetting className={classes.field} data={data} update={updateElement} type="number" />
       <RequiredSetting className={classes.field} data={data} update={updateElement} />
       <DisabledSetting className={classes.field} data={data} update={updateElement} />
     </div>
   );
 };
 
-export default TextFieldSettings;
+export default NumberFieldSettings;

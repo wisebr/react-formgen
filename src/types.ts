@@ -4,6 +4,7 @@ export interface ObjectMap<T = any> {
 
 export enum ElementType {
   TextField = 'TextField',
+  NumberField = 'NumberField',
   Select = 'Select',
   Switch = 'Switch',
   Checkbox = 'Checkbox',
@@ -87,4 +88,10 @@ export interface ElementAction {
   type: string;
   payload?: any;
   [key: string]: any;
+}
+
+export interface BaseSettingProps {
+  className?: string;
+  data: ElementData;
+  update: (data: Partial<ElementData>) => void;
 }
