@@ -4,9 +4,10 @@ import { makeStyles } from '@material-ui/styles';
 import React from 'react';
 import { useCallback } from 'react';
 import { useState } from 'react';
-import { ElementData, FormRenderer, useElementsState } from 'react-formgen';
+import { ElementData, useElementsState } from 'react-formgen';
 
 import FormGenerator from './FormGenerator';
+import FormSubmission from './FormSubmission';
 
 const useStyles = makeStyles({
   '@global': {
@@ -35,10 +36,6 @@ const App: React.FC = () => {
     setElements([...fgElementsState.elements]);
   }, [fgElementsState.elements]);
 
-  const handleSubmit = useCallback((data) => {
-    console.log(data);
-  }, []);
-
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -47,10 +44,7 @@ const App: React.FC = () => {
       <Button onClick={handleRender}>Render To:</Button>
       <Divider />
       <Typography variant="h3">FormRenderer</Typography>
-      <FormRenderer
-        elements={elements}
-        onSubmit={handleSubmit}
-      />
+      <FormSubmission elements={elements} />
     </div>
   );
 }
