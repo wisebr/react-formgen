@@ -3,6 +3,7 @@
   "noSettings": "No Settings",
   "label": "Label",
   "varName": "Variable Name",
+  "helpTip": "Help Tip",
   "defaultValue": "Default Value",
   "required": "Required",
   "disabled": "Disable",
@@ -10,8 +11,8 @@
   "lib.title": "Form Library",
   "lib.baseElements": "Base Elements",
 
-  "lib.TextField": "Text Field",
-  "lib.NumberField": "Number Field",
-  "lib.Checkbox": "Checkbox",
-  "lib.Select": "Select"
+  "lib.element.TextField": "Text Field",
+  "lib.element.NumberField": "Number Field",
+  "lib.element.Checkbox": "Checkbox",
+  "lib.element.Select": "Select"
 }

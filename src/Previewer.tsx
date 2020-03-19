@@ -30,6 +30,20 @@ const useStyles = makeStyles({
   },
 });
 
+const generateDefElement = (options: ElementOptions): ElementData => ({
+  id: '',
+  order: 0,
+  name: '',
+  value: '',
+  required: false,
+  disabled: false,
+  helpTip: '',
+  props: {},
+  settings: {},
+  label:'',
+  ...options,
+});
+
 const Previewer: React.FC<PreviewerProps> = ({
   className,
   acceptDropType = BASE_LIBRARY_TYPE,
@@ -44,7 +58,7 @@ const Previewer: React.FC<PreviewerProps> = ({
   const classes = useStyles();
   const { getLocale } = useContext(FormgenContext);
 
-  const [collectedProps, drop] = useDrop<LibraryDragItem, void, {}>({
+  const [, drop] = useDrop<LibraryDragItem, void, {}>({
     accept: acceptDropType,
     drop: (item: LibraryDragItem) => {
       if (onPreDrop && !onPreDrop(item)) {
@@ -60,18 +74,8 @@ const Previewer: React.FC<PreviewerProps> = ({
             console.error(`can't get element type from dropping object, will ignore adding it %o`, element);
             return;
           }
-          const payload: ElementData = {
-            id: '',
-            order: 0,
-            name: '',
-            value: '',
-            required: false,
-            disabled: false,
-            props: {},
-            settings: {},
-            ...element,
-            label: getLocale(`lib.${element.type}`),
-          };
+          const payload = generateDefElement(element);
+          payload.label = getLocale(`lib.element.${element.type}`);
           if (onAddElement) {
             onAddElement(payload);
           }
@@ -90,7 +94,6 @@ const Previewer: React.FC<PreviewerProps> = ({
     }
   };
 
-  console.log('render previewer, collectedProps:', collectedProps);
   return (
     <div className={classNames(classes.root, className)} ref={drop}>
       {elements.map((el: ElementData) => (

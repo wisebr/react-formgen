@@ -19,6 +19,7 @@ export interface SettingsOptions {
   value?: boolean;
   required?: boolean;
   disabled?: boolean;
+  helpTip?: boolean;
 }
 
 export interface ElementOptions<P extends ObjectMap = ObjectMap> {
@@ -28,6 +29,7 @@ export interface ElementOptions<P extends ObjectMap = ObjectMap> {
   type: string; // form component name
   required?: boolean;
   disabled?: boolean;
+  helpTip?: string;
   props?: P;
   elements?: ElementOptions[]; // if there are sub elements
   settings?: SettingsOptions;
@@ -51,6 +53,7 @@ export interface LibraryData {
   items: LibItemData[];
 }
 
+// The type stored in context
 export interface ElementData<P extends ObjectMap = ObjectMap, S extends SettingsOptions = SettingsOptions> {
   id: string; // unique
   name: string; // unique
@@ -60,10 +63,12 @@ export interface ElementData<P extends ObjectMap = ObjectMap, S extends Settings
   order: number; // span 10
   required: boolean;
   disabled: boolean;
+  helpTip: string;
   props: P;
   settings: S;
 }
 
+// For component to extend
 export interface BaseElementProps<V = any, S extends SettingsOptions = SettingsOptions> {
   name: string;
   label: string;
@@ -71,6 +76,7 @@ export interface BaseElementProps<V = any, S extends SettingsOptions = SettingsO
   type: string;
   required: boolean;
   disabled: boolean;
+  helpTip: string;
   settings: S;
 }
 

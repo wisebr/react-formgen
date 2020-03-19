@@ -1,5 +1,7 @@
 import { ElementOptions, ElementType, LibItemData, LibraryData } from './types';
 
+export const BASE_ELEMENT_SET: ReadonlySet<string> = new Set(Object.keys(ElementType));
+
 export const ELEMENT_TextField: ElementOptions = {
   type: ElementType.TextField,
 };

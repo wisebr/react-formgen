@@ -23,6 +23,7 @@ export const elementsReducer: Reducer<
       }
       break;
     case 'FORMGEN/UPDATE_ELEMENT':
+      console.log('formgen update element:', payload);
       const idx = state.findIndex(e => e.id === payload.id);
       if (idx >= 0) {
         const newState = [...state];

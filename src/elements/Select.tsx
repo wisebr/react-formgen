@@ -8,15 +8,15 @@ import ElementLabel from './ElementLabel';
 const useStyles = makeStyles({
   root: {
     marginRight: 10
-  },
-}, {name: 'fg-NumberField'});
+  }
+}, {name: 'fg-Select'});
 
-export interface NumberFieldProps extends BaseElementProps<string> {
+export interface SelectProps extends BaseElementProps<string> {
   inputRef?: React.Ref<any>;
   onChange?: (val: string) => void;
 }
 
-const NumberField: React.FC<NumberFieldProps> = ({ value, required, disabled, label, helpTip, onChange, name, inputRef }) => {
+const Select: React.FC<SelectProps> = ({ value, required, disabled, label, helpTip, onChange, name, inputRef }) => {
   const classes = useStyles();
 
   const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,10 +29,10 @@ const NumberField: React.FC<NumberFieldProps> = ({ value, required, disabled, la
     <MuiTextField
       inputRef={inputRef}
       className={classes.root}
+      select
       label={<ElementLabel text={label} tip={helpTip} />}
       name={name}
       value={value}
-      type="number"
       required={required}
       disabled={disabled}
       onChange={handleChange}
@@ -40,4 +40,4 @@ const NumberField: React.FC<NumberFieldProps> = ({ value, required, disabled, la
   );
 };
 
-export default React.memo(NumberField);
+export default React.memo(Select);

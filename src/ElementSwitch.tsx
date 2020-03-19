@@ -10,7 +10,7 @@ export interface ElementSwitchProps extends Partial<ElementData> {
 }
 
 const ElementSwitch: React.FC<ElementSwitchProps> = (
-  {id, name, value, type, required, disabled, label, props, settings, onChange, inputRef},
+  {id, name, value, type, required, disabled, label, helpTip, props, settings, onChange, inputRef},
 ) => {
   const Component: React.ComponentType<any> = useMemo(() => (elements as any)[type], [type]);
   if (!Component) {
@@ -28,6 +28,7 @@ const ElementSwitch: React.FC<ElementSwitchProps> = (
       required={required}
       disabled={disabled}
       label={label}
+      helpTip={helpTip}
       settings={settings}
       onChange={onChange}
     />
