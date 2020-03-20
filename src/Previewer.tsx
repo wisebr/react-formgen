@@ -2,12 +2,14 @@ import { makeStyles } from '@material-ui/styles';
 import classNames from 'classnames';
 import React, { useContext } from 'react';
 import { useDrop } from 'react-dnd';
+import shortId from 'shortid';
 
 import { BASE_LIBRARY_TYPE } from './constants';
 import ElementSwitch from './ElementSwitch';
 import ElementWrapper from './ElementWrapper';
 import FormgenContext from './FormgenContext';
 import { ElementData, ElementOptions, LibraryDragItem } from './types';
+import { isSelectElement } from './utils';
 
 export interface PreviewerProps {
   className?: string;
@@ -30,19 +32,25 @@ const useStyles = makeStyles({
   },
 });
 
-const generateDefElement = (options: ElementOptions): ElementData => ({
-  id: '',
-  order: 0,
-  name: '',
-  value: '',
-  required: false,
-  disabled: false,
-  helpTip: '',
-  props: {},
-  settings: {},
-  label:'',
-  ...options,
-});
+const generateDefElement = (options: ElementOptions): ElementData => {
+  const element = {
+    id: '',
+    order: 0,
+    name: '',
+    value: '',
+    required: false,
+    disabled: false,
+    helpTip: '',
+    props: {},
+    settings: {},
+    label:'',
+    ...options,
+  };
+  if (isSelectElement(element)) {
+    element.props.options.push({id: shortId(), label: '', value: ''});
+  }
+  return element;
+};
 
 const Previewer: React.FC<PreviewerProps> = ({
   className,

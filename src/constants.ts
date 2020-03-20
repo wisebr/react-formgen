@@ -1,4 +1,4 @@
-import { ElementOptions, ElementType, LibItemData, LibraryData } from './types';
+import { ElementOptions, ElementType, LibItemData, LibraryData, SelectElementOptions } from './types';
 
 export const BASE_ELEMENT_SET: ReadonlySet<string> = new Set(Object.keys(ElementType));
 
@@ -14,8 +14,11 @@ export const ELEMENT_Checkbox: ElementOptions = {
   type: ElementType.Checkbox,
 };
 
-export const ELEMENT_Select: ElementOptions = {
+export const ELEMENT_Select: SelectElementOptions = {
   type: ElementType.Select,
+  props: {
+    options: []
+  },
 };
 
 export const BASE_LIB_ITEMS: LibItemData[] = [

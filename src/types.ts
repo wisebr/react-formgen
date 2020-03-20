@@ -20,9 +20,10 @@ export interface SettingsOptions {
   required?: boolean;
   disabled?: boolean;
   helpTip?: boolean;
+  options?: boolean;
 }
 
-export interface ElementOptions<P extends ObjectMap = ObjectMap> {
+export interface ElementOptions<P extends ObjectMap = {}> {
   name?: string; // unique
   label?: string;
   value?: any; // default value
@@ -54,7 +55,7 @@ export interface LibraryData {
 }
 
 // The type stored in context
-export interface ElementData<P extends ObjectMap = ObjectMap, S extends SettingsOptions = SettingsOptions> {
+export interface ElementData<P extends ObjectMap = {}> {
   id: string; // unique
   name: string; // unique
   label: string;
@@ -65,11 +66,11 @@ export interface ElementData<P extends ObjectMap = ObjectMap, S extends Settings
   disabled: boolean;
   helpTip: string;
   props: P;
-  settings: S;
+  settings: SettingsOptions;
 }
 
 // For component to extend
-export interface BaseElementProps<V = any, S extends SettingsOptions = SettingsOptions> {
+export interface BaseElementProps<V = any> {
   name: string;
   label: string;
   value: V;
@@ -77,12 +78,12 @@ export interface BaseElementProps<V = any, S extends SettingsOptions = SettingsO
   required: boolean;
   disabled: boolean;
   helpTip: string;
-  settings: S;
+  settings: SettingsOptions;
 }
 
 export type ElementMap = ObjectMap<ElementOptions>;
 
-export interface ElementAction {
+export interface BaseAction {
   type: string;
   payload?: any;
   [key: string]: any;
@@ -93,3 +94,17 @@ export interface BaseSettingProps {
   data: ElementData;
   update: (data: Partial<ElementData>) => void;
 }
+
+// External props from context
+export interface SelectElementProps {
+  options: SelectOption[];
+}
+
+export interface SelectOption {
+  id: string;
+  label: string;
+  value: string;
+}
+
+export type SelectElementData = ElementData<SelectElementProps>;
+export type SelectElementOptions = ElementOptions<SelectElementProps>;

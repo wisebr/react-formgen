@@ -62,7 +62,7 @@ const FormGenerator = ({state}: FormGeneratorProps) => {
             <Library dragType="library" name="custom" items={customLibItems} />
           </LibContainer>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={6}>
           <Previewer
             elements={elements}
             onAddElement={addElement}
@@ -72,7 +72,7 @@ const FormGenerator = ({state}: FormGeneratorProps) => {
             acceptDropType="library"
           />
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={4}>
           <SettingPanel
             element={activedElement}
             onUpdateElement={updateElement}

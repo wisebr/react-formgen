@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/styles';
 import React, { useEffect } from 'react';
-import { FormContextValues } from 'react-hook-form';
+import { Controller, FormContextValues } from 'react-hook-form';
 
 import ElementSwitch from './ElementSwitch';
 import { ElementData } from './types';
@@ -19,7 +19,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const FormRenderer: React.FC<FormRendererProps> = ({ className, elements, register, setValue }) => {
+const FormRenderer: React.FC<FormRendererProps> = ({ className, elements, register, setValue, control }) => {
   if (!elements.length) {
     return null;
   }
@@ -37,8 +37,11 @@ const FormRenderer: React.FC<FormRendererProps> = ({ className, elements, regist
         const {value, ...rest} = el;
         return (
           <div className={classes.field} key={el.id}>
-            <ElementSwitch
+            <Controller
+              control={control}
+              as={ElementSwitch}
               {...rest}
+              defaultValue={value}
               inputRef={register}
             />
           </div>

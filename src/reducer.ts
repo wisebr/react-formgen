@@ -1,7 +1,7 @@
 import { Reducer } from 'react';
 import shortId from 'shortid';
 
-import { ElementAction, ElementData } from './types';
+import { BaseAction, ElementData } from './types';
 
 const createElement = (el: ElementData) => el.id
 ? { ...el }
@@ -9,7 +9,7 @@ const createElement = (el: ElementData) => el.id
 
 export const elementsReducer: Reducer<
   ElementData[],
-  ElementAction
+  BaseAction
 > = (state, {type, payload}) => {
   switch (type) {
     case 'FORMGEN/ADD_ELEMENT':

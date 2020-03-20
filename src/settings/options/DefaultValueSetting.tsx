@@ -1,14 +1,16 @@
-import { TextField } from '@material-ui/core';
+import { MenuItem, TextField } from '@material-ui/core';
 import React, { useContext } from 'react';
 
 import FormgenContext from '../../FormgenContext';
-import { BaseSettingProps } from '../../types';
+import { BaseSettingProps, SelectOption } from '../../types';
 
 interface DefaultValueSettingProps extends BaseSettingProps {
   type?: 'number' | 'text';
+  select?: boolean;
+  options?: SelectOption[];
 }
 
-const DefaultValueSetting: React.FC<DefaultValueSettingProps> = ({data, className, update, type}) => {
+const DefaultValueSetting: React.FC<DefaultValueSettingProps> = ({data, className, update, type, select, options}) => {
   if (data.settings.value === false) {
     return null;
   }
@@ -23,11 +25,16 @@ const DefaultValueSetting: React.FC<DefaultValueSettingProps> = ({data, classNam
   return (
     <TextField
       type={type}
+      select={select}
       className={className}
       label={getLocale('defaultValue')}
       value={data.value}
       onChange={handleChange}
-    />
+    >
+      {options && options.map(opt => (
+        <MenuItem key={opt.id} value={opt.value}>{opt.label}</MenuItem>
+      ))}
+    </TextField>
   );
 };
 

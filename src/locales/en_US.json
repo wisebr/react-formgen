@@ -14,5 +14,9 @@
   "lib.element.TextField": "Text Field",
   "lib.element.NumberField": "Number Field",
   "lib.element.Checkbox": "Checkbox",
-  "lib.element.Select": "Select"
+  "lib.element.Select": "Select",
+
+  "setting.options": "Options",
+  "setting.optionName": "Name",
+  "setting.optionValue": "Value"
 }
