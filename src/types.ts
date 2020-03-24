@@ -6,11 +6,11 @@ export enum ElementType {
   TextField = 'TextField',
   NumberField = 'NumberField',
   Select = 'Select',
-  Switch = 'Switch',
+  Switch = 'Switch', // TODO
   Checkbox = 'Checkbox',
-  Radio = 'Radio',
-  Textarea = 'Textarea',
-  DateTime = 'DateTime',
+  Radio = 'Radio', // TODO
+  Textarea = 'Textarea', // TODO
+  DateTimePicker = 'DateTimePicker',
 }
 
 export interface SettingsOptions {
@@ -111,3 +111,6 @@ export type SelectElementOptions = ElementOptions<SelectElementProps, string>;
 
 export type CheckboxElementData = ElementData<{}, boolean>;
 export type CheckboxElementOptions = ElementOptions<{}, boolean>;
+
+export type DateTimePickerElementData = ElementData<{}, string>;
+export type DateTimePickerElementOptions = ElementOptions<{}, string>;

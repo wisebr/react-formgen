@@ -1,3 +1,4 @@
+import DateFnsUtils from '@date-io/date-fns';
 import { Button } from '@material-ui/core';
 import React from 'react';
 import { ElementData, FormRenderer } from 'react-formgen';
@@ -12,7 +13,7 @@ const FormSubmission = ({elements}: FormSubmissionProps) => {
 
   return (
     <div>
-      <FormRenderer elements={elements} {...formHook} />
+      <FormRenderer dateUtils={DateFnsUtils} elements={elements} {...formHook} />
       <Button
         variant="contained"
         color="primary"

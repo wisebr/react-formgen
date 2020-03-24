@@ -6,3 +6,5 @@ export { default as Select } from './Select';
 export * from './Select';
 export { default as Checkbox } from './Checkbox';
 export * from './Checkbox';
+export { default as DateTimePicker } from './DateTimePicker';
+export * from './DateTimePicker';

@@ -15,6 +15,7 @@
   "lib.element.NumberField": "Number Field",
   "lib.element.Checkbox": "Checkbox",
   "lib.element.Select": "Select",
+  "lib.element.DateTimePicker": "DateTime Picker",
 
   "setting.options": "Options",
   "setting.optionName": "Name",

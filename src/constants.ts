@@ -2,16 +2,17 @@ import { ElementOptions, ElementType, LibItemData, LibraryData, SelectElementOpt
 
 export const BASE_ELEMENT_SET: ReadonlySet<string> = new Set(Object.keys(ElementType));
 
-export const ELEMENT_TextField: ElementOptions = {
+export const ELEMENT_TextField: ElementOptions<{}, string> = {
   type: ElementType.TextField,
 };
 
-export const ELEMENT_NumberField: ElementOptions = {
+export const ELEMENT_NumberField: ElementOptions<{}, string> = {
   type: ElementType.NumberField,
 };
 
-export const ELEMENT_Checkbox: ElementOptions = {
+export const ELEMENT_Checkbox: ElementOptions<{}, boolean> = {
   type: ElementType.Checkbox,
+  value: false,
 };
 
 export const ELEMENT_Select: SelectElementOptions = {
@@ -19,6 +20,13 @@ export const ELEMENT_Select: SelectElementOptions = {
   props: {
     options: []
   },
+};
+
+export const ELEMENT_DateTimePicker: ElementOptions<{}, string> = {
+  type: ElementType.DateTimePicker,
+  settings: {
+    value: false, // The default of DateTimePicker value is set to now
+  }
 };
 
 export const BASE_LIB_ITEMS: LibItemData[] = [
@@ -42,6 +50,11 @@ export const BASE_LIB_ITEMS: LibItemData[] = [
     name: ElementType.Select,
     thumb: '',
     element: ELEMENT_Select
+  }, {
+    id: ElementType.DateTimePicker,
+    name: ElementType.DateTimePicker,
+    thumb: '',
+    element: ELEMENT_DateTimePicker
   },
 ];
 

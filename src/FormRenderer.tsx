@@ -1,3 +1,4 @@
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { makeStyles } from '@material-ui/styles';
 import React, { useEffect } from 'react';
 import { Controller, FormContextValues } from 'react-hook-form';
@@ -8,6 +9,7 @@ import { ElementData } from './types';
 export interface FormRendererProps extends FormContextValues {
   className?: string;
   elements: ElementData[];
+  dateUtils: any;
 }
 
 const useStyles = makeStyles(() => ({
@@ -19,7 +21,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const FormRenderer: React.FC<FormRendererProps> = ({ className, elements, register, setValue, control }) => {
+const FormRenderer: React.FC<FormRendererProps> = ({ className, elements, register, setValue, control, dateUtils }) => {
   if (!elements.length) {
     return null;
   }
@@ -33,20 +35,22 @@ const FormRenderer: React.FC<FormRendererProps> = ({ className, elements, regist
 
   return (
     <div className={className}>
-      {elements.map((el) => {
-        const {value, ...rest} = el;
-        return (
-          <div className={classes.field} key={el.id}>
-            <Controller
-              control={control}
-              as={ElementSwitch}
-              {...rest}
-              defaultValue={value}
-              inputRef={register}
-            />
-          </div>
-        );
-      })}
+      <MuiPickersUtilsProvider utils={dateUtils}>
+        {elements.map((el) => {
+          const {value, ...rest} = el;
+          return (
+            <div className={classes.field} key={el.id}>
+              <Controller
+                control={control}
+                as={ElementSwitch}
+                {...rest}
+                defaultValue={value}
+                inputRef={register}
+              />
+            </div>
+          );
+        })}
+      </MuiPickersUtilsProvider>
     </div>
   );
 };

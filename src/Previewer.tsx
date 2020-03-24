@@ -1,3 +1,4 @@
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { makeStyles } from '@material-ui/styles';
 import classNames from 'classnames';
 import React, { useContext } from 'react';
@@ -9,7 +10,7 @@ import ElementSwitch from './ElementSwitch';
 import ElementWrapper from './ElementWrapper';
 import FormgenContext from './FormgenContext';
 import { ElementData, ElementOptions, LibraryDragItem } from './types';
-import { isCheckboxElement, isSelectElement } from './utils';
+import { isDateTimePickerElement, isSelectElement } from './utils';
 
 export interface PreviewerProps {
   className?: string;
@@ -22,6 +23,8 @@ export interface PreviewerProps {
   onRemoveElement?: (id: string) => void;
   onActiveElement?: (id: string) => void;
   activedElement?: ElementData;
+
+  dateUtils: any; // Date utils like DateFnsUtils from @date-io/date-fns
 }
 
 const useStyles = makeStyles({
@@ -49,8 +52,8 @@ const generateDefElement = (options: ElementOptions): ElementData => {
   if (isSelectElement(element)) {
     element.props.options.push({id: shortId(), label: '', value: ''});
   }
-  if (isCheckboxElement(element)) {
-    element.value = false;
+  if (isDateTimePickerElement(element)) {
+    element.value = new Date().toISOString();
   }
   return element;
 };
@@ -65,6 +68,7 @@ const Previewer: React.FC<PreviewerProps> = ({
   onDrop,
   activedElement,
   elements,
+  dateUtils,
 }) => {
   const classes = useStyles();
   const { getLocale } = useContext(FormgenContext);
@@ -107,17 +111,19 @@ const Previewer: React.FC<PreviewerProps> = ({
 
   return (
     <div className={classNames(classes.root, className)} ref={drop}>
-      {elements.map((el: ElementData) => (
-        <ElementWrapper
-          key={el.id}
-          id={el.id}
-          actived={!!activedElement && activedElement.id === el.id}
-          onClick={createElementClickHandler(el.id)}
-          onRemoveElement={onRemoveElement}
-        >
-          <ElementSwitch {...el} />
-        </ElementWrapper>
-      ))}
+      <MuiPickersUtilsProvider utils={dateUtils}>
+        {elements.map((el: ElementData) => (
+          <ElementWrapper
+            key={el.id}
+            id={el.id}
+            actived={!!activedElement && activedElement.id === el.id}
+            onClick={createElementClickHandler(el.id)}
+            onRemoveElement={onRemoveElement}
+          >
+            <ElementSwitch {...el} />
+          </ElementWrapper>
+        ))}
+      </MuiPickersUtilsProvider>
     </div>
   );
 };

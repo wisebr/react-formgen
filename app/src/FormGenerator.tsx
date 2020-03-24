@@ -1,3 +1,4 @@
+import DateFnsUtils from '@date-io/date-fns';
 import { Grid } from '@material-ui/core';
 import React from 'react';
 import {
@@ -64,6 +65,7 @@ const FormGenerator = ({state}: FormGeneratorProps) => {
         </Grid>
         <Grid item xs={6}>
           <Previewer
+            dateUtils={DateFnsUtils}
             elements={elements}
             onAddElement={addElement}
             onRemoveElement={removeElement}
