@@ -1,14 +1,15 @@
 import { MenuItem, TextField as MuiTextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
+import classNames from 'classnames';
 import React from 'react';
 
+import { useCommonStyles } from '../styles';
 import { BaseElementProps, SelectElementProps } from '../types';
 import ElementLabel from './ElementLabel';
 
 const useStyles = makeStyles({
   root: {
-    marginRight: 10,
-    minWidth: 200,
+    minWidth: 166,
   }
 }, {name: 'fg-Select'});
 
@@ -19,6 +20,7 @@ export interface SelectProps extends BaseElementProps<string>, SelectElementProp
 
 const Select: React.FC<SelectProps> = ({ value, required, disabled, label, helpTip, onChange, name, inputRef, options }) => {
   const classes = useStyles();
+  const commonClasses = useCommonStyles();
 
   const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     if (onChange) {
@@ -29,7 +31,7 @@ const Select: React.FC<SelectProps> = ({ value, required, disabled, label, helpT
   return (
     <MuiTextField
       inputRef={inputRef}
-      className={classes.root}
+      className={classNames(commonClasses.element, classes.root)}
       select
       label={<ElementLabel text={label} tip={helpTip} />}
       name={name}

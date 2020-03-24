@@ -1,15 +1,9 @@
 import { TextField as MuiTextField } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
 import React from 'react';
 
+import { useCommonStyles } from '../styles';
 import { BaseElementProps } from '../types';
 import ElementLabel from './ElementLabel';
-
-const useStyles = makeStyles({
-  root: {
-    marginRight: 10
-  },
-}, {name: 'fg-NumberField'});
 
 export interface NumberFieldProps extends BaseElementProps<string> {
   inputRef?: React.Ref<any>;
@@ -17,7 +11,7 @@ export interface NumberFieldProps extends BaseElementProps<string> {
 }
 
 const NumberField: React.FC<NumberFieldProps> = ({ value, required, disabled, label, helpTip, onChange, name, inputRef }) => {
-  const classes = useStyles();
+  const commonClasses = useCommonStyles();
 
   const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     if (onChange) {
@@ -28,7 +22,7 @@ const NumberField: React.FC<NumberFieldProps> = ({ value, required, disabled, la
   return (
     <MuiTextField
       inputRef={inputRef}
-      className={classes.root}
+      className={commonClasses.element}
       label={<ElementLabel text={label} tip={helpTip} />}
       name={name}
       value={value}

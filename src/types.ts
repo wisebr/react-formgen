@@ -23,10 +23,10 @@ export interface SettingsOptions {
   options?: boolean;
 }
 
-export interface ElementOptions<P extends ObjectMap = {}> {
+export interface ElementOptions<P extends ObjectMap = {}, V = any> {
   name?: string; // unique
   label?: string;
-  value?: any; // default value
+  value?: V; // default value
   type: string; // form component name
   required?: boolean;
   disabled?: boolean;
@@ -55,11 +55,11 @@ export interface LibraryData {
 }
 
 // The type stored in context
-export interface ElementData<P extends ObjectMap = {}> {
+export interface ElementData<P extends ObjectMap = {}, V = any> {
   id: string; // unique
   name: string; // unique
   label: string;
-  value: any; // default value
+  value: V; // default value
   type: string; // LibItemData.name, ElementType
   order: number; // span 10
   required: boolean;
@@ -106,5 +106,8 @@ export interface SelectOption {
   value: string;
 }
 
-export type SelectElementData = ElementData<SelectElementProps>;
-export type SelectElementOptions = ElementOptions<SelectElementProps>;
+export type SelectElementData = ElementData<SelectElementProps, string>;
+export type SelectElementOptions = ElementOptions<SelectElementProps, string>;
+
+export type CheckboxElementData = ElementData<{}, boolean>;
+export type CheckboxElementOptions = ElementOptions<{}, boolean>;

@@ -9,7 +9,7 @@ import ElementSwitch from './ElementSwitch';
 import ElementWrapper from './ElementWrapper';
 import FormgenContext from './FormgenContext';
 import { ElementData, ElementOptions, LibraryDragItem } from './types';
-import { isSelectElement } from './utils';
+import { isCheckboxElement, isSelectElement } from './utils';
 
 export interface PreviewerProps {
   className?: string;
@@ -48,6 +48,9 @@ const generateDefElement = (options: ElementOptions): ElementData => {
   };
   if (isSelectElement(element)) {
     element.props.options.push({id: shortId(), label: '', value: ''});
+  }
+  if (isCheckboxElement(element)) {
+    element.value = false;
   }
   return element;
 };

@@ -5,4 +5,7 @@ export const useCommonStyles = makeStyles({
     display: 'block',
     marginBottom: 10,
   },
+  element: {
+    marginRight: 10,
+  },
 }, {name: 'fg-common'});
