@@ -9,7 +9,11 @@ interface FormSubmissionProps {
 }
 
 const FormSubmission = ({elements}: FormSubmissionProps) => {
-  const formHook = useForm();
+  const formHook = useForm({mode: 'onChange'});
+
+  const onSubmit = formHook.handleSubmit((data) => {
+    console.log(data);
+  });
 
   return (
     <div>
@@ -17,7 +21,7 @@ const FormSubmission = ({elements}: FormSubmissionProps) => {
       <Button
         variant="contained"
         color="primary"
-        onClick={formHook.handleSubmit((data) => console.log(data))}
+        onClick={onSubmit}
       >
         Submit
       </Button>

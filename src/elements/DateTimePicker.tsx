@@ -10,7 +10,7 @@ export interface DateTimePickerProps extends BaseElementProps<string> {
   onChange?: (val: string) => void;
 }
 
-const DateTimePicker: React.FC<DateTimePickerProps> = ({ value, required, disabled, label, helpTip, onChange, name, inputRef }) => {
+const DateTimePicker: React.FC<DateTimePickerProps> = ({ value, required, disabled, label, helpTip, onChange, name, inputRef, error }) => {
   const commonClasses = useCommonStyles();
 
   const handleChange = (date: Date) => {
@@ -29,6 +29,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({ value, required, disabl
         disabled={disabled}
         onChange={handleChange}
         format="yyyy-MM-dd HH:mm:ss"
+        error={!!error}
       />
       <input type="hidden" ref={inputRef} name={name} value={value} />
     </>

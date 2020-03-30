@@ -18,7 +18,7 @@ export interface SelectProps extends BaseElementProps<string>, SelectElementProp
   onChange?: (val: string) => void;
 }
 
-const Select: React.FC<SelectProps> = ({ value, required, disabled, label, helpTip, onChange, name, inputRef, options }) => {
+const Select: React.FC<SelectProps> = ({ value, required, disabled, label, helpTip, onChange, name, inputRef, options, error }) => {
   const classes = useStyles();
   const commonClasses = useCommonStyles();
 
@@ -39,6 +39,7 @@ const Select: React.FC<SelectProps> = ({ value, required, disabled, label, helpT
       required={required}
       disabled={disabled}
       onChange={handleChange}
+      error={!!error}
     >
       {options.map(opt => (
         <MenuItem key={opt.id} value={opt.value}>{opt.label}</MenuItem>

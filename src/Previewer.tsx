@@ -120,7 +120,7 @@ const Previewer: React.FC<PreviewerProps> = ({
             onClick={createElementClickHandler(el.id)}
             onRemoveElement={onRemoveElement}
           >
-            <ElementSwitch {...el} />
+            <ElementSwitch {...el} variant="previewer" />
           </ElementWrapper>
         ))}
       </MuiPickersUtilsProvider>

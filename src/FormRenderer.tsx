@@ -21,7 +21,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const FormRenderer: React.FC<FormRendererProps> = ({ className, elements, register, setValue, control, dateUtils }) => {
+const FormRenderer: React.FC<FormRendererProps> = ({ className, elements, register, setValue, control, dateUtils, errors }) => {
   if (!elements.length) {
     return null;
   }
@@ -43,9 +43,11 @@ const FormRenderer: React.FC<FormRendererProps> = ({ className, elements, regist
               <Controller
                 control={control}
                 as={ElementSwitch}
+                variant="renderer"
                 {...rest}
+                error={errors[el.name]}
                 defaultValue={value}
-                inputRef={register}
+                inputRef={register({required: el.required})}
               />
             </div>
           );

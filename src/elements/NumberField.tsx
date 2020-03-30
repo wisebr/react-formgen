@@ -10,7 +10,7 @@ export interface NumberFieldProps extends BaseElementProps<string> {
   onChange?: (val: string) => void;
 }
 
-const NumberField: React.FC<NumberFieldProps> = ({ value, required, disabled, label, helpTip, onChange, name, inputRef }) => {
+const NumberField: React.FC<NumberFieldProps> = ({ value, required, disabled, label, helpTip, onChange, name, inputRef, error }) => {
   const commonClasses = useCommonStyles();
 
   const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,6 +30,7 @@ const NumberField: React.FC<NumberFieldProps> = ({ value, required, disabled, la
       required={required}
       disabled={disabled}
       onChange={handleChange}
+      error={!!error}
     />
   );
 };
