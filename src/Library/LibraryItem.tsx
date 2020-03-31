@@ -6,7 +6,7 @@ import { useDrag } from 'react-dnd';
 
 import { BASE_ELEMENT_SET } from '../constants';
 import FormgenContext from '../FormgenContext';
-import { LibItemData, LibraryDragItem } from '../types';
+import { LibItemData } from '../types';
 
 export interface LibraryItemProps {
   data: LibItemData;
@@ -14,8 +14,14 @@ export interface LibraryItemProps {
   key: string;
 }
 
-const useStyles = makeStyles({
+interface DragProps {
+  isDragging: boolean;
+}
+
+const useStyles = makeStyles<{}, DragProps>({
   root: {
+    opacity: ({isDragging}) => isDragging ? .4 : 1,
+    border: ({isDragging}) => `1px dashed ${isDragging ? grey[500] : 'rgba(0,0,0,0)'}`,
     '&:hover': {
       backgroundColor: grey[100],
       cursor: 'move',
@@ -24,11 +30,14 @@ const useStyles = makeStyles({
 }, {name: 'fg-LibraryItem'});
 
 const LibraryItem: React.FC<LibraryItemProps> = ({ data: {element, id, name}, dragType }) => {
-  const classes = useStyles();
   const { getLocale } = useContext(FormgenContext);
-  const [, drag] = useDrag<LibraryDragItem, void, {}>({
+  const [{isDragging}, drag] = useDrag({
     item: { element, type: dragType, id },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
   });
+  const classes = useStyles({isDragging});
 
   if (BASE_ELEMENT_SET.has(element.type)) {
     name = getLocale(`lib.element.${element.type}`);

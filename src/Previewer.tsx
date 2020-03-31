@@ -1,3 +1,4 @@
+import { blue, green } from '@material-ui/core/colors';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { makeStyles } from '@material-ui/styles';
 import classNames from 'classnames';
@@ -22,6 +23,7 @@ export interface PreviewerProps {
   onAddElement?: (element: ElementData) => void;
   onRemoveElement?: (id: string) => void;
   onActiveElement?: (id: string) => void;
+  onMoveElement?: (index: number, target: number) => void;
   activedElement?: ElementData;
 
   dateUtils: any; // Date utils like DateFnsUtils from @date-io/date-fns
@@ -33,7 +35,13 @@ const useStyles = makeStyles({
     paddingBottom: 20,
     height: '100%',
   },
-});
+  dragging: {
+    backgroundColor: blue[100],
+  },
+  draggingOver: {
+    backgroundColor: green[100],
+  },
+}, {name: 'fg-Previewer'});
 
 const generateDefElement = (options: ElementOptions): ElementData => {
   const element = {
@@ -64,16 +72,16 @@ const Previewer: React.FC<PreviewerProps> = ({
   onAddElement,
   onRemoveElement,
   onActiveElement,
+  onMoveElement,
   onPreDrop,
   onDrop,
   activedElement,
   elements,
   dateUtils,
 }) => {
-  const classes = useStyles();
   const { getLocale } = useContext(FormgenContext);
 
-  const [, drop] = useDrop<LibraryDragItem, void, {}>({
+  const [{isOver, canDrop}, drop] = useDrop({
     accept: acceptDropType,
     drop: (item: LibraryDragItem) => {
       if (onPreDrop && !onPreDrop(item)) {
@@ -96,12 +104,17 @@ const Previewer: React.FC<PreviewerProps> = ({
           }
         }
       })(item.element);
-      console.log('dropped item:', item);
       if (onDrop) {
         onDrop(item);
       }
     },
+    collect: (monitor) => ({
+      isOver: monitor.isOver(),
+      canDrop: monitor.canDrop(),
+    }),
   });
+
+  const classes = useStyles();
 
   const createElementClickHandler = (id: string) => () => {
     if (onActiveElement) {
@@ -110,15 +123,23 @@ const Previewer: React.FC<PreviewerProps> = ({
   };
 
   return (
-    <div className={classNames(classes.root, className)} ref={drop}>
+    <div
+      className={classNames(classes.root, className, {
+        [classes.dragging]: canDrop,
+        [classes.draggingOver]: isOver,
+      })}
+      ref={drop}
+    >
       <MuiPickersUtilsProvider utils={dateUtils}>
-        {elements.map((el: ElementData) => (
+        {elements.map((el, i) => (
           <ElementWrapper
             key={el.id}
             id={el.id}
+            index={i}
             actived={!!activedElement && activedElement.id === el.id}
             onClick={createElementClickHandler(el.id)}
             onRemoveElement={onRemoveElement}
+            onMoveElement={onMoveElement}
           >
             <ElementSwitch {...el} variant="previewer" />
           </ElementWrapper>

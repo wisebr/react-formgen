@@ -24,6 +24,15 @@ const useStyles = makeStyles({
   root: {
     height: '100%',
     backgroundColor: grey[200]
+  },
+  title: {
+    padding: 15,
+  },
+  renderBtn: {
+    position: 'relative',
+    width: '100%',
+    textAlign: 'center',
+    top: 15
   }
 });
 
@@ -39,11 +48,13 @@ const App: React.FC = () => {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <Typography variant="h3">FormGenerator</Typography>
+      <Typography className={classes.title} variant="h5">FormGenerator</Typography>
       <FormGenerator state={fgElementsState} />
-      <Button onClick={handleRender}>Render To:</Button>
+      <div className={classes.renderBtn}>
+        <Button variant="contained" onClick={handleRender}>↓↓ Render To ↓↓</Button>
+      </div>
       <Divider />
-      <Typography variant="h3">FormRenderer</Typography>
+      <Typography className={classes.title} variant="h5">FormRenderer</Typography>
       <FormSubmission elements={elements} />
     </div>
   );

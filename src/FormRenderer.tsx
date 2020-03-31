@@ -1,6 +1,6 @@
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { makeStyles } from '@material-ui/styles';
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Controller, FormContextValues } from 'react-hook-form';
 
 import ElementSwitch from './ElementSwitch';
@@ -26,6 +26,7 @@ const FormRenderer: React.FC<FormRendererProps> = ({ className, elements, regist
     return null;
   }
   const classes = useStyles();
+  const sortedElements = useMemo(() => elements.sort((a, b) => a.order - b.order), [elements]);
 
   useEffect(() => {
     if (elements.length) {
@@ -36,7 +37,7 @@ const FormRenderer: React.FC<FormRendererProps> = ({ className, elements, regist
   return (
     <div className={className}>
       <MuiPickersUtilsProvider utils={dateUtils}>
-        {elements.map((el) => {
+        {sortedElements.map((el) => {
           const {value, ...rest} = el;
           return (
             <div className={classes.field} key={el.id}>

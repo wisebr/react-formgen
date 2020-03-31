@@ -50,6 +50,7 @@ const FormGenerator = ({state}: FormGeneratorProps) => {
     addElement,
     updateElement,
     removeElement,
+    moveElement,
     activedElement,
     activeElement,
   } = state;
@@ -69,6 +70,7 @@ const FormGenerator = ({state}: FormGeneratorProps) => {
             elements={elements}
             onAddElement={addElement}
             onRemoveElement={removeElement}
+            onMoveElement={moveElement}
             onActiveElement={activeElement}
             activedElement={activedElement}
             acceptDropType="library"

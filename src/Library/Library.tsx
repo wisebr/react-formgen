@@ -1,4 +1,6 @@
-import { ListItem } from '@material-ui/core';
+import { ListItem, Typography } from '@material-ui/core';
+import { grey } from '@material-ui/core/colors';
+import { makeStyles } from '@material-ui/styles';
 import React, { useContext } from 'react';
 
 import FormgenContext from '../FormgenContext';
@@ -12,11 +14,20 @@ export interface ElementLibProps {
   dragType: string;
 }
 
+const useStyles = makeStyles({
+  header: {
+    background: grey[300],
+  }
+});
+
 const Library: React.FC<ElementLibProps> = ({ className, name, items, dragType }) => {
+  const classes = useStyles();
   const { getLocale } = useContext(FormgenContext);
   return (
     <div className={className}>
-      <ListItem>{getLocale(`lib.${name}`)}</ListItem>
+      <ListItem className={classes.header}>
+        <Typography variant="subtitle1">{getLocale(`lib.${name}`)}</Typography>
+      </ListItem>
       <div>
         {items.map(item => (
           <LibraryItem key={item.id} data={item} dragType={dragType} />

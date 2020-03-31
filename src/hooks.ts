@@ -43,6 +43,11 @@ export const useElementsState = (preloadedElements: ElementData[] = []) => {
     [],
   );
 
+  const moveElement = useCallback(
+    (index: number, target: number) => dispatchElement({ type: 'FORMGEN/MOVE_ELEMENT', payload: {index, target} }),
+    [],
+  );
+
   const activeElement = useCallback((id: string) => {
     if (id !== activedId) {
       setActivedId(id);
@@ -54,7 +59,7 @@ export const useElementsState = (preloadedElements: ElementData[] = []) => {
   }, []);
 
   return {
-    elements, addElement, removeElement, updateElement, removeAllElements, addElements,
+    elements, addElement, removeElement, updateElement, removeAllElements, addElements, moveElement,
     activedElement, activeElement, deactiveElement
   };
 };
