@@ -22,10 +22,10 @@ export const ELEMENT_Select: SelectElementOptions = {
   },
 };
 
-export const ELEMENT_DateTimePicker: ElementOptions<{}, string> = {
+export const ELEMENT_DateTimePicker: ElementOptions<{}, number> = {
   type: ElementType.DateTimePicker,
   settings: {
-    value: false, // The default of DateTimePicker value is set to now
+    value: false, // The default of DateTimePicker value is set to now when render it
   }
 };
 

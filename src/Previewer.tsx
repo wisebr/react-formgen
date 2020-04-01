@@ -11,7 +11,7 @@ import ElementSwitch from './ElementSwitch';
 import ElementWrapper from './ElementWrapper';
 import FormgenContext from './FormgenContext';
 import { ElementData, ElementOptions, LibraryDragItem } from './types';
-import { isDateTimePickerElement, isSelectElement } from './utils';
+import { isSelectElement } from './utils';
 
 export interface PreviewerProps {
   className?: string;
@@ -59,9 +59,6 @@ const generateDefElement = (options: ElementOptions): ElementData => {
   };
   if (isSelectElement(element)) {
     element.props.options.push({id: shortId(), label: '', value: ''});
-  }
-  if (isDateTimePickerElement(element)) {
-    element.value = new Date().toISOString();
   }
   return element;
 };
@@ -141,7 +138,7 @@ const Previewer: React.FC<PreviewerProps> = ({
             onRemoveElement={onRemoveElement}
             onMoveElement={onMoveElement}
           >
-            <ElementSwitch {...el} variant="previewer" />
+            <ElementSwitch {...el} scene="previewer" />
           </ElementWrapper>
         ))}
       </MuiPickersUtilsProvider>

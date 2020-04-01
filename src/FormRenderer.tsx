@@ -30,24 +30,28 @@ const FormRenderer: React.FC<FormRendererProps> = ({ className, elements, regist
 
   useEffect(() => {
     if (elements.length) {
-      elements.forEach((el) => setValue(el.name, el.value));
+      elements.forEach((el) => {
+        if (el.value) {
+          setValue(el.name, el.value);
+        }
+      });
     }
-  }, [elements]);
+  }, []);
 
   return (
     <div className={className}>
       <MuiPickersUtilsProvider utils={dateUtils}>
         {sortedElements.map((el) => {
-          const {value, ...rest} = el;
           return (
             <div className={classes.field} key={el.id}>
               <Controller
                 control={control}
                 as={ElementSwitch}
-                variant="renderer"
-                {...rest}
+                scene="renderer"
+                {...el}
                 error={errors[el.name]}
-                defaultValue={value}
+                defaultValue={el.value}
+                setValue={setValue}
                 inputRef={register({required: el.required})}
               />
             </div>

@@ -4,6 +4,8 @@ export interface ObjectMap<T = any> {
   [key: string]: T;
 }
 
+export type ElementSceneType = 'previewer' | 'renderer';
+
 export enum ElementType {
   TextField = 'TextField',
   NumberField = 'NumberField',
@@ -82,6 +84,8 @@ export interface BaseElementProps<V = any> {
   helpTip: string;
   settings: SettingsOptions;
   error?: ElementError; // from react-hook-form
+  scene: ElementSceneType;
+  setValue?: (name: string, val: any) => void;
 }
 
 export type ElementMap = ObjectMap<ElementOptions>;
@@ -108,6 +112,9 @@ export interface SelectOption {
   label: string;
   value: string;
 }
+
+export type NumberFieldElementData = ElementData<{}, string>;
+export type NumberFieldElementOptions = ElementOptions<{}, string>;
 
 export type SelectElementData = ElementData<SelectElementProps, string>;
 export type SelectElementOptions = ElementOptions<SelectElementProps, string>;
