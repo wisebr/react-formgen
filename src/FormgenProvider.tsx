@@ -2,17 +2,20 @@ import React, { useCallback } from 'react';
 import { DndProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
+import { ICON_MAP } from './constants';
 import FormgenContext from './FormgenContext';
 import enUs from './locales/en_US.json';
 import { ObjectMap } from './types';
 
 export interface FormgenProviderProps {
   locales?: ObjectMap;
+  iconMap?: {[key: string]: React.ElementType};
 }
 
 const FormgenProvider: React.FC<FormgenProviderProps> = ({
   children,
   locales = enUs,
+  iconMap = ICON_MAP,
 }) => {
   const getLocale = useCallback((key: string) => {
     const locale = locales[key];
@@ -29,6 +32,7 @@ const FormgenProvider: React.FC<FormgenProviderProps> = ({
         value={{
           locales,
           getLocale,
+          iconMap,
         }}
       >
         {children}

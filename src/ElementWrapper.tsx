@@ -13,35 +13,43 @@ export interface ElementWrapperProps {
   children: React.FunctionComponentElement<ElementSwitchProps>;
   index: number;
   actived?: boolean;
+  acceptDropType?: string;
   onClick?: (ev: React.MouseEvent) => void;
   onRemoveElement?: (id: string) => void;
   onMoveElement?: (index: number, target: number) => void;
 }
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles<{}, ElementWrapperProps>(() => ({
   root: {
     display: 'flex',
     justifyContent: 'space-between',
     minHeight: 64,
     padding: '8px 16px',
+    border: '1px solid rgba(0,0,0,0)',
+    borderRadius: 3,
+    transition: 'all linear .25s',
+    marginBottom: 8,
     '& $btn': {
       display: 'none',
     },
     '&:hover': {
-      // backgroundColor: lightBlue[100],
-      cursor: 'move',
+      borderColor: lightBlue[100],
+      cursor: ({onMoveElement}) => onMoveElement ? 'move' : 'default',
       '& $btn': {
         display: 'block',
       },
     },
     '&$actived': {
+      borderColor: lightBlue[200],
       backgroundColor: lightBlue[100],
       '& $btn': {
         display: 'block',
       },
     },
   },
-  btn: {},
+  btn: {
+    color: lightBlue[600],
+  },
   actived: {
     backgroundColor: lightBlue[100],
   },
@@ -55,39 +63,48 @@ interface WrapperDragItem {
   index: number;
 }
 
-const ElementWrapper: React.FC<ElementWrapperProps> = ({
-  children,
-  id,
-  index,
-  actived,
-  onClick,
-  onRemoveElement,
-  onMoveElement,
-}) => {
-  const classes = useStyles();
+const ElementWrapper: React.FC<ElementWrapperProps> = (props) => {
+  const {
+    children,
+    id,
+    index,
+    actived,
+    acceptDropType = 'elementWrapper',
+    onClick,
+    onRemoveElement,
+    onMoveElement,
+  } = props;
+  const classes = useStyles(props);
   const ref = useRef<HTMLDivElement>(null);
+  let isDragging = false;
 
   React.Children.only(children);
 
-  const [, drop] = useDrop<WrapperDragItem, void, {}>({
-    accept: 'wrapper',
-    hover: (item) => {
-      if (item.index === index) {
-        return;
+  if (onMoveElement) {
+    const [, drop] = useDrop<WrapperDragItem, void, {}>({
+      accept: acceptDropType,
+      hover: (item) => {
+        if (item.index === index) {
+          return;
+        }
+        if (onMoveElement) {
+          onMoveElement(item.index, index);
+          item.index = index;
+        }
       }
-      if (onMoveElement) {
-        onMoveElement(item.index, index);
-        item.index = index;
-      }
-    }
-  });
+    });
 
-  const [{isDragging}, drag] = useDrag({
-    item: { type: 'wrapper', index },
-    collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-    }),
-  });
+    const [collect, drag] = useDrag({
+      item: { type: acceptDropType, index },
+      collect: (monitor) => ({
+        isDragging: monitor.isDragging(),
+      }),
+    });
+
+    isDragging = collect.isDragging;
+
+    drag(drop(ref));
+  }
 
   const handleRemove = useCallback((ev: React.MouseEvent) => {
     ev.stopPropagation();
@@ -95,8 +112,6 @@ const ElementWrapper: React.FC<ElementWrapperProps> = ({
       onRemoveElement(id);
     }
   }, []);
-
-  drag(drop(ref));
 
   return (
     <div

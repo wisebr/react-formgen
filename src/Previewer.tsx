@@ -137,6 +137,7 @@ const Previewer: React.FC<PreviewerProps> = ({
             onClick={createElementClickHandler(el.id)}
             onRemoveElement={onRemoveElement}
             onMoveElement={onMoveElement}
+            acceptDropType={`${acceptDropType}-elementWrapper`}
           >
             <ElementSwitch {...el} scene="previewer" />
           </ElementWrapper>

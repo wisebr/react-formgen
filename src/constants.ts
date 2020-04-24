@@ -1,3 +1,9 @@
+import CheckBox from '@material-ui/icons/CheckBox';
+import Input from '@material-ui/icons/Input';
+import ListAlt from '@material-ui/icons/ListAlt';
+import LooksOne from '@material-ui/icons/LooksOne';
+import Today from '@material-ui/icons/Today';
+
 import { ElementOptions, ElementType, LibItemData, LibraryData, SelectElementOptions } from './types';
 
 export const BASE_ELEMENT_SET: ReadonlySet<string> = new Set(Object.keys(ElementType));
@@ -63,5 +69,12 @@ export const BASE_LIBRARY: LibraryData = {
   items: BASE_LIB_ITEMS,
 };
 
-
 export const BASE_LIBRARY_TYPE = 'baseLibrary';
+
+export const ICON_MAP = {
+  [ElementType.TextField]: Input,
+  [ElementType.NumberField]: LooksOne,
+  [ElementType.Checkbox]: CheckBox,
+  [ElementType.Select]: ListAlt,
+  [ElementType.DateTimePicker]: Today,
+};

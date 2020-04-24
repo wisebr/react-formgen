@@ -27,10 +27,14 @@ const useStyles = makeStyles<{}, DragProps>({
       cursor: 'move',
     },
   },
+  icon: {
+    marginRight: 10,
+    color: grey[700],
+  },
 }, {name: 'fg-LibraryItem'});
 
-const LibraryItem: React.FC<LibraryItemProps> = ({ data: {element, id, name}, dragType }) => {
-  const { getLocale } = useContext(FormgenContext);
+const LibraryItem: React.FC<LibraryItemProps> = ({ data: {element, id, name, thumb}, dragType }) => {
+  const { getLocale, iconMap } = useContext(FormgenContext);
   const [{isDragging}, drag] = useDrag({
     item: { element, type: dragType, id },
     collect: (monitor) => ({
@@ -38,16 +42,23 @@ const LibraryItem: React.FC<LibraryItemProps> = ({ data: {element, id, name}, dr
     }),
   });
   const classes = useStyles({isDragging});
+  let icon: React.ReactNode | null = null;
+  if (typeof thumb === 'string' && iconMap[thumb || name]) {
+    const Comp = iconMap[thumb || name];
+    icon = Comp ? <Comp className={classes.icon} /> : thumb;
+  }
+
+  let label = name;
 
   if (BASE_ELEMENT_SET.has(element.type)) {
-    name = getLocale(`lib.element.${element.type}`);
+    label = getLocale(`lib.element.${element.type}`);
   } else {
-    name = name || getLocale(`lib.element.${element.type}`);
+    label = label || getLocale(`lib.element.${element.type}`);
   }
 
   return (
     <ListItem className={classes.root} ref={drag}>
-      {name}
+      {icon} {label}
     </ListItem>
   );
 };
