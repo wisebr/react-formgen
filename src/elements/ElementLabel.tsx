@@ -25,7 +25,7 @@ const ElementLabel: React.FC<ElementLabelProps> = ({text, tip}) => {
   return (
     <>
       {text}
-      <Tooltip title={tip} placement='top'>
+      <Tooltip title={tip} placement="top">
         <Info className={classes.icon} />
       </Tooltip>
     </>

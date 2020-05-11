@@ -18,7 +18,9 @@ const useStyles = makeStyles({
   }
 }, {name: 'fg-DefaultValueSetting'});
 
-const DefaultValueSetting: React.FC<DefaultValueSettingProps> = ({data, className, update, type, select, options, transValueToBool}) => {
+const DefaultValueSetting: React.FC<DefaultValueSettingProps> = ({
+  data, className, update, type, select, options, transValueToBool
+}) => {
   if (data.settings.value === false) {
     return null;
   }
@@ -45,7 +47,7 @@ const DefaultValueSetting: React.FC<DefaultValueSettingProps> = ({data, classNam
       value={data.value}
       onChange={handleChange}
     >
-      {options && options.map(opt => (
+      {options && options.map((opt) => (
         <MenuItem key={opt.id} value={opt.value}>{opt.label}</MenuItem>
       ))}
     </TextField>

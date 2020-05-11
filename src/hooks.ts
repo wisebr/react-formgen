@@ -3,13 +3,13 @@ import { useCallback, useMemo, useReducer, useState } from 'react';
 import { elementsReducer } from './reducer';
 import { ElementData } from './types';
 
-export const useElementsState = (preloadedElements: ElementData[] = []) => {
+export function useElementsState (preloadedElements: ElementData[] = []) {
   const [elements, dispatchElement] = useReducer(elementsReducer, preloadedElements);
   const [activedId, setActivedId] = useState<string>();
   const activedElement = useMemo(
     () => {
       if (activedId) {
-        return elements.find(el => el.id === activedId);
+        return elements.find((el) => el.id === activedId);
       }
       return;
     },
@@ -39,7 +39,7 @@ export const useElementsState = (preloadedElements: ElementData[] = []) => {
   );
 
   const addElements = useCallback(
-    (elements: ElementData[]) => dispatchElement({ type: 'FORMGEN/ADD_ELEMENTS', payload: elements }),
+    (elementList: ElementData[]) => dispatchElement({ type: 'FORMGEN/ADD_ELEMENTS', payload: elementList }),
     [],
   );
 
@@ -62,6 +62,6 @@ export const useElementsState = (preloadedElements: ElementData[] = []) => {
     elements, addElement, removeElement, updateElement, removeAllElements, addElements, moveElement,
     activedElement, activeElement, deactiveElement
   };
-};
+}
 
 export type FormgenElementsState = ReturnType<typeof useElementsState>;

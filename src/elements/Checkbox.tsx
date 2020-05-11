@@ -10,7 +10,9 @@ export interface CheckboxProps extends BaseElementProps<boolean> {
   onChange?: (val: boolean) => void;
 }
 
-const Checkbox: React.FC<CheckboxProps> = ({value, required, disabled, label, helpTip, onChange, name, inputRef, error }) => {
+const Checkbox: React.FC<CheckboxProps> = ({
+  value, required, disabled, label, helpTip, onChange, name, inputRef, error
+}) => {
   const commonClasses = useCommonStyles();
 
   const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {

@@ -11,7 +11,8 @@
     "build": "npm run build:modern",
     "build:modern": "rollup -c",
     "start": "npm link && rollup -cw & (cd ./app && npm link react-formgen && npm start)",
-    "prettier": "prettier --write './src/**/*.ts' './src/**/*.tsx' --config ./.prettierrc"
+    "prettier": "prettier --write './src/**/*.ts' './src/**/*.tsx' --config ./.prettierrc",
+    "lint": "tslint --project ."
   },
   "repository": {
     "type": "git",
@@ -44,6 +45,9 @@
     "rollup-plugin-typescript2": "^0.25.3",
     "rollup-plugin-visualizer": "^3.3.1",
     "ts-jest": "^25.3.0",
+    "tslint": "^6.1.2",
+    "tslint-react": "^5.0.0",
+    "tslint-react-hooks": "^2.2.2",
     "typescript": "^3.7.4"
   },
   "dependencies": {

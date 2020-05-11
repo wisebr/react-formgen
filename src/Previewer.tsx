@@ -54,7 +54,7 @@ const generateDefElement = (options: ElementOptions): ElementData => {
     helpTip: '',
     props: {},
     settings: {},
-    label:'',
+    label: '',
     ...options,
   };
   if (isSelectElement(element)) {
@@ -84,9 +84,9 @@ const Previewer: React.FC<PreviewerProps> = ({
       if (onPreDrop && !onPreDrop(item)) {
         return;
       }
-      (function addElement(element: ElementOptions) {
+      (function addElement (element: ElementOptions) {
         if (element.elements) {
-          element.elements.forEach(el => {
+          element.elements.forEach((el) => {
             addElement(el);
           });
         } else {

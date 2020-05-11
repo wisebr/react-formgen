@@ -31,7 +31,7 @@ const insertElement = (state: ElementData[], element: ElementData, index: number
 };
 
 const removeElement = (state: ElementData[], id: string) => {
-  const index = state.findIndex(e => e.id === id);
+  const index = state.findIndex((e) => e.id === id);
   if (index >= 0) {
     const newState: ElementData[] = [];
     state.forEach((el, i) => {
@@ -50,7 +50,7 @@ const updateElement = (state: ElementData[], element: Partial<ElementData>) => {
   if (!element.id) {
     console.error('formgen reducer: should specify the id when update element', element);
   }
-  const idx = state.findIndex(e => e.id === element.id);
+  const idx = state.findIndex((e) => e.id === element.id);
   if (idx >= 0) {
     const newState = [...state];
     const newElement = { ...state[idx], ...element }; // shallow copy
@@ -58,7 +58,7 @@ const updateElement = (state: ElementData[], element: Partial<ElementData>) => {
     return newState;
   }
   return state;
-}
+};
 
 const moveElement = (state: ElementData[], index: number, target: number) => {
   const newState: ElementData[] = [];
@@ -89,7 +89,7 @@ const moveElement = (state: ElementData[], index: number, target: number) => {
     }
   }
   return newState.map((el, i) => ({...el, order: i}));
-}
+};
 
 export const elementsReducer: Reducer<
   ElementData[],
@@ -112,6 +112,8 @@ export const elementsReducer: Reducer<
       return updateElement(state, payload);
     case 'FORMGEN/MOVE_ELEMENT':
       return moveElement(state, payload.index, payload.target);
+    default:
+      break;
   }
   return state;
 };

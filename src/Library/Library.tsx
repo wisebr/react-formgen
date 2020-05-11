@@ -29,7 +29,7 @@ const Library: React.FC<ElementLibProps> = ({ className, name, items, dragType }
         <Typography variant="subtitle1">{getLocale(`lib.${name}`)}</Typography>
       </ListItem>
       <div>
-        {items.map(item => (
+        {items.map((item) => (
           <LibraryItem key={item.id} data={item} dragType={dragType} />
         ))}
       </div>

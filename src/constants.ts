@@ -6,6 +6,7 @@ import Today from '@material-ui/icons/Today';
 
 import { ElementOptions, ElementType, LibItemData, LibraryData, SelectElementOptions } from './types';
 
+// tslint:disable:variable-name
 export const BASE_ELEMENT_SET: ReadonlySet<string> = new Set(Object.keys(ElementType));
 
 export const ELEMENT_TextField: ElementOptions<{}, string> = {

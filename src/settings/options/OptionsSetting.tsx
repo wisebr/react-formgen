@@ -61,7 +61,7 @@ const OptionsSetting: React.FC<OptionsSetting> = ({data, className, update}) => 
   };
 
   const createRemoveOptHandler = (id: string) => () => {
-    update({ id: data.id, props: {...data.props, options: options.filter(opt => opt.id !== id)} });
+    update({ id: data.id, props: {...data.props, options: options.filter((opt) => opt.id !== id)} });
   };
 
   const createAddOptHandler = (index: number) => () => {
@@ -94,8 +94,14 @@ const OptionsSetting: React.FC<OptionsSetting> = ({data, className, update}) => 
             value={opt.value}
             onChange={createChangeValueHandler(opt.id)}
           />
-          <RemoveCircle className={classNames(classes.btn, classes.removeBtn)} onClick={createRemoveOptHandler(opt.id)} />
-          <AddCircle className={classNames(classes.btn, classes.addBtn)} onClick={createAddOptHandler(i)} />
+          <RemoveCircle
+            className={classNames(classes.btn, classes.removeBtn)}
+            onClick={createRemoveOptHandler(opt.id)}
+          />
+          <AddCircle
+            className={classNames(classes.btn, classes.addBtn)}
+            onClick={createAddOptHandler(i)}
+          />
         </div>
       ))}
     </div>

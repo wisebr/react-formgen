@@ -10,7 +10,9 @@ export interface TextFieldProps extends BaseElementProps<string> {
   onChange?: (val: string) => void;
 }
 
-const TextField: React.FC<TextFieldProps> = ({ value, required, disabled, label, helpTip, onChange, name, inputRef, error}) => {
+const TextField: React.FC<TextFieldProps> = ({
+  value, required, disabled, label, helpTip, onChange, name, inputRef, error
+}) => {
   const commonClasses = useCommonStyles();
 
   const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {

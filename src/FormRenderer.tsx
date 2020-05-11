@@ -21,7 +21,9 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const FormRenderer: React.FC<FormRendererProps> = ({ className, elements, register, setValue, control, dateUtils, errors }) => {
+const FormRenderer: React.FC<FormRendererProps> = ({
+  className, elements, register, setValue, control, dateUtils, errors
+}) => {
   if (!elements.length) {
     return null;
   }
