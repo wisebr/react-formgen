@@ -4,7 +4,8 @@ import ListAlt from '@material-ui/icons/ListAlt';
 import LooksOne from '@material-ui/icons/LooksOne';
 import Today from '@material-ui/icons/Today';
 
-import { ElementOptions, ElementType, LibItemData, LibraryData, SelectElementOptions } from './types';
+import { Checkbox, DateTimePicker, NumberField, Select, TextField } from './elements';
+import { ElementOptions, ElementType, LibItemData, LibraryData, ObjectMap, SelectElementOptions } from './types';
 
 // tslint:disable:variable-name
 export const BASE_ELEMENT_SET: ReadonlySet<string> = new Set(Object.keys(ElementType));
@@ -78,4 +79,12 @@ export const ICON_MAP = {
   [ElementType.Checkbox]: CheckBox,
   [ElementType.Select]: ListAlt,
   [ElementType.DateTimePicker]: Today,
+};
+
+export const ELEMENT_MAP: ObjectMap<React.NamedExoticComponent<any>> = {
+  TextField,
+  NumberField,
+  Select,
+  Checkbox,
+  DateTimePicker,
 };

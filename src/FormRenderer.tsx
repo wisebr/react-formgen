@@ -24,9 +24,6 @@ const useStyles = makeStyles(() => ({
 const FormRenderer: React.FC<FormRendererProps> = ({
   className, elements, register, setValue, control, dateUtils, errors
 }) => {
-  if (!elements.length) {
-    return null;
-  }
   const classes = useStyles();
   const sortedElements = useMemo(() => elements.sort((a, b) => a.order - b.order), [elements]);
 
@@ -39,6 +36,10 @@ const FormRenderer: React.FC<FormRendererProps> = ({
       });
     }
   }, []);
+
+  if (!elements.length) {
+    return null;
+  }
 
   return (
     <div className={className}>

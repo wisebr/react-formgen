@@ -125,4 +125,4 @@ export type CheckboxElementOptions = ElementOptions<{}, boolean>;
 export type DateTimePickerElementData = ElementData<{}, string>;
 export type DateTimePickerElementOptions = ElementOptions<{}, string>;
 
-export type ElementError = FieldError | FieldError[] | NestDataObject<any> | Array<NestDataObject<any>>;
+export type ElementError = FieldError | FieldError[] | NestDataObject<any> | NestDataObject<any>[];

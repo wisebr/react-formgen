@@ -80,29 +80,28 @@ const ElementWrapper: React.FC<ElementWrapperProps> = (props) => {
 
   React.Children.only(children);
 
-  if (onMoveElement) {
-    const [, drop] = useDrop<WrapperDragItem, void, {}>({
-      accept: acceptDropType,
-      hover: (item) => {
-        if (item.index === index) {
-          return;
-        }
-        if (onMoveElement) {
-          onMoveElement(item.index, index);
-          item.index = index;
-        }
+  const [, drop] = useDrop<WrapperDragItem, void, {}>({
+    accept: acceptDropType,
+    hover: (item) => {
+      if (item.index === index) {
+        return;
       }
-    });
+      if (onMoveElement) {
+        onMoveElement(item.index, index);
+        item.index = index;
+      }
+    }
+  });
 
-    const [collect, drag] = useDrag({
-      item: { type: acceptDropType, index },
-      collect: (monitor) => ({
-        isDragging: monitor.isDragging(),
-      }),
-    });
+  const [collect, drag] = useDrag({
+    item: { type: acceptDropType, index },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  });
 
+  if (onMoveElement) {
     isDragging = collect.isDragging;
-
     drag(drop(ref));
   }
 

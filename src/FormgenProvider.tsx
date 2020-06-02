@@ -25,7 +25,9 @@ const FormgenProvider: React.FC<FormgenProviderProps> = ({
     }
     return locale;
   }, []);
-  console.log('render formgen context...');
+  console.log('[formgen] render formgen context...');
+  console.log(children);
+  console.log(HTML5Backend);
   return (
     <DndProvider backend={HTML5Backend}>
       <FormgenContext.Provider

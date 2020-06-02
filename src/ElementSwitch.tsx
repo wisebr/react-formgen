@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import * as elements from './elements';
+import { ELEMENT_MAP } from './constants';
 import { BaseElementProps, ElementData, ElementError, ElementSceneType } from './types';
 
 export interface ElementSwitchProps extends Partial<ElementData> {
@@ -30,7 +30,7 @@ const ElementSwitch: React.FC<ElementSwitchProps> = ({
   setValue,
 }) => {
   const Component: React.ComponentType<any> = useMemo(
-    () => (elements as any)[type],
+    () => ELEMENT_MAP[type],
     [type],
   );
   if (!Component) {
