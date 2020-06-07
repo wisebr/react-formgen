@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { DndProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
-import { ICON_MAP } from './constants';
+import { BASE_ELEMENT_MAP, ICON_MAP } from './constants';
 import FormgenContext from './FormgenContext';
 import enUs from './locales/en_US.json';
 import { ObjectMap } from './types';
@@ -10,12 +10,14 @@ import { ObjectMap } from './types';
 export interface FormgenProviderProps {
   locales?: ObjectMap;
   iconMap?: {[key: string]: React.ElementType};
+  elementMap?: {[type: string]: React.ComponentType};
 }
 
 const FormgenProvider: React.FC<FormgenProviderProps> = ({
   children,
   locales = enUs,
   iconMap = ICON_MAP,
+  elementMap = BASE_ELEMENT_MAP,
 }) => {
   const getLocale = useCallback((key: string) => {
     const locale = locales[key];
@@ -25,9 +27,6 @@ const FormgenProvider: React.FC<FormgenProviderProps> = ({
     }
     return locale;
   }, []);
-  console.log('[formgen] render formgen context...');
-  console.log(children);
-  console.log(HTML5Backend);
   return (
     <DndProvider backend={HTML5Backend}>
       <FormgenContext.Provider
@@ -35,6 +34,7 @@ const FormgenProvider: React.FC<FormgenProviderProps> = ({
           locales,
           getLocale,
           iconMap,
+          elementMap,
         }}
       >
         {children}

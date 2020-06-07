@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { ELEMENT_MAP } from './constants';
+import FormgenContext from './FormgenContext';
 import { BaseElementProps, ElementData, ElementError, ElementSceneType } from './types';
 
 export interface ElementSwitchProps extends Partial<ElementData> {
@@ -29,13 +29,14 @@ const ElementSwitch: React.FC<ElementSwitchProps> = ({
   error,
   setValue,
 }) => {
+  const {elementMap} = React.useContext(FormgenContext);
   const Component: React.ComponentType<any> = useMemo(
-    () => ELEMENT_MAP[type],
+    () => elementMap[type],
     [type],
   );
   if (!Component) {
     console.error(
-      `there is no element component named ${type}, please add one first`,
+      `there is no element component named ${type}, please add one via context prop "elementMap" first`,
     );
     return null;
   }

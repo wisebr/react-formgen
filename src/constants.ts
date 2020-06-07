@@ -81,7 +81,7 @@ export const ICON_MAP = {
   [ElementType.DateTimePicker]: Today,
 };
 
-export const ELEMENT_MAP: ObjectMap<React.NamedExoticComponent<any>> = {
+export const BASE_ELEMENT_MAP: ObjectMap<React.NamedExoticComponent<any>> = {
   TextField,
   NumberField,
   Select,
