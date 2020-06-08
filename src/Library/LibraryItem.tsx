@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/styles';
 import React, { useContext } from 'react';
 import { useDrag } from 'react-dnd';
 
-import { BASE_ELEMENT_SET } from '../constants';
 import FormgenContext from '../FormgenContext';
 import { LibItemData } from '../types';
 
@@ -28,8 +27,10 @@ const useStyles = makeStyles<{}, DragProps>({
     },
   },
   icon: {
-    marginRight: 10,
+    marginRight: 8,
     color: grey[700],
+    position: 'relative',
+    top: 2,
   },
 }, {name: 'fg-LibraryItem'});
 
@@ -42,23 +43,23 @@ const LibraryItem: React.FC<LibraryItemProps> = ({ data: {element, id, name, thu
     }),
   });
   const classes = useStyles({isDragging});
-  let icon: React.ReactNode | null = null;
-  if (typeof thumb === 'string' && iconMap[thumb || name]) {
-    const Comp = iconMap[thumb || name];
-    icon = Comp ? <Comp className={classes.icon} /> : thumb;
+  let icon: React.ReactNode = thumb;
+  const key = thumb || name;
+  if (key && typeof key === 'string') {
+    const Comp = iconMap[key];
+    if (Comp) {
+      icon = <Comp />;
+    }
   }
 
-  let label = name;
-
-  if (BASE_ELEMENT_SET.has(element.type)) {
-    label = getLocale(`lib.element.${element.type}`);
-  } else {
-    label = label || getLocale(`lib.element.${element.type}`);
-  }
+  const label = name || getLocale(`lib.element.${element.type}`);
 
   return (
     <ListItem className={classes.root} ref={drag}>
-      {icon} {label}
+      <span className={classes.icon}>
+        {icon}
+      </span>
+      {label}
     </ListItem>
   );
 };

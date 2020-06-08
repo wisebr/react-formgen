@@ -42,8 +42,8 @@ export interface ElementOptions<P extends ObjectMap = {}, V = any> {
 
 export interface LibItemData {
   id: string; // unique
-  name: string; // unique, extends ElementType
-  thumb: React.ReactNode;
+  name?: string; // unique, extends ElementType
+  thumb?: React.ReactNode;
   element: ElementOptions;
 }
 

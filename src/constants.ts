@@ -7,9 +7,6 @@ import Today from '@material-ui/icons/Today';
 import { Checkbox, DateTimePicker, NumberField, Select, TextField } from './elements';
 import { ElementOptions, ElementType, LibItemData, LibraryData, ObjectMap, SelectElementOptions } from './types';
 
-// tslint:disable:variable-name
-export const BASE_ELEMENT_SET: ReadonlySet<string> = new Set(Object.keys(ElementType));
-
 export const ELEMENT_TextField: ElementOptions<{}, string> = {
   type: ElementType.TextField,
 };
@@ -41,17 +38,14 @@ export const BASE_LIB_ITEMS: LibItemData[] = [
   {
     id: ElementType.TextField,
     name: ElementType.TextField,
-    thumb: '',
     element: ELEMENT_TextField
   }, {
     id: ElementType.NumberField,
     name: ElementType.NumberField,
-    thumb: '',
     element: ELEMENT_NumberField
   }, {
     id: ElementType.Checkbox,
     name: ElementType.Checkbox,
-    thumb: '',
     element: ELEMENT_Checkbox
   }, {
     id: ElementType.Select,
@@ -61,7 +55,6 @@ export const BASE_LIB_ITEMS: LibItemData[] = [
   }, {
     id: ElementType.DateTimePicker,
     name: ElementType.DateTimePicker,
-    thumb: '',
     element: ELEMENT_DateTimePicker
   },
 ];
