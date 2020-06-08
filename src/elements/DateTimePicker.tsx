@@ -33,11 +33,11 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
     }
   };
 
-  if (scene === 'renderer' && setValue) {
-    useEffect(() => {
+  useEffect(() => {
+    if (scene === 'renderer' && setValue) {
       setValue(name, renderVal.getTime());
-    }, []);
-  }
+    }
+  }, []);
 
   return (
     <>

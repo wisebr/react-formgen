@@ -126,3 +126,5 @@ export type DateTimePickerElementData = ElementData<{}, string>;
 export type DateTimePickerElementOptions = ElementOptions<{}, string>;
 
 export type ElementError = FieldError | FieldError[] | NestDataObject<any> | NestDataObject<any>[];
+
+export type ElementComponentMap<T extends BaseElementProps = any> = ObjectMap<React.ComponentType<T>>;

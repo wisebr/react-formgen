@@ -18,10 +18,10 @@ const useStyles = makeStyles({
 }, {name: 'fg-ElementLabel'});
 
 const ElementLabel: React.FC<ElementLabelProps> = ({text, tip}) => {
+  const classes = useStyles();
   if (!tip) {
     return <>{text}</>;
   }
-  const classes = useStyles();
   return (
     <>
       {text}

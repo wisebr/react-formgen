@@ -44,7 +44,7 @@ const LibraryItem: React.FC<LibraryItemProps> = ({ data: {element, id, name, thu
   });
   const classes = useStyles({isDragging});
   let icon: React.ReactNode = thumb;
-  const key = thumb || name;
+  const key = thumb || element.type;
   if (key && typeof key === 'string') {
     const Comp = iconMap[key];
     if (Comp) {

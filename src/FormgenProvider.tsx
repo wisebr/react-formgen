@@ -5,12 +5,12 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import { BASE_ELEMENT_MAP, ICON_MAP } from './constants';
 import FormgenContext from './FormgenContext';
 import enUs from './locales/en_US.json';
-import { ObjectMap } from './types';
+import { ElementComponentMap, ObjectMap } from './types';
 
 export interface FormgenProviderProps {
   locales?: ObjectMap;
   iconMap?: {[key: string]: React.ElementType};
-  elementMap?: {[type: string]: React.ComponentType};
+  elementMap?: ElementComponentMap;
 }
 
 const FormgenProvider: React.FC<FormgenProviderProps> = ({

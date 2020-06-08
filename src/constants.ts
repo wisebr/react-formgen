@@ -5,8 +5,16 @@ import LooksOne from '@material-ui/icons/LooksOne';
 import Today from '@material-ui/icons/Today';
 
 import { Checkbox, DateTimePicker, NumberField, Select, TextField } from './elements';
-import { ElementOptions, ElementType, LibItemData, LibraryData, ObjectMap, SelectElementOptions } from './types';
+import {
+  ElementComponentMap,
+  ElementOptions,
+  ElementType,
+  LibItemData,
+  LibraryData,
+  SelectElementOptions,
+} from './types';
 
+// tslint:disable: variable-name
 export const ELEMENT_TextField: ElementOptions<{}, string> = {
   type: ElementType.TextField,
 };
@@ -37,24 +45,18 @@ export const ELEMENT_DateTimePicker: ElementOptions<{}, number> = {
 export const BASE_LIB_ITEMS: LibItemData[] = [
   {
     id: ElementType.TextField,
-    name: ElementType.TextField,
     element: ELEMENT_TextField
   }, {
     id: ElementType.NumberField,
-    name: ElementType.NumberField,
     element: ELEMENT_NumberField
   }, {
     id: ElementType.Checkbox,
-    name: ElementType.Checkbox,
     element: ELEMENT_Checkbox
   }, {
     id: ElementType.Select,
-    name: ElementType.Select,
-    thumb: '',
     element: ELEMENT_Select
   }, {
     id: ElementType.DateTimePicker,
-    name: ElementType.DateTimePicker,
     element: ELEMENT_DateTimePicker
   },
 ];
@@ -74,7 +76,7 @@ export const ICON_MAP = {
   [ElementType.DateTimePicker]: Today,
 };
 
-export const BASE_ELEMENT_MAP: ObjectMap<React.NamedExoticComponent<any>> = {
+export const BASE_ELEMENT_MAP: ElementComponentMap = {
   TextField,
   NumberField,
   Select,
