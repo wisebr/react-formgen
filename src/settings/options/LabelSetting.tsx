@@ -1,14 +1,17 @@
 import { TextField } from '@material-ui/core';
+import classNames from 'classnames';
 import React, { useContext } from 'react';
 
 import FormgenContext from '../../FormgenContext';
-import { BaseSettingProps } from '../../types';
+import { useCommonStyles } from '../../styles';
+import { BaseSettingOptionProps } from '../../types';
 
-const LabelSetting: React.FC<BaseSettingProps> = ({data, className, update}) => {
+const LabelSetting: React.FC<BaseSettingOptionProps> = ({data, className, update}) => {
+  const commonClasses = useCommonStyles();
+  const { getLocale } = useContext(FormgenContext);
   if (data.settings.label === false) {
     return null;
   }
-  const { getLocale } = useContext(FormgenContext);
 
   const handleChange = ({
     target: { value },
@@ -18,7 +21,7 @@ const LabelSetting: React.FC<BaseSettingProps> = ({data, className, update}) => 
 
   return (
     <TextField
-      className={className}
+      className={classNames(commonClasses.settingField, className)}
       label={getLocale('label')}
       value={data.label}
       onChange={handleChange}

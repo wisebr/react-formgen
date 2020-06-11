@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 
-import { useCommonStyles } from '../styles';
-import { CheckboxElementData } from '../types';
+import { BaseSettingProps, CheckboxElementData } from '../types';
 import {
   DefaultValueSetting,
   DisabledSetting,
@@ -21,16 +20,13 @@ const options = [{
   value: 'false'
 }];
 
-export interface CheckboxSettingsProps {
-  data: CheckboxElementData;
-  onUpdateElement?: (payload: Partial<CheckboxElementData>) => void;
+export interface CheckboxSettingsProps extends BaseSettingProps<CheckboxElementData> {
 }
 
 const CheckboxSettings: React.FC<CheckboxSettingsProps> = ({
   data,
   onUpdateElement,
 }) => {
-  const classes = useCommonStyles();
   const updateElement = useCallback((payload: Partial<CheckboxElementData>) => {
     if (onUpdateElement) {
       onUpdateElement(payload);
@@ -38,19 +34,18 @@ const CheckboxSettings: React.FC<CheckboxSettingsProps> = ({
   }, []);
   return (
     <div>
-      <NameSetting className={classes.settingField} data={data} update={updateElement} />
-      <LabelSetting className={classes.settingField} data={data} update={updateElement} />
+      <NameSetting data={data} update={updateElement} />
+      <LabelSetting data={data} update={updateElement} />
       <DefaultValueSetting
-        className={classes.settingField}
         data={data}
         select
         options={options}
         transValueToBool
         update={updateElement}
       />
-      <HelpTipSetting className={classes.settingField} data={data} update={updateElement} />
-      <RequiredSetting className={classes.settingField} data={data} update={updateElement} />
-      <DisabledSetting className={classes.settingField} data={data} update={updateElement} />
+      <HelpTipSetting data={data} update={updateElement} />
+      <RequiredSetting data={data} update={updateElement} />
+      <DisabledSetting data={data} update={updateElement} />
     </div>
   );
 };

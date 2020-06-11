@@ -1,11 +1,13 @@
 import { MenuItem, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
+import classNames from 'classnames';
 import React, { useContext } from 'react';
 
 import FormgenContext from '../../FormgenContext';
-import { BaseSettingProps, SelectOption } from '../../types';
+import { useCommonStyles } from '../../styles';
+import { BaseSettingOptionProps, SelectOption } from '../../types';
 
-export interface DefaultValueSettingProps extends BaseSettingProps {
+export interface DefaultValueSettingProps extends BaseSettingOptionProps {
   type?: 'number' | 'text';
   select?: boolean;
   options?: SelectOption[];
@@ -21,11 +23,12 @@ const useStyles = makeStyles({
 const DefaultValueSetting: React.FC<DefaultValueSettingProps> = ({
   data, className, update, type, select, options, transValueToBool
 }) => {
+  const classes = useStyles();
+  const commonClasses = useCommonStyles();
+  const { getLocale } = useContext(FormgenContext);
   if (data.settings.value === false) {
     return null;
   }
-  const classes = useStyles();
-  const { getLocale } = useContext(FormgenContext);
 
   const handleChange = ({
     target: { value },
@@ -41,7 +44,7 @@ const DefaultValueSetting: React.FC<DefaultValueSettingProps> = ({
     <TextField
       type={type}
       select={select}
-      className={className}
+      className={classNames(commonClasses.settingField, className)}
       InputProps={{classes: {formControl: classes.control}}}
       label={getLocale('defaultValue')}
       value={data.value}

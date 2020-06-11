@@ -16,3 +16,4 @@ export * from './hooks';
 export * from './reducer';
 export * from './types';
 export * from './constants';
+export * from './settings/options';

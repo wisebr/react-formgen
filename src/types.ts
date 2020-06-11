@@ -96,10 +96,15 @@ export interface BaseAction {
   [key: string]: any;
 }
 
-export interface BaseSettingProps {
+export interface BaseSettingProps<T extends ElementData = ElementData> {
+  data: T;
+  onUpdateElement?: (payload: Partial<T>) => void;
+}
+
+export interface BaseSettingOptionProps<T extends ElementData = any> {
   className?: string;
-  data: ElementData;
-  update: (data: Partial<ElementData>) => void;
+  data: T;
+  update: (data: Partial<T>) => void;
 }
 
 // External props from context
@@ -128,3 +133,4 @@ export type DateTimePickerElementOptions = ElementOptions<{}, string>;
 export type ElementError = FieldError | FieldError[] | NestDataObject<any> | NestDataObject<any>[];
 
 export type ElementComponentMap<T extends BaseElementProps = any> = ObjectMap<React.ComponentType<T>>;
+export type SettingComponentMap<T extends BaseSettingProps = any> = ObjectMap<React.ComponentType<T>>;

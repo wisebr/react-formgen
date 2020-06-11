@@ -1,14 +1,17 @@
 import { Checkbox, FormControl, FormControlLabel } from '@material-ui/core';
+import classNames from 'classnames';
 import React, { useContext } from 'react';
 
 import FormgenContext from '../../FormgenContext';
-import { BaseSettingProps } from '../../types';
+import { useCommonStyles } from '../../styles';
+import { BaseSettingOptionProps } from '../../types';
 
-const DisabledSetting: React.FC<BaseSettingProps> = ({data, className, update}) => {
+const DisabledSetting: React.FC<BaseSettingOptionProps> = ({data, className, update}) => {
+  const { getLocale } = useContext(FormgenContext);
+  const commonClasses = useCommonStyles();
   if (data.settings.disabled === false) {
     return null;
   }
-  const { getLocale } = useContext(FormgenContext);
 
   const handleChange = ({
     target: { checked },
@@ -17,7 +20,9 @@ const DisabledSetting: React.FC<BaseSettingProps> = ({data, className, update}) 
   };
 
   return (
-    <FormControl className={className}>
+    <FormControl
+      className={classNames(commonClasses.settingField, className)}
+    >
       <FormControlLabel
         label={getLocale('disabled')}
         control={

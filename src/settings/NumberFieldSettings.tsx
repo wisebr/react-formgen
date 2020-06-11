@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 
-import { useCommonStyles } from '../styles';
-import { ElementData } from '../types';
+import { BaseSettingProps, ElementData } from '../types';
 import {
   DefaultValueSetting,
   DisabledSetting,
@@ -11,16 +10,10 @@ import {
   RequiredSetting,
 } from './options';
 
-export interface NumberFieldSettingsProps {
-  data: ElementData;
-  onUpdateElement?: (payload: Partial<ElementData>) => void;
-}
-
-const NumberFieldSettings: React.FC<NumberFieldSettingsProps> = ({
+const NumberFieldSettings: React.FC<BaseSettingProps> = ({
   data,
   onUpdateElement,
 }) => {
-  const classes = useCommonStyles();
   const updateElement = useCallback((payload: Partial<ElementData>) => {
     if (onUpdateElement) {
       onUpdateElement(payload);
@@ -28,12 +21,12 @@ const NumberFieldSettings: React.FC<NumberFieldSettingsProps> = ({
   }, []);
   return (
     <div>
-      <NameSetting className={classes.settingField} data={data} update={updateElement} />
-      <LabelSetting className={classes.settingField} data={data} update={updateElement} />
-      <DefaultValueSetting className={classes.settingField} data={data} update={updateElement} type="number" />
-      <HelpTipSetting className={classes.settingField} data={data} update={updateElement} />
-      <RequiredSetting className={classes.settingField} data={data} update={updateElement} />
-      <DisabledSetting className={classes.settingField} data={data} update={updateElement} />
+      <NameSetting data={data} update={updateElement} />
+      <LabelSetting data={data} update={updateElement} />
+      <DefaultValueSetting data={data} update={updateElement} type="number" />
+      <HelpTipSetting data={data} update={updateElement} />
+      <RequiredSetting data={data} update={updateElement} />
+      <DisabledSetting data={data} update={updateElement} />
     </div>
   );
 };

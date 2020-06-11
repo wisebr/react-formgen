@@ -1,19 +1,12 @@
 import React, { useCallback } from 'react';
 
-import { useCommonStyles } from '../styles';
-import { ElementData } from '../types';
+import { BaseSettingProps, ElementData } from '../types';
 import { DisabledSetting, HelpTipSetting, LabelSetting, NameSetting, RequiredSetting } from './options';
 
-export interface DateTimePickerSettingsProps {
-  data: ElementData;
-  onUpdateElement?: (payload: Partial<ElementData>) => void;
-}
-
-const DateTimePickerSettings: React.FC<DateTimePickerSettingsProps> = ({
+const DateTimePickerSettings: React.FC<BaseSettingProps> = ({
   data,
   onUpdateElement,
 }) => {
-  const classes = useCommonStyles();
   const updateElement = useCallback((payload: Partial<ElementData>) => {
     if (onUpdateElement) {
       onUpdateElement(payload);
@@ -21,11 +14,11 @@ const DateTimePickerSettings: React.FC<DateTimePickerSettingsProps> = ({
   }, []);
   return (
     <div>
-      <NameSetting className={classes.settingField} data={data} update={updateElement} />
-      <LabelSetting className={classes.settingField} data={data} update={updateElement} />
-      <HelpTipSetting className={classes.settingField} data={data} update={updateElement} />
-      <RequiredSetting className={classes.settingField} data={data} update={updateElement} />
-      <DisabledSetting className={classes.settingField} data={data} update={updateElement} />
+      <NameSetting data={data} update={updateElement} />
+      <LabelSetting data={data} update={updateElement} />
+      <HelpTipSetting data={data} update={updateElement} />
+      <RequiredSetting data={data} update={updateElement} />
+      <DisabledSetting data={data} update={updateElement} />
     </div>
   );
 };

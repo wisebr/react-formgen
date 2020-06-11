@@ -8,9 +8,10 @@ import React, { useContext } from 'react';
 import shortId from 'shortid';
 
 import FormgenContext from '../../FormgenContext';
-import { BaseSettingProps, SelectElementData } from '../../types';
+import { useCommonStyles } from '../../styles';
+import { BaseSettingOptionProps, SelectElementData } from '../../types';
 
-export interface OptionsSetting extends BaseSettingProps {
+export interface OptionsSetting extends BaseSettingOptionProps {
   data: SelectElementData;
 }
 
@@ -41,12 +42,13 @@ const useStyles = makeStyles({
 }, {name: 'fg-OptionsSetting'});
 
 const OptionsSetting: React.FC<OptionsSetting> = ({data, className, update}) => {
+  const classes = useStyles();
+  const { getLocale } = useContext(FormgenContext);
+  const commonClasses = useCommonStyles();
   if (data.settings.options === false) {
     return null;
   }
 
-  const classes = useStyles();
-  const { getLocale } = useContext(FormgenContext);
   const {options} = data.props;
 
   // TODO: store the options in component state
@@ -76,7 +78,9 @@ const OptionsSetting: React.FC<OptionsSetting> = ({data, className, update}) => 
   };
 
   return (
-    <div className={className}>
+    <div
+      className={classNames(commonClasses.settingField, className)}
+    >
       <Typography variant="body1">{getLocale('setting.options')}</Typography>
       {options.map((opt, i) => (
         <div key={opt.id} className={classes.option}>

@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/styles';
 import React, { useContext } from 'react';
 
 import FormgenContext from './FormgenContext';
-import * as settings from './settings';
 import { ElementData } from './types';
 
 const useStyles = makeStyles({
@@ -19,14 +18,12 @@ export interface SettingPanel {
 
 const SettingPanel: React.FC<SettingPanel> = ({element, onUpdateElement}) => {
   const classes = useStyles();
-  const { getLocale } = useContext(FormgenContext);
+  const { getLocale, settingMap } = useContext(FormgenContext);
   if (!element) {
     return null;
   }
 
-  const Component: React.ComponentType<any> = (settings as any)[
-    `${element.type}Settings`
-  ];
+  const Component: React.ComponentType<any> = settingMap[element.type];
 
   if (!Component) {
     return <div className={classes.root}>{getLocale('noSettings')}</div>;

@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 
-import { useCommonStyles } from '../styles';
-import { ElementData, SelectElementData } from '../types';
+import { BaseSettingProps, SelectElementData } from '../types';
 import {
   DefaultValueSetting,
   DisabledSetting,
@@ -12,36 +11,32 @@ import {
 } from './options';
 import OptionsSetting from './options/OptionsSetting';
 
-export interface SelectSettingsProps {
-  data: SelectElementData;
-  onUpdateElement?: (payload: Partial<ElementData>) => void;
+export interface SelectSettingsProps extends BaseSettingProps<SelectElementData> {
 }
 
 const SelectSettings: React.FC<SelectSettingsProps> = ({
   data,
   onUpdateElement,
 }) => {
-  const classes = useCommonStyles();
-  const updateElement = useCallback((payload: Partial<ElementData>) => {
+  const updateElement = useCallback((payload: Partial<SelectElementData>) => {
     if (onUpdateElement) {
       onUpdateElement(payload);
     }
   }, []);
   return (
     <div>
-      <NameSetting className={classes.settingField} data={data} update={updateElement} />
-      <LabelSetting className={classes.settingField} data={data} update={updateElement} />
+      <NameSetting data={data} update={updateElement} />
+      <LabelSetting data={data} update={updateElement} />
       <DefaultValueSetting
-        className={classes.settingField}
         data={data}
         select
         options={data.props.options}
         update={updateElement}
       />
-      <HelpTipSetting className={classes.settingField} data={data} update={updateElement} />
-      <RequiredSetting className={classes.settingField} data={data} update={updateElement} />
-      <DisabledSetting className={classes.settingField} data={data} update={updateElement} />
-      <OptionsSetting className={classes.settingField} data={data} update={updateElement} />
+      <HelpTipSetting data={data} update={updateElement} />
+      <RequiredSetting data={data} update={updateElement} />
+      <DisabledSetting data={data} update={updateElement} />
+      <OptionsSetting data={data} update={updateElement} />
     </div>
   );
 };
