@@ -85,7 +85,6 @@ export interface BaseElementProps<V = any> {
   settings: SettingsOptions;
   error?: ElementError; // from react-hook-form
   scene: ElementSceneType;
-  setValue?: (name: string, val: any) => void;
 }
 
 export type ElementMap = ObjectMap<ElementOptions>;
@@ -130,7 +129,7 @@ export type CheckboxElementOptions = ElementOptions<{}, boolean>;
 export type DateTimePickerElementData = ElementData<{}, string>;
 export type DateTimePickerElementOptions = ElementOptions<{}, string>;
 
-export type ElementError = FieldError | FieldError[] | NestDataObject<any> | NestDataObject<any>[];
+export type ElementError = FieldError | FieldError[] | NestDataObject<any, any> | NestDataObject<any, any>[];
 
 export type ElementComponentMap<T extends BaseElementProps = any> = ObjectMap<React.ComponentType<T>>;
 export type SettingComponentMap<T extends BaseSettingProps = any> = ObjectMap<React.ComponentType<T>>;

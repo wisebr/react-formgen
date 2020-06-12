@@ -13,6 +13,8 @@ import {
   SettingPanel,
 } from 'react-formgen';
 
+import locales from './i18n.json';
+
 const customLibItems: LibItemData[] = [
   {
     id: 'abc',
@@ -56,7 +58,7 @@ const FormGenerator = ({state}: FormGeneratorProps) => {
   } = state;
 
   return (
-    <FormgenProvider>
+    <FormgenProvider locales={locales}>
       <Grid container>
         <Grid item xs={2}>
           <LibContainer>

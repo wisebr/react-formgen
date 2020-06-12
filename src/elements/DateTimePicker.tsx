@@ -21,7 +21,6 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
   name,
   inputRef,
   error,
-  setValue,
 }) => {
   const commonClasses = useCommonStyles();
   const [renderVal, setRenderVal] = useState(new Date());
@@ -34,8 +33,8 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
   };
 
   useEffect(() => {
-    if (scene === 'renderer' && setValue) {
-      setValue(name, renderVal.getTime());
+    if (scene === 'renderer' && onChange) {
+      onChange(renderVal.getTime());
     }
   }, []);
 

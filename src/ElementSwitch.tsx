@@ -9,7 +9,6 @@ export interface ElementSwitchProps extends Partial<ElementData> {
   inputRef?: React.Ref<any>;
   onChange?: (...args: any[]) => void;
   error?: ElementError;
-  setValue?: (name: string, val: any) => void;
 }
 
 const ElementSwitch: React.FC<ElementSwitchProps> = ({
@@ -27,7 +26,6 @@ const ElementSwitch: React.FC<ElementSwitchProps> = ({
   onChange,
   inputRef,
   error,
-  setValue,
 }) => {
   const {elementMap} = React.useContext(FormgenContext);
   const Component: React.ComponentType<any> = useMemo(
@@ -50,17 +48,14 @@ const ElementSwitch: React.FC<ElementSwitchProps> = ({
     helpTip,
     settings,
     error,
+    value,
   };
-  if (scene === 'previewer') {
-    rest.value = value;
-  }
   return (
     <Component
       {...props}
       {...rest}
       onChange={onChange}
       inputRef={inputRef}
-      setValue={setValue}
       key={id}
     />
   );

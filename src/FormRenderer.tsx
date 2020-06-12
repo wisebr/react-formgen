@@ -1,6 +1,6 @@
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { makeStyles } from '@material-ui/styles';
-import React, { useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { Controller, FormContextValues } from 'react-hook-form';
 
 import ElementSwitch from './ElementSwitch';
@@ -22,20 +22,10 @@ const useStyles = makeStyles(() => ({
 }));
 
 const FormRenderer: React.FC<FormRendererProps> = ({
-  className, elements, register, setValue, control, dateUtils, errors
+  className, elements, control, dateUtils, errors
 }) => {
   const classes = useStyles();
   const sortedElements = useMemo(() => elements.sort((a, b) => a.order - b.order), [elements]);
-
-  useEffect(() => {
-    if (elements.length) {
-      elements.forEach((el) => {
-        if (el.value) {
-          setValue(el.name, el.value);
-        }
-      });
-    }
-  }, []);
 
   if (!elements.length) {
     return null;
@@ -53,9 +43,8 @@ const FormRenderer: React.FC<FormRendererProps> = ({
                 scene="renderer"
                 {...el}
                 error={errors[el.name]}
+                rules={{required: el.required}}
                 defaultValue={el.value}
-                setValue={setValue}
-                inputRef={register({required: el.required})}
               />
             </div>
           );

@@ -11,7 +11,7 @@ export interface TextFieldProps extends BaseElementProps<string> {
 }
 
 const TextField: React.FC<TextFieldProps> = ({
-  value, required, disabled, label, helpTip, onChange, name, inputRef, error
+  value, required, disabled, label, helpTip, onChange, name, inputRef, error, scene
 }) => {
   const commonClasses = useCommonStyles();
 
@@ -21,13 +21,15 @@ const TextField: React.FC<TextFieldProps> = ({
     }
   };
 
+  const rest = scene === 'renderer' ? {defaultValue: value} : {value};
+
   return (
     <MuiTextField
       inputRef={inputRef}
       className={commonClasses.element}
       label={<ElementLabel text={label} tip={helpTip} />}
       name={name}
-      value={value}
+      {...rest}
       required={required}
       disabled={disabled}
       onChange={handleChange}

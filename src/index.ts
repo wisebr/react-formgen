@@ -10,6 +10,8 @@ export { default as LibContainer } from './LibContainer';
 export * from './LibContainer';
 export { default as Library } from './Library';
 export * from './Library';
+export { default as ElementLabel } from './elements/ElementLabel';
+export * from './elements/ElementLabel';
 export { default as SettingPanel } from './SettingPanel';
 export * from './SettingPanel';
 export * from './hooks';

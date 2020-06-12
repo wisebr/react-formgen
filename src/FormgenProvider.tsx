@@ -16,24 +16,25 @@ export interface FormgenProviderProps {
 
 const FormgenProvider: React.FC<FormgenProviderProps> = ({
   children,
-  locales = enUs,
+  locales,
   iconMap = ICON_MAP,
   elementMap = BASE_ELEMENT_MAP,
   settingMap = BASE_SETTING_MAP,
 }) => {
+  const mergedLocales: ObjectMap = React.useMemo(() => locales ? {...enUs, ...locales} : enUs, [locales]);
   const getLocale = useCallback((key: string) => {
-    const locale = locales[key];
+    const locale = mergedLocales[key];
     if (!locale) {
       console.warn(`[formgen] doesn't match the key "${key}" in locales`);
       return key;
     }
     return locale;
-  }, []);
+  }, [mergedLocales]);
   return (
     <DndProvider backend={HTML5Backend}>
       <FormgenContext.Provider
         value={{
-          locales,
+          locales: mergedLocales,
           getLocale,
           iconMap,
           elementMap,

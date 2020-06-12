@@ -11,7 +11,7 @@ export interface NumberFieldProps extends BaseElementProps<string> {
 }
 
 const NumberField: React.FC<NumberFieldProps> = ({
-  value, required, disabled, label, helpTip, onChange, name, inputRef, error
+  value, required, disabled, label, helpTip, onChange, name, inputRef, error, scene
 }) => {
   const commonClasses = useCommonStyles();
 
@@ -20,6 +20,7 @@ const NumberField: React.FC<NumberFieldProps> = ({
       onChange(ev.target.value);
     }
   };
+  const rest = scene === 'renderer' ? {defaultValue: value} : {value};
 
   return (
     <MuiTextField
@@ -27,7 +28,7 @@ const NumberField: React.FC<NumberFieldProps> = ({
       className={commonClasses.element}
       label={<ElementLabel text={label} tip={helpTip} />}
       name={name}
-      value={value}
+      {...rest}
       type="number"
       required={required}
       disabled={disabled}

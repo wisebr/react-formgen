@@ -19,7 +19,7 @@ export interface SelectProps extends BaseElementProps<string>, SelectElementProp
 }
 
 const Select: React.FC<SelectProps> = ({
-  value, required, disabled, label, helpTip, onChange, name, inputRef, options, error
+  value, required, disabled, label, helpTip, onChange, name, inputRef, options, error, scene
 }) => {
   const classes = useStyles();
   const commonClasses = useCommonStyles();
@@ -30,6 +30,8 @@ const Select: React.FC<SelectProps> = ({
     }
   };
 
+  const rest = scene === 'renderer' ? {defaultValue: value} : {value};
+
   return (
     <MuiTextField
       inputRef={inputRef}
@@ -37,7 +39,7 @@ const Select: React.FC<SelectProps> = ({
       select
       label={<ElementLabel text={label} tip={helpTip} />}
       name={name}
-      value={value}
+      {...rest}
       required={required}
       disabled={disabled}
       onChange={handleChange}
