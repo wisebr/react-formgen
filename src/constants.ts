@@ -4,23 +4,7 @@ import ListAlt from '@material-ui/icons/ListAlt';
 import LooksOne from '@material-ui/icons/LooksOne';
 import Today from '@material-ui/icons/Today';
 
-import { Checkbox, DateTimePicker, NumberField, Select, TextField } from './elements';
-import {
-  CheckboxSettings,
-  DateTimePickerSettings,
-  NumberFieldSettings,
-  SelectSettings,
-  TextFieldSettings,
-} from './settings';
-import {
-  ElementComponentMap,
-  ElementOptions,
-  ElementType,
-  LibItemData,
-  LibraryData,
-  SelectElementOptions,
-  SettingComponentMap,
-} from './types';
+import { ElementOptions, ElementType, LibItemData, LibraryData, SelectElementOptions } from './types';
 
 // tslint:disable: variable-name
 export const ELEMENT_TextField: ElementOptions<{}, string> = {
@@ -82,20 +66,4 @@ export const ICON_MAP = {
   [ElementType.Checkbox]: CheckBox,
   [ElementType.Select]: ListAlt,
   [ElementType.DateTimePicker]: Today,
-};
-
-export const BASE_ELEMENT_MAP: ElementComponentMap = {
-  TextField,
-  NumberField,
-  Select,
-  Checkbox,
-  DateTimePicker,
-};
-
-export const BASE_SETTING_MAP: SettingComponentMap = {
-  [ElementType.TextField]: TextFieldSettings,
-  [ElementType.NumberField]: NumberFieldSettings,
-  [ElementType.Checkbox]: CheckboxSettings,
-  [ElementType.Select]: SelectSettings,
-  [ElementType.DateTimePicker]: DateTimePickerSettings,
 };

@@ -2,9 +2,11 @@ import React, { useCallback } from 'react';
 import { DndProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
-import { BASE_ELEMENT_MAP, BASE_SETTING_MAP, ICON_MAP } from './constants';
+import { ICON_MAP } from './constants';
+import { BASE_ELEMENT_MAP } from './elements';
 import FormgenContext from './FormgenContext';
 import enUs from './locales/en_US.json';
+import { BASE_SETTING_MAP } from './settings';
 import { ElementComponentMap, ObjectMap, SettingComponentMap } from './types';
 
 export interface FormgenProviderProps {

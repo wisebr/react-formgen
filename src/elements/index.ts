@@ -1,10 +1,28 @@
-export { default as TextField } from './TextField';
+import { ElementComponentMap } from '../types';
+import Checkbox from './Checkbox';
+import DateTimePicker from './DateTimePicker';
+import NumberField from './NumberField';
+import Select from './Select';
+import TextField from './TextField';
+
 export * from './TextField';
-export { default as NumberField } from './NumberField';
 export * from './NumberField';
-export { default as Select } from './Select';
 export * from './Select';
-export { default as Checkbox } from './Checkbox';
 export * from './Checkbox';
-export { default as DateTimePicker } from './DateTimePicker';
 export * from './DateTimePicker';
+
+export {
+  TextField,
+  NumberField,
+  Select,
+  Checkbox,
+  DateTimePicker,
+};
+
+export const BASE_ELEMENT_MAP: ElementComponentMap = {
+  TextField,
+  NumberField,
+  Select,
+  Checkbox,
+  DateTimePicker,
+};
