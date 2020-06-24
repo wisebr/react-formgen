@@ -19,3 +19,5 @@ export * from './reducer';
 export * from './types';
 export * from './constants';
 export * from './settings/options';
+export { BASE_SETTING_MAP } from './settings';
+export { BASE_ELEMENT_MAP } from './elements';
