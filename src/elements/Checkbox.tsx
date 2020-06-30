@@ -11,7 +11,7 @@ export interface CheckboxProps extends BaseElementProps<boolean> {
 }
 
 const Checkbox: React.FC<CheckboxProps> = ({
-  value, required, disabled, label, helpTip, onChange, name, inputRef, error
+  value, required, disabled, label, helpTip, onChange, name, inputRef, error, scene
 }) => {
   const commonClasses = useCommonStyles();
 
@@ -20,6 +20,8 @@ const Checkbox: React.FC<CheckboxProps> = ({
       onChange(ev.target.checked);
     }
   };
+
+  const rest = scene === 'previewer' ? {checked: value} : null;
 
   return (
     <FormControl
@@ -31,7 +33,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
       <FormControlLabel
         label={<ElementLabel text={label} tip={helpTip} />}
         control={
-          <MuiCheckbox inputRef={inputRef} name={name} checked={value} onChange={handleChange} />
+          <MuiCheckbox inputRef={inputRef} name={name} {...rest} onChange={handleChange} />
         }
       />
     </FormControl>

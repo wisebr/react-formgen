@@ -3,12 +3,13 @@ import React, { useMemo } from 'react';
 import FormgenContext from './FormgenContext';
 import { BaseElementProps, ElementData, ElementError, ElementSceneType } from './types';
 
-export interface ElementSwitchProps extends Partial<ElementData> {
+export interface ElementSwitchProps<Ctx = any> extends Partial<ElementData> {
   type: ElementData['type'];
   scene: ElementSceneType;
   inputRef?: React.Ref<any>;
   onChange?: (...args: any[]) => void;
   error?: ElementError;
+  context?: Ctx;
 }
 
 const ElementSwitch: React.FC<ElementSwitchProps> = ({
@@ -26,6 +27,7 @@ const ElementSwitch: React.FC<ElementSwitchProps> = ({
   onChange,
   inputRef,
   error,
+  context,
 }) => {
   const {elementMap} = React.useContext(FormgenContext);
   const Component: React.ComponentType<any> = useMemo(
@@ -57,6 +59,7 @@ const ElementSwitch: React.FC<ElementSwitchProps> = ({
       onChange={onChange}
       inputRef={inputRef}
       key={id}
+      context={context}
     />
   );
 };

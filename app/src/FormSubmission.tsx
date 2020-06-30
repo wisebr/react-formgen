@@ -3,8 +3,9 @@ import { Button, Grid, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import React from 'react';
 import { useState } from 'react';
-import { ElementData, FormRenderer } from 'react-formgen';
+import { ElementData, FormRenderer, FormgenProvider, BASE_ELEMENT_MAP } from 'react-formgen';
 import { Controller, useForm } from 'react-hook-form';
+import locales from './i18n.json';
 
 interface FormSubmissionProps {
   elements: ElementData[];
@@ -31,12 +32,19 @@ const FormSubmission = ({elements}: FormSubmissionProps) => {
     <div className={classes.root}>
       <Grid container>
         <Grid item xs={6}>
-          <FormRenderer dateUtils={DateFnsUtils} elements={elements} {...formHook} />
+
+          <FormgenProvider
+            locales={locales}
+            elementMap={BASE_ELEMENT_MAP}
+          >
+            <FormRenderer dateUtils={DateFnsUtils} elements={elements} {...formHook} />
+          </FormgenProvider>
           <Controller
             control={formHook.control}
             as={TextField}
             onChange={([ev]) => ev.target.value}
             name="test"
+            label="External Input"
             defaultValue="5"
             rules={{required: true}}
           />
@@ -53,6 +61,7 @@ const FormSubmission = ({elements}: FormSubmissionProps) => {
         <Grid item xs={6}>
           <TextField
             label="value"
+            fullWidth
             multiline
             variant="outlined"
             value={JSON.stringify(data, undefined, 4)}
@@ -62,6 +71,7 @@ const FormSubmission = ({elements}: FormSubmissionProps) => {
           <br />
           <TextField
             label="errors"
+            fullWidth
             multiline
             variant="outlined"
             value={JSON.stringify(formHook.errors, undefined, 4)}

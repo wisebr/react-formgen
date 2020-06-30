@@ -11,6 +11,7 @@ import {
   Library,
   Previewer,
   SettingPanel,
+  BASE_ELEMENT_MAP,
 } from 'react-formgen';
 
 import locales from './i18n.json';
@@ -58,7 +59,10 @@ const FormGenerator = ({state}: FormGeneratorProps) => {
   } = state;
 
   return (
-    <FormgenProvider locales={locales}>
+    <FormgenProvider
+      locales={locales}
+      elementMap={BASE_ELEMENT_MAP}
+    >
       <Grid container>
         <Grid item xs={2}>
           <LibContainer>

@@ -6,10 +6,11 @@ import { Controller, FormContextValues } from 'react-hook-form';
 import ElementSwitch from './ElementSwitch';
 import { ElementData } from './types';
 
-export interface FormRendererProps extends FormContextValues {
+export interface FormRendererProps<Ctx = any> extends FormContextValues {
   className?: string;
   elements: ElementData[];
   dateUtils: any;
+  context?: Ctx;
 }
 
 const useStyles = makeStyles(() => ({
@@ -22,7 +23,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const FormRenderer: React.FC<FormRendererProps> = ({
-  className, elements, control, dateUtils, errors
+  className, elements, control, dateUtils, errors, context
 }) => {
   const classes = useStyles();
   const sortedElements = useMemo(() => elements.sort((a, b) => a.order - b.order), [elements]);
@@ -45,6 +46,7 @@ const FormRenderer: React.FC<FormRendererProps> = ({
                 error={errors[el.name]}
                 rules={{required: el.required}}
                 defaultValue={el.value}
+                context={context}
               />
             </div>
           );

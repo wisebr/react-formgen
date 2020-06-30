@@ -74,7 +74,7 @@ export interface ElementData<P extends ObjectMap = {}, V = any> {
 }
 
 // For component to extend
-export interface BaseElementProps<V = any> {
+export interface BaseElementProps<V = any, Ctx = any> {
   name: string;
   label: string;
   value: V;
@@ -85,6 +85,7 @@ export interface BaseElementProps<V = any> {
   settings: SettingsOptions;
   error?: ElementError; // from react-hook-form
   scene: ElementSceneType;
+  context?: Ctx;
 }
 
 export type ElementMap = ObjectMap<ElementOptions>;

@@ -13,7 +13,7 @@ import FormgenContext from './FormgenContext';
 import { ElementData, ElementOptions, LibraryDragItem } from './types';
 import { isSelectElement } from './utils';
 
-export interface PreviewerProps {
+export interface PreviewerProps<Ctx = any> {
   className?: string;
   acceptDropType?: string;
   onPreDrop?: (item: LibraryDragItem) => boolean;
@@ -27,6 +27,7 @@ export interface PreviewerProps {
   activedElement?: ElementData;
 
   dateUtils: any; // Date utils like DateFnsUtils from @date-io/date-fns
+  context?: Ctx;
 }
 
 const useStyles = makeStyles({
@@ -75,6 +76,7 @@ const Previewer: React.FC<PreviewerProps> = ({
   activedElement,
   elements,
   dateUtils,
+  context,
 }) => {
   const { getLocale } = useContext(FormgenContext);
 
@@ -139,7 +141,7 @@ const Previewer: React.FC<PreviewerProps> = ({
             onMoveElement={onMoveElement}
             acceptDropType={`${acceptDropType}-elementWrapper`}
           >
-            <ElementSwitch {...el} scene="previewer" />
+            <ElementSwitch {...el} scene="previewer" context={context} />
           </ElementWrapper>
         ))}
       </MuiPickersUtilsProvider>
