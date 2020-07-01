@@ -3,7 +3,6 @@ import React from 'react';
 
 import { useCommonStyles } from '../styles';
 import { BaseElementProps } from '../types';
-import ElementLabel from './ElementLabel';
 
 export interface NumberFieldProps extends BaseElementProps<string> {
   inputRef?: React.Ref<any>;
@@ -11,7 +10,7 @@ export interface NumberFieldProps extends BaseElementProps<string> {
 }
 
 const NumberField: React.FC<NumberFieldProps> = ({
-  value, required, disabled, label, helpTip, onChange, name, inputRef, error, scene
+  value, required, disabled, label, onChange, name, inputRef, error, scene
 }) => {
   const commonClasses = useCommonStyles();
 
@@ -26,7 +25,7 @@ const NumberField: React.FC<NumberFieldProps> = ({
     <MuiTextField
       inputRef={inputRef}
       className={commonClasses.element}
-      label={<ElementLabel text={label} tip={helpTip} />}
+      label={label}
       name={name}
       {...rest}
       type="number"

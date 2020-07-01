@@ -5,7 +5,6 @@ import React from 'react';
 
 import { useCommonStyles } from '../styles';
 import { BaseElementProps, SelectElementProps } from '../types';
-import ElementLabel from './ElementLabel';
 
 const useStyles = makeStyles({
   root: {
@@ -19,7 +18,7 @@ export interface SelectProps extends BaseElementProps<string>, SelectElementProp
 }
 
 const Select: React.FC<SelectProps> = ({
-  value, required, disabled, label, helpTip, onChange, name, inputRef, options, error, scene
+  value, required, disabled, label, onChange, name, inputRef, options, error, scene
 }) => {
   const classes = useStyles();
   const commonClasses = useCommonStyles();
@@ -37,7 +36,7 @@ const Select: React.FC<SelectProps> = ({
       inputRef={inputRef}
       className={classNames(commonClasses.element, classes.root)}
       select
-      label={<ElementLabel text={label} tip={helpTip} />}
+      label={label}
       name={name}
       {...rest}
       required={required}

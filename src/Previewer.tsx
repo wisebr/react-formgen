@@ -56,6 +56,7 @@ const generateDefElement = (options: ElementOptions): ElementData => {
     props: {},
     settings: {},
     label: '',
+    meta: {},
     ...options,
   };
   if (isSelectElement(element)) {

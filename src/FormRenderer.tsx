@@ -1,9 +1,9 @@
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import { makeStyles } from '@material-ui/styles';
 import React, { useMemo } from 'react';
 import { Controller, FormContextValues } from 'react-hook-form';
 
 import ElementSwitch from './ElementSwitch';
+import { ElementTipsWrapper, ElementTipsWrapperProps } from './ElementTipsWrapper';
 import { ElementData } from './types';
 
 export interface FormRendererProps<Ctx = any> extends FormContextValues {
@@ -11,21 +11,14 @@ export interface FormRendererProps<Ctx = any> extends FormContextValues {
   elements: ElementData[];
   dateUtils: any;
   context?: Ctx;
+  showTips?: boolean;
+  elementTipsWrapperProps?: ElementTipsWrapperProps;
 }
 
-const useStyles = makeStyles(() => ({
-  field: {
-    marginBottom: 10,
-    '&:last-of-type': {
-      marginBottom: 30,
-    }
-  }
-}));
-
 const FormRenderer: React.FC<FormRendererProps> = ({
-  className, elements, control, dateUtils, errors, context
+  className, elements, control, dateUtils, errors, context, showTips,
+  elementTipsWrapperProps
 }) => {
-  const classes = useStyles();
   const sortedElements = useMemo(() => elements.sort((a, b) => a.order - b.order), [elements]);
 
   if (!elements.length) {
@@ -35,9 +28,14 @@ const FormRenderer: React.FC<FormRendererProps> = ({
   return (
     <div className={className}>
       <MuiPickersUtilsProvider utils={dateUtils}>
-        {sortedElements.map((el) => {
+        {showTips ? sortedElements.map((el) => {
           return (
-            <div className={classes.field} key={el.id}>
+            <ElementTipsWrapper
+              key={el.id}
+              name={el.name}
+              helpTip={el.helpTip}
+              {...elementTipsWrapperProps}
+            >
               <Controller
                 control={control}
                 as={ElementSwitch}
@@ -48,9 +46,21 @@ const FormRenderer: React.FC<FormRendererProps> = ({
                 defaultValue={el.value}
                 context={context}
               />
-            </div>
+            </ElementTipsWrapper>
           );
-        })}
+        }) : sortedElements.map((el) => (
+          <Controller
+            key={el.id}
+            control={control}
+            as={ElementSwitch}
+            scene="renderer"
+            {...el}
+            error={errors[el.name]}
+            rules={{required: el.required}}
+            defaultValue={el.value}
+            context={context}
+          />
+        ))}
       </MuiPickersUtilsProvider>
     </div>
   );

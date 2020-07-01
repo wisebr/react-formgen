@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 
 import { useCommonStyles } from '../styles';
 import { BaseElementProps } from '../types';
-import ElementLabel from './ElementLabel';
 
 export interface DateTimePickerProps extends BaseElementProps<string> {
   inputRef?: React.Ref<any>;
@@ -16,7 +15,6 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
   required,
   disabled,
   label,
-  helpTip,
   onChange,
   name,
   inputRef,
@@ -42,7 +40,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
     <>
       <KeyboardDateTimePicker
         className={commonClasses.element}
-        label={<ElementLabel text={label} tip={helpTip} />}
+        label={label}
         value={scene === 'previewer' ? new Date() : renderVal}
         required={required}
         disabled={disabled}

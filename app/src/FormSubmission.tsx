@@ -37,7 +37,12 @@ const FormSubmission = ({elements}: FormSubmissionProps) => {
             locales={locales}
             elementMap={BASE_ELEMENT_MAP}
           >
-            <FormRenderer dateUtils={DateFnsUtils} elements={elements} {...formHook} />
+            <FormRenderer
+              dateUtils={DateFnsUtils}
+              elements={elements}
+              {...formHook}
+              showTips
+            />
           </FormgenProvider>
           <Controller
             control={formHook.control}

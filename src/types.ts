@@ -27,7 +27,7 @@ export interface SettingsOptions {
   options?: boolean;
 }
 
-export interface ElementOptions<P extends ObjectMap = {}, V = any> {
+export interface ElementOptions<P extends ObjectMap = {}, V = any, Meta = {}> {
   name?: string; // unique
   label?: string;
   value?: V; // default value
@@ -38,6 +38,7 @@ export interface ElementOptions<P extends ObjectMap = {}, V = any> {
   props?: P;
   elements?: ElementOptions[]; // if there are sub elements
   settings?: SettingsOptions;
+  meta?: Meta;
 }
 
 export interface LibItemData {
@@ -59,7 +60,7 @@ export interface LibraryData {
 }
 
 // The type stored in context
-export interface ElementData<P extends ObjectMap = {}, V = any> {
+export interface ElementData<P extends ObjectMap = {}, V = any, Meta = {}> {
   id: string; // unique
   name: string; // unique
   label: string;
@@ -71,6 +72,7 @@ export interface ElementData<P extends ObjectMap = {}, V = any> {
   helpTip: string;
   props: P;
   settings: SettingsOptions;
+  meta?: Meta;
 }
 
 // For component to extend
