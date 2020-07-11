@@ -6,6 +6,7 @@ import pkg from './package.json';
 
 export function getConfig({
   tsconfig = './tsconfig.json',
+  input = 'src/index.ts',
   output = [
     {
       file: `dist/${pkg.name}.js`,
@@ -17,9 +18,10 @@ export function getConfig({
       format: 'esm',
     },
   ],
-} = {}) {
+}) {
   return {
-    input: 'src/index.ts',
+    input,
+    output,
     external: ['react', 'react-dom', '@material-ui/icons', '@material-ui/core', '@material-ui/styles'],
     plugins: [
       json(),
@@ -29,8 +31,7 @@ export function getConfig({
       }),
       visualizer(),
     ],
-    output,
   };
 }
 
-export default getConfig();
+export default getConfig({});

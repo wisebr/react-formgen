@@ -49,6 +49,7 @@ const useStyles = makeStyles<{}, ElementWrapperProps>(() => ({
   },
   btn: {
     color: lightBlue[600],
+    height: '3rem',
   },
   actived: {
     backgroundColor: lightBlue[100],

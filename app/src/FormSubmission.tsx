@@ -3,8 +3,10 @@ import { Button, Grid, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import React from 'react';
 import { useState } from 'react';
-import { ElementData, FormRenderer, FormgenProvider, BASE_ELEMENT_MAP } from 'react-formgen';
+import { ElementData, FormgenProvider, FormRenderer } from 'react-formgen';
 import { Controller, useForm } from 'react-hook-form';
+
+import { ELEMENT_MAP } from './constants';
 import locales from './i18n.json';
 
 interface FormSubmissionProps {
@@ -35,7 +37,7 @@ const FormSubmission = ({elements}: FormSubmissionProps) => {
 
           <FormgenProvider
             locales={locales}
-            elementMap={BASE_ELEMENT_MAP}
+            elementMap={ELEMENT_MAP}
           >
             <FormRenderer
               dateUtils={DateFnsUtils}

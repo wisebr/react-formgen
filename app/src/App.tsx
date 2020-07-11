@@ -8,6 +8,7 @@ import { ElementData, useElementsState } from 'react-formgen';
 
 import FormGenerator from './FormGenerator';
 import FormSubmission from './FormSubmission';
+import { generateElements } from './utils';
 
 const useStyles = makeStyles({
   '@global': {
@@ -45,6 +46,10 @@ const App: React.FC = () => {
     setElements([...fgElementsState.elements]);
   }, [fgElementsState.elements]);
 
+  const handleRandom = useCallback(() => {
+    setElements(generateElements());
+  }, []);
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -52,12 +57,14 @@ const App: React.FC = () => {
       <FormGenerator state={fgElementsState} />
       <div className={classes.renderBtn}>
         <Button variant="contained" onClick={handleRender}>↓↓ Render To ↓↓</Button>
+        &nbsp;OR&nbsp;
+        <Button variant="contained" onClick={handleRandom}>Random Render</Button>
       </div>
       <Divider />
       <Typography className={classes.title} variant="h5">FormRenderer</Typography>
       <FormSubmission elements={elements} />
     </div>
   );
-}
+};
 
 export default App;

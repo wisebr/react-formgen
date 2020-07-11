@@ -11,9 +11,10 @@ import {
   Library,
   Previewer,
   SettingPanel,
-  BASE_ELEMENT_MAP,
+  KEY_PAIRS_INPUT_LIST_LIB_ITEM,
 } from 'react-formgen';
 
+import { ELEMENT_MAP, SETTINGS_MAP } from './constants';
 import locales from './i18n.json';
 
 const customLibItems: LibItemData[] = [
@@ -61,12 +62,14 @@ const FormGenerator = ({state}: FormGeneratorProps) => {
   return (
     <FormgenProvider
       locales={locales}
-      elementMap={BASE_ELEMENT_MAP}
+      elementMap={ELEMENT_MAP}
+      settingMap={SETTINGS_MAP}
     >
       <Grid container>
         <Grid item xs={2}>
           <LibContainer>
             <BaseLibrary dragType="library" />
+            <Library dragType="library" name="extends" items={[KEY_PAIRS_INPUT_LIST_LIB_ITEM]} />
             <Library dragType="library" name="custom" items={customLibItems} />
           </LibContainer>
         </Grid>

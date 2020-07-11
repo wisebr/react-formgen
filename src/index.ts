@@ -21,3 +21,6 @@ export * from './constants';
 export * from './settings/options';
 export { BASE_SETTING_MAP } from './settings';
 export { BASE_ELEMENT_MAP } from './elements';
+
+// TODO: move to separate sub module
+export * from './extends';
