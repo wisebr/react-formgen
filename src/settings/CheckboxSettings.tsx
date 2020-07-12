@@ -1,14 +1,7 @@
 import React, { useCallback } from 'react';
 
 import { BaseSettingProps, CheckboxElementData } from '../types';
-import {
-  DefaultValueSetting,
-  DisabledSetting,
-  HelpTipSetting,
-  LabelSetting,
-  NameSetting,
-  RequiredSetting,
-} from './options';
+import { DefaultValueSetting, DisabledSetting, HelpTipSetting, LabelSetting, NameSetting } from './options';
 
 const options = [{
   id: '1',
@@ -44,7 +37,6 @@ const CheckboxSettings: React.FC<CheckboxSettingsProps> = ({
         update={updateElement}
       />
       <HelpTipSetting data={data} update={updateElement} />
-      <RequiredSetting data={data} update={updateElement} />
       <DisabledSetting data={data} update={updateElement} />
     </div>
   );
