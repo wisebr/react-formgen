@@ -1,9 +1,8 @@
-import { Button, CssBaseline, Divider, Typography, StyledEngineProvider } from '@material-ui/core';
+import { Button, createMuiTheme, CssBaseline, Divider, StyledEngineProvider, Typography } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles, ThemeProvider } from '@material-ui/styles';
 import React from 'react';
-import { useCallback } from 'react';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { ElementData, useElementsState } from 'react-formgen';
 
 import FormGenerator from './FormGenerator';
@@ -37,6 +36,15 @@ const useStyles = makeStyles({
   }
 });
 
+const theme = createMuiTheme({components: {
+  MuiTextField: {
+    defaultProps: {
+      // variant: 'standard',
+      size: 'small'
+    }
+  }
+}});
+
 const App: React.FC = () => {
   const classes = useStyles();
   const fgElementsState = useElementsState();
@@ -51,21 +59,25 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <StyledEngineProvider injectFirst>
-      <div className={classes.root}>
-        <CssBaseline />
-        <Typography className={classes.title} variant="h5">FormGenerator</Typography>
-        <FormGenerator state={fgElementsState} />
-        <div className={classes.renderBtn}>
-          <Button variant="contained" onClick={handleRender}>↓↓ Render To ↓↓</Button>
-          &nbsp;OR&nbsp;
-          <Button variant="contained" onClick={handleRandom}>Random Render</Button>
+    <ThemeProvider
+      theme={theme}
+    >
+      <StyledEngineProvider injectFirst>
+        <div className={classes.root}>
+          <CssBaseline />
+          <Typography className={classes.title} variant="h5">FormGenerator</Typography>
+          <FormGenerator state={fgElementsState} />
+          <div className={classes.renderBtn}>
+            <Button variant="contained" onClick={handleRender}>↓↓ Render To ↓↓</Button>
+            &nbsp;OR&nbsp;
+            <Button variant="contained" onClick={handleRandom}>Random Render</Button>
+          </div>
+          <Divider />
+          <Typography className={classes.title} variant="h5">FormRenderer</Typography>
+          <FormSubmission elements={elements} />
         </div>
-        <Divider />
-        <Typography className={classes.title} variant="h5">FormRenderer</Typography>
-        <FormSubmission elements={elements} />
-      </div>
-    </StyledEngineProvider>
+      </StyledEngineProvider>
+    </ThemeProvider>
   );
 };
 

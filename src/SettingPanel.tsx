@@ -9,6 +9,9 @@ const useStyles = makeStyles({
   root: {
     padding: 10,
   },
+  title: {
+    marginBottom: 15,
+  },
 });
 
 export interface SettingPanel {
@@ -31,7 +34,7 @@ const SettingPanel: React.FC<SettingPanel> = ({element, onUpdateElement}) => {
 
   return (
     <div className={classes.root}>
-      <Typography>{getLocale('formSettings')}</Typography>
+      <Typography className={classes.title}>{getLocale('formSettings')}</Typography>
       <Component data={element} onUpdateElement={onUpdateElement} />
     </div>
   );

@@ -7,7 +7,7 @@ import React, { useMemo } from 'react';
 const useStyles = makeStyles(() => ({
   field: {
     padding: 10,
-    // marginBottom: 10,
+    marginBottom: 15,
     '&:last-of-type': {
       marginBottom: 30,
     },

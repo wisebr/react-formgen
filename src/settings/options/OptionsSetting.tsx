@@ -16,8 +16,12 @@ export interface OptionsSetting extends BaseSettingOptionProps {
 }
 
 const useStyles = makeStyles({
+  title: {
+    marginBottom: 10,
+  },
   field: {
     marginRight: 10,
+    marginBottom: 10,
     width: 100,
   },
   option: {
@@ -81,7 +85,9 @@ const OptionsSetting: React.FC<OptionsSetting> = ({data, className, update}) => 
     <div
       className={classNames(commonClasses.settingField, className)}
     >
-      <Typography variant="body1">{getLocale('setting.options')}</Typography>
+      <Typography variant="body1" className={classes.title}>
+        {getLocale('setting.options')}
+      </Typography>
       {options.map((opt, i) => (
         <div key={opt.id} className={classes.option}>
           <TextField
