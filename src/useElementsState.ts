@@ -1,10 +1,11 @@
-import { useCallback, useMemo, useReducer, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
+import * as React from 'react';
 
 import { elementsReducer } from './reducer';
 import { ElementData } from './types';
 
-export function useElementsState (preloadedElements: ElementData[] = []) {
-  const [elements, dispatchElement] = useReducer(elementsReducer, preloadedElements);
+export default function useElementsState (preloadedElements: ElementData[] = []) {
+  const [elements, dispatchElement] = React.useReducer(elementsReducer, preloadedElements);
   const [activedId, setActivedId] = useState<string>();
   const activedElement = useMemo(
     () => {

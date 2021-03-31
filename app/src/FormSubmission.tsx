@@ -1,4 +1,3 @@
-import DateFnsUtils from '@date-io/date-fns';
 import { Button, Grid, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import React from 'react';
@@ -22,7 +21,7 @@ const useStyles = makeStyles({
 const FormSubmission = ({elements}: FormSubmissionProps) => {
   const classes = useStyles();
   const formHook = useForm({mode: 'onChange'});
-  const [data, setData] = useState();
+  const [data, setData] = useState<any>();
 
   // tslint:disable-next-line: no-shadowed-variable
   const onSubmit = formHook.handleSubmit((d) => {
@@ -40,7 +39,6 @@ const FormSubmission = ({elements}: FormSubmissionProps) => {
             elementMap={ELEMENT_MAP}
           >
             <FormRenderer
-              dateUtils={DateFnsUtils}
               elements={elements}
               {...formHook}
               showTips

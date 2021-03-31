@@ -1,4 +1,5 @@
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
+import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
 import React, { useMemo } from 'react';
 import { Controller, FormContextValues } from 'react-hook-form';
 
@@ -9,7 +10,7 @@ import { ElementData } from './types';
 export interface FormRendererProps<Ctx = any> extends FormContextValues {
   className?: string;
   elements: ElementData[];
-  dateUtils: any;
+  dateUtils?: any;
   context?: Ctx;
   showTips?: boolean;
   elementTipsWrapperProps?: ElementTipsWrapperProps;
@@ -27,7 +28,7 @@ const FormRenderer: React.FC<FormRendererProps> = ({
 
   return (
     <div className={className}>
-      <MuiPickersUtilsProvider utils={dateUtils}>
+      <LocalizationProvider dateAdapter={dateUtils || AdapterDateFns}>
         {showTips ? sortedElements.map((el) => {
           return (
             <ElementTipsWrapper
@@ -61,7 +62,7 @@ const FormRenderer: React.FC<FormRendererProps> = ({
             context={context}
           />
         ))}
-      </MuiPickersUtilsProvider>
+      </LocalizationProvider>
     </div>
   );
 };

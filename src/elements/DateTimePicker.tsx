@@ -1,5 +1,6 @@
-import { KeyboardDateTimePicker } from '@material-ui/pickers';
-import React, { useEffect, useState } from 'react';
+import { TextField } from '@material-ui/core';
+import MuiDateTimePicker from '@material-ui/lab/DateTimePicker';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { useCommonStyles } from '../styles';
 import { BaseElementProps } from '../types';
@@ -23,12 +24,12 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
   const commonClasses = useCommonStyles();
   const [renderVal, setRenderVal] = useState(new Date());
 
-  const handleChange = (date: Date) => {
+  const handleChange = useCallback((date: Date) => {
     setRenderVal(date);
     if (onChange) {
       onChange(date.getTime());
     }
-  };
+  }, [onChange]);
 
   useEffect(() => {
     if (scene === 'renderer' && onChange) {
@@ -38,15 +39,21 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
 
   return (
     <>
-      <KeyboardDateTimePicker
+      <MuiDateTimePicker
         className={commonClasses.element}
         label={label}
         value={scene === 'previewer' ? new Date() : renderVal}
-        required={required}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            required={required}
+            error={!!error}
+            margin="normal"
+          />
+        )}
         disabled={disabled}
-        onChange={handleChange}
-        format="yyyy-MM-dd HH:mm:ss"
-        error={!!error}
+        onChange={handleChange as any}
+        inputFormat="yyyy-MM-dd HH:mm:ss"
       />
       <input type="hidden" ref={inputRef} name={name} />
     </>

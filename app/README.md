@@ -6,9 +6,16 @@ cd ..
 npm i
 npm run build
 npm link
-# avoid importing react and @material-ui twice
-mv ./node_modules/react ./node_modules/react_bak
-mv ./node_modules/@material-ui ./node_modules/@material-ui_bak
+
+# make link for react-formgen lib to avoid importing react and @material-ui twice
+# react may cause invalid hook errors
+# @material-ui may cause styles errors
+npm link ./app/node_modules/react
+npm link ./app/node_modules/@material-ui/core
+npm link ./app/node_modules/@material-ui/styles
+npm link ./app/node_modules/@material-ui/lib
+
+# then link lib to app and start
 cd app
 npm link react-formgen
 npm start

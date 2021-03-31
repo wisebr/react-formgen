@@ -1,9 +1,8 @@
 import { Chip, Grid } from '@material-ui/core';
 import { blueGrey } from '@material-ui/core/colors';
 import Info from '@material-ui/icons/Info';
-import { makeStyles, mergeClasses, StyledComponentProps } from '@material-ui/styles';
-import { Classes } from '@material-ui/styles/mergeClasses/mergeClasses';
-import React from 'react';
+import { ClassNameMap, makeStyles, mergeClasses, StyledComponentProps } from '@material-ui/styles';
+import React, { useMemo } from 'react';
 
 const useStyles = makeStyles(() => ({
   field: {
@@ -44,11 +43,11 @@ export const ElementTipsWrapper: React.FC<ElementTipsWrapperProps> = ({
   classes: newClasses, name, helpTip, children, renderName
 }) => {
   const baseClasses = useStyles();
-  const classes = newClasses ? mergeClasses({
+  const classes = useMemo(() => newClasses ? mergeClasses({
     baseClasses,
-    newClasses: newClasses as Classes,
+    newClasses: newClasses,
     Component: ElementTipsWrapper
-  }) : baseClasses;
+  }) : baseClasses, [newClasses, baseClasses]) as ClassNameMap<"field" | "fieldInfo" | "variable">;
 
   return (
     <Grid container spacing={2} className={classes.field} alignItems="center">

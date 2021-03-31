@@ -1,5 +1,6 @@
 import { blue, green } from '@material-ui/core/colors';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
+import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
 import { makeStyles } from '@material-ui/styles';
 import classNames from 'classnames';
 import React, { useContext } from 'react';
@@ -26,7 +27,7 @@ export interface PreviewerProps<Ctx = any> {
   onMoveElement?: (index: number, target: number) => void;
   activedElement?: ElementData;
 
-  dateUtils: any; // Date utils like DateFnsUtils from @date-io/date-fns
+  dateUtils?: any; // Date utils like DateFnsUtils from @date-io/date-fns
   context?: Ctx;
 }
 
@@ -130,7 +131,7 @@ const Previewer: React.FC<PreviewerProps> = ({
       })}
       ref={drop}
     >
-      <MuiPickersUtilsProvider utils={dateUtils}>
+      <LocalizationProvider dateAdapter={dateUtils || AdapterDateFns}>
         {elements.map((el, i) => (
           <ElementWrapper
             key={el.id}
@@ -145,7 +146,7 @@ const Previewer: React.FC<PreviewerProps> = ({
             <ElementSwitch {...el} scene="previewer" context={context} />
           </ElementWrapper>
         ))}
-      </MuiPickersUtilsProvider>
+      </LocalizationProvider>
     </div>
   );
 };

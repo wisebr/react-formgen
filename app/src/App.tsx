@@ -1,4 +1,4 @@
-import { Button, CssBaseline, Divider, Typography } from '@material-ui/core';
+import { Button, CssBaseline, Divider, Typography, StyledEngineProvider } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/styles';
 import React from 'react';
@@ -51,19 +51,21 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <Typography className={classes.title} variant="h5">FormGenerator</Typography>
-      <FormGenerator state={fgElementsState} />
-      <div className={classes.renderBtn}>
-        <Button variant="contained" onClick={handleRender}>↓↓ Render To ↓↓</Button>
-        &nbsp;OR&nbsp;
-        <Button variant="contained" onClick={handleRandom}>Random Render</Button>
+    <StyledEngineProvider injectFirst>
+      <div className={classes.root}>
+        <CssBaseline />
+        <Typography className={classes.title} variant="h5">FormGenerator</Typography>
+        <FormGenerator state={fgElementsState} />
+        <div className={classes.renderBtn}>
+          <Button variant="contained" onClick={handleRender}>↓↓ Render To ↓↓</Button>
+          &nbsp;OR&nbsp;
+          <Button variant="contained" onClick={handleRandom}>Random Render</Button>
+        </div>
+        <Divider />
+        <Typography className={classes.title} variant="h5">FormRenderer</Typography>
+        <FormSubmission elements={elements} />
       </div>
-      <Divider />
-      <Typography className={classes.title} variant="h5">FormRenderer</Typography>
-      <FormSubmission elements={elements} />
-    </div>
+    </StyledEngineProvider>
   );
 };
 
