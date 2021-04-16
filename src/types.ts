@@ -136,3 +136,7 @@ export type ElementError = FieldError | FieldError[] | NestDataObject<any, any> 
 
 export type ElementComponentMap<T extends BaseElementProps = any> = ObjectMap<React.ComponentType<T>>;
 export type SettingComponentMap<T extends BaseSettingProps = any> = ObjectMap<React.ComponentType<T>>;
+
+export type DeepPartial<T> = {
+  [P in keyof T]?: DeepPartial<T[P]>;
+};

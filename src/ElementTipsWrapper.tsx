@@ -3,8 +3,9 @@ import { blueGrey } from '@material-ui/core/colors';
 import Info from '@material-ui/icons/Info';
 import { ClassNameMap, makeStyles, mergeClasses, StyledComponentProps } from '@material-ui/styles';
 import React, { useMemo } from 'react';
+import { InjectFormgenTheme } from './theme';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles<InjectFormgenTheme>(({palette}) => ({
   field: {
     padding: 10,
     marginBottom: 15,
@@ -12,7 +13,7 @@ const useStyles = makeStyles(() => ({
       marginBottom: 30,
     },
     '&:hover': {
-      backgroundColor: blueGrey[100],
+      backgroundColor: palette.action.hover,
       '& $fieldInfo': {
         display: 'block'
       }
@@ -45,7 +46,7 @@ export const ElementTipsWrapper: React.FC<ElementTipsWrapperProps> = ({
   const baseClasses = useStyles();
   const classes = useMemo(() => newClasses ? mergeClasses({
     baseClasses,
-    newClasses: newClasses,
+    newClasses,
     Component: ElementTipsWrapper
   }) : baseClasses, [newClasses, baseClasses]) as ClassNameMap<"field" | "fieldInfo" | "variable">;
 

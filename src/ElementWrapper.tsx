@@ -1,5 +1,4 @@
 import { IconButton } from '@material-ui/core';
-import { lightBlue } from '@material-ui/core/colors';
 import Clear from '@material-ui/icons/Clear';
 import { makeStyles } from '@material-ui/styles';
 import classNames from 'classnames';
@@ -7,6 +6,7 @@ import React, { useCallback, useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 
 import { ElementSwitchProps } from './ElementSwitch';
+import { InjectFormgenTheme, theme } from './theme';
 
 export interface ElementWrapperProps {
   id: string;
@@ -19,7 +19,7 @@ export interface ElementWrapperProps {
   onMoveElement?: (index: number, target: number) => void;
 }
 
-const useStyles = makeStyles<{}, ElementWrapperProps>(() => ({
+const useStyles = makeStyles<InjectFormgenTheme, ElementWrapperProps>(({formgen = theme}) => ({
   root: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -33,27 +33,25 @@ const useStyles = makeStyles<{}, ElementWrapperProps>(() => ({
       display: 'none',
     },
     '&:hover': {
-      borderColor: lightBlue[100],
+      borderColor: formgen.palette.border.hover,
       cursor: ({onMoveElement}) => onMoveElement ? 'move' : 'default',
       '& $btn': {
         display: 'block',
       },
     },
     '&$actived': {
-      borderColor: lightBlue[200],
-      backgroundColor: lightBlue[100],
+      borderColor: formgen.palette.border.selected,
+      backgroundColor: formgen.palette.background.selected,
       '& $btn': {
         display: 'block',
       },
     },
   },
   btn: {
-    color: lightBlue[600],
+    color: formgen.palette.text.clickable,
     height: '3rem',
   },
-  actived: {
-    backgroundColor: lightBlue[100],
-  },
+  actived: {},
   dragging: {
     opacity: .3
   },

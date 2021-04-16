@@ -5,6 +5,7 @@ import React, { useContext } from 'react';
 import { useDrag } from 'react-dnd';
 
 import FormgenContext from '../FormgenContext';
+import { InjectFormgenTheme } from '../theme';
 import { LibItemData } from '../types';
 
 export interface LibraryItemProps {
@@ -17,12 +18,12 @@ interface DragProps {
   isDragging: boolean;
 }
 
-const useStyles = makeStyles<{}, DragProps>({
+const useStyles = makeStyles<InjectFormgenTheme, DragProps>(({palette}) => ({
   root: {
     opacity: ({isDragging}) => isDragging ? .4 : 1,
     border: ({isDragging}) => `1px dashed ${isDragging ? grey[500] : 'rgba(0,0,0,0)'}`,
     '&:hover': {
-      backgroundColor: grey[100],
+      backgroundColor: palette.action.hover,
       cursor: 'move',
     },
   },
@@ -32,7 +33,7 @@ const useStyles = makeStyles<{}, DragProps>({
     position: 'relative',
     top: 2,
   },
-}, {name: 'fg-LibraryItem'});
+}), {name: 'fg-LibraryItem'});
 
 const LibraryItem: React.FC<LibraryItemProps> = ({ data: {element, id, name, thumb}, dragType }) => {
   const { getLocale, iconMap } = useContext(FormgenContext);

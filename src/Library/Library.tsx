@@ -1,9 +1,9 @@
 import { ListItem, Typography } from '@material-ui/core';
-import { grey } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/styles';
 import React, { useContext } from 'react';
 
 import FormgenContext from '../FormgenContext';
+import { InjectFormgenTheme } from '../theme';
 import { LibItemData } from '../types';
 import LibraryItem from './LibraryItem';
 
@@ -14,11 +14,11 @@ export interface ElementLibProps {
   dragType: string;
 }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles<InjectFormgenTheme>(({formgen}) => ({
   header: {
-    background: grey[300],
+    background: formgen.palette.background.head,
   }
-});
+}));
 
 const Library: React.FC<ElementLibProps> = ({ className, name, items, dragType }) => {
   const classes = useStyles();
