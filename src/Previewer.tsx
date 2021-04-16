@@ -1,6 +1,5 @@
-import { blue, green } from '@material-ui/core/colors';
-import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
 import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
+import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
 import { makeStyles } from '@material-ui/styles';
 import classNames from 'classnames';
 import React, { useContext } from 'react';
@@ -11,6 +10,7 @@ import { BASE_LIBRARY_TYPE } from './constants';
 import ElementSwitch from './ElementSwitch';
 import ElementWrapper from './ElementWrapper';
 import FormgenContext from './FormgenContext';
+import { InjectFormgenTheme } from './theme';
 import { ElementData, ElementOptions, LibraryDragItem } from './types';
 import { isSelectElement } from './utils';
 
@@ -31,19 +31,19 @@ export interface PreviewerProps<Ctx = any> {
   context?: Ctx;
 }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles<InjectFormgenTheme>(({formgen}) => ({
   root: {
     paddingTop: 20,
     paddingBottom: 20,
     height: '100%',
   },
   dragging: {
-    backgroundColor: blue[100],
+    backgroundColor: formgen.palette.background.active,
   },
   draggingOver: {
-    backgroundColor: green[100],
+    backgroundColor: formgen.palette.background.dragover,
   },
-}, {name: 'fg-Previewer'});
+}), {name: 'fg-Previewer'});
 
 const generateDefElement = (options: ElementOptions): ElementData => {
   const element = {
