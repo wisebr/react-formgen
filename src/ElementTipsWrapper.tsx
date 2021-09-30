@@ -1,7 +1,7 @@
-import { Chip, Grid } from '@material-ui/core';
-import { blueGrey } from '@material-ui/core/colors';
-import Info from '@material-ui/icons/Info';
-import { ClassNameMap, makeStyles, mergeClasses, StyledComponentProps } from '@material-ui/styles';
+import { Chip, Grid } from '@mui/material';
+import { blueGrey } from '@mui/material/colors';
+import Info from '@mui/icons-material/Info';
+import { ClassNameMap, makeStyles, mergeClasses, StyledComponentProps } from '@mui/styles';
 import React, { useMemo } from 'react';
 import { InjectFormgenTheme } from './theme';
 

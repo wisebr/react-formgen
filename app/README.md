@@ -11,9 +11,9 @@ npm link
 # react may cause invalid hook errors
 # @material-ui may cause styles errors
 npm link ./app/node_modules/react
-npm link ./app/node_modules/@material-ui/core
-npm link ./app/node_modules/@material-ui/styles
-npm link ./app/node_modules/@material-ui/lib
+npm link ./app/node_modules/@mui/material
+npm link ./app/node_modules/@mui/styles
+npm link ./app/node_modules/@mui/lab
 
 # then link lib to app and start
 cd app

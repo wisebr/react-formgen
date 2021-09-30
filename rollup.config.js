@@ -22,7 +22,7 @@ export function getConfig({
   return {
     input,
     output,
-    external: ['react', 'react-dom', '@material-ui/icons', '@material-ui/core', '@material-ui/styles'],
+    external: ['react', 'react-dom', '@mui/icons-material', '@mui/material', '@mui/styles'],
     plugins: [
       json(),
       typescript({

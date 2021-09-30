@@ -1,9 +1,9 @@
 import React from 'react';
 import KeyPairInput, { ExternalKeyPairInputProps } from './KeyPairInput';
 import { BaseElementProps } from '../../types';
-import { Typography } from '@material-ui/core';
-import { makeStyles, DefaultTheme } from '@material-ui/styles';
-import { red } from '@material-ui/core/colors';
+import { Typography } from '@mui/material';
+import { makeStyles, DefaultTheme } from '@mui/styles';
+import { red } from '@mui/material/colors';
 
 export const KEY_PAIRS_INPUT_LIST = 'KeyPairsInputList';
 

@@ -1,8 +1,8 @@
-import CheckBox from '@material-ui/icons/CheckBox';
-import Input from '@material-ui/icons/Input';
-import ListAlt from '@material-ui/icons/ListAlt';
-import LooksOne from '@material-ui/icons/LooksOne';
-import Today from '@material-ui/icons/Today';
+import CheckBox from '@mui/icons-material/CheckBox';
+import Input from '@mui/icons-material/Input';
+import ListAlt from '@mui/icons-material/ListAlt';
+import LooksOne from '@mui/icons-material/LooksOne';
+import Today from '@mui/icons-material/Today';
 
 import { ElementOptions, ElementType, LibItemData, LibraryData, SelectElementOptions } from './types';
 

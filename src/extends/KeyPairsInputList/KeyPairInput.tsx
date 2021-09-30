@@ -1,7 +1,7 @@
 import React from 'react';
-import { TextField, TextFieldProps, MenuItem } from '@material-ui/core';
+import { TextField, TextFieldProps, MenuItem } from '@mui/material';
 import { SelectOption } from '../../types';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@mui/styles';
 
 export interface ExternalKeyPairInputProps {
   label?: string;

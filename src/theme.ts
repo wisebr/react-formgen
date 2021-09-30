@@ -1,6 +1,6 @@
-import { Theme } from '@material-ui/core';
-import { blue, green, grey, lightBlue } from '@material-ui/core/colors';
-import { CSSProperties } from '@material-ui/core/styles/withStyles';
+import { Theme } from '@mui/material';
+import { blue, green, grey, lightBlue } from '@mui/material/colors';
+import { CSSProperties } from '@mui/styles';
 import { DeepPartial } from './types';
 
 type Color = CSSProperties['color'];

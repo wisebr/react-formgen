@@ -1,5 +1,5 @@
-import { MenuItem, TextField as MuiTextField } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { MenuItem, TextField as MuiTextField } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import classNames from 'classnames';
 import React from 'react';
 

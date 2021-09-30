@@ -1,5 +1,5 @@
-import { Button, Grid, TextField } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { Button, Grid, TextField } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import React from 'react';
 import { useState } from 'react';
 import { ElementData, FormgenProvider, FormRenderer } from 'react-formgen';
