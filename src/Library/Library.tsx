@@ -1,5 +1,5 @@
-import { ListItem, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { ListItem, Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import React, { useContext } from 'react';
 
 import FormgenContext from '../FormgenContext';

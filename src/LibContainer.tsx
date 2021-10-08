@@ -1,4 +1,4 @@
-import { List, ListSubheader } from '@material-ui/core';
+import { List, ListSubheader } from '@mui/material';
 import React from 'react';
 
 import FormgenContext from './FormgenContext';

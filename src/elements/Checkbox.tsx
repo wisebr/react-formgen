@@ -1,4 +1,4 @@
-import { Checkbox as MuiCheckbox, FormControl, FormControlLabel } from '@material-ui/core';
+import { Checkbox as MuiCheckbox, FormControl, FormControlLabel } from '@mui/material';
 import React from 'react';
 
 import { useCommonStyles } from '../styles';

@@ -1,12 +1,12 @@
-import { createMuiTheme, StyledEngineProvider } from '@material-ui/core';
-import { ThemeProvider } from '@material-ui/styles';
+import StyledEngineProvider from '@mui/material/StyledEngineProvider';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import React from 'react';
 import { theme as formgenTheme } from 'react-formgen';
 
 import Main from './Main';
 
 const theme = {
-  ...createMuiTheme({
+  ...createTheme({
     palette: {
       mode: 'light',
     },

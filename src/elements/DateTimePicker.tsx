@@ -1,5 +1,5 @@
-import { TextField } from '@material-ui/core';
-import MuiDateTimePicker from '@material-ui/lab/DateTimePicker';
+import { TextField } from '@mui/material';
+import MuiDateTimePicker from '@mui/lab/DateTimePicker';
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { useCommonStyles } from '../styles';

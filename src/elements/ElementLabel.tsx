@@ -1,7 +1,7 @@
-import { Tooltip } from '@material-ui/core';
-import { grey } from '@material-ui/core/colors';
-import Info from '@material-ui/icons/Info';
-import { makeStyles } from '@material-ui/styles';
+import { Tooltip } from '@mui/material';
+import { grey } from '@mui/material/colors';
+import Info from '@mui/icons-material/Info';
+import { makeStyles } from '@mui/styles';
 import React from 'react';
 
 export interface ElementLabelProps {

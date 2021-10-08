@@ -1,5 +1,6 @@
-import { Button, CssBaseline, Divider, makeStyles, Theme, Typography } from '@material-ui/core';
-import { grey } from '@material-ui/core/colors';
+import { Button, CssBaseline, Divider, Theme, Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import { grey } from '@mui/material/colors';
 import React, { useCallback, useState } from 'react';
 import { ElementData, useElementsState } from 'react-formgen';
 

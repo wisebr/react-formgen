@@ -1,6 +1,6 @@
-import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
-import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
-import { makeStyles } from '@material-ui/styles';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { makeStyles } from '@mui/styles';
 import classNames from 'classnames';
 import React, { useContext } from 'react';
 import { useDrop } from 'react-dnd';

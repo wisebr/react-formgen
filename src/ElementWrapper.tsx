@@ -1,6 +1,6 @@
-import { IconButton } from '@material-ui/core';
-import Clear from '@material-ui/icons/Clear';
-import { makeStyles } from '@material-ui/styles';
+import { IconButton } from '@mui/material';
+import Clear from '@mui/icons-material/Clear';
+import { makeStyles } from '@mui/styles';
 import classNames from 'classnames';
 import React, { useCallback, useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
