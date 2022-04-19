@@ -22,6 +22,7 @@ const HelpTipSetting: React.FC<BaseSettingOptionProps> = ({data, className, upda
   return (
     <TextField
       className={classNames(commonClasses.settingField, className)}
+      multiline
       label={getLocale('helpTip')}
       value={data.helpTip}
       onChange={handleChange}
