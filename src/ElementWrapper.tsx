@@ -23,6 +23,7 @@ const useStyles = makeStyles<InjectFormgenTheme, ElementWrapperProps>(({formgen 
   root: {
     display: 'flex',
     justifyContent: 'space-between',
+    alignItems: 'center',
     minHeight: 64,
     padding: '8px 16px',
     border: '1px solid rgba(0,0,0,0)',
@@ -36,20 +37,19 @@ const useStyles = makeStyles<InjectFormgenTheme, ElementWrapperProps>(({formgen 
       borderColor: formgen.palette.border.hover,
       cursor: ({onMoveElement}) => onMoveElement ? 'move' : 'default',
       '& $btn': {
-        display: 'block',
+        display: 'inline-flex',
       },
     },
     '&$actived': {
       borderColor: formgen.palette.border.selected,
       backgroundColor: formgen.palette.background.selected,
       '& $btn': {
-        display: 'block',
+        display: 'inline-flex',
       },
     },
   },
   btn: {
     color: formgen.palette.text.clickable,
-    height: '3rem',
   },
   actived: {},
   dragging: {
