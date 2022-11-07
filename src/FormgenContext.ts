@@ -5,6 +5,7 @@ import enUs from './locales/en_US.json';
 import { ElementComponentMap, ObjectMap, SettingComponentMap } from './types';
 
 export interface FormgenContextProps {
+  adapterLocale: ObjectMap;
   locales: ObjectMap;
   getLocale: (key: string) => string;
   iconMap: {[key: string]: React.ElementType};
@@ -13,6 +14,7 @@ export interface FormgenContextProps {
 }
 
 const FormgenContext = React.createContext<FormgenContextProps>({
+  adapterLocale: {},
   locales: enUs,
   getLocale: () => '',
   iconMap: ICON_MAP,

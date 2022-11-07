@@ -1,5 +1,5 @@
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { makeStyles } from '@mui/styles';
 import classNames from 'classnames';
 import React, { useContext } from 'react';
@@ -80,8 +80,7 @@ const Previewer: React.FC<PreviewerProps> = ({
   dateUtils,
   context,
 }) => {
-  const { getLocale } = useContext(FormgenContext);
-
+  const { getLocale, adapterLocale } = useContext(FormgenContext);
   const [{isOver, canDrop}, drop] = useDrop({
     accept: acceptDropType,
     drop: (item: LibraryDragItem) => {
@@ -131,7 +130,10 @@ const Previewer: React.FC<PreviewerProps> = ({
       })}
       ref={drop}
     >
-      <LocalizationProvider dateAdapter={dateUtils || AdapterDateFns}>
+      <LocalizationProvider
+        adapterLocale={adapterLocale}
+        dateAdapter={dateUtils || AdapterDayjs}
+      >
         {elements.map((el, i) => (
           <ElementWrapper
             key={el.id}
