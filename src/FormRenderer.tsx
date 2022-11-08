@@ -1,8 +1,8 @@
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import React, { useMemo } from 'react';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import React, { useContext, useMemo } from 'react';
 import { Controller, FormContextValues } from 'react-hook-form';
-
+import FormgenContext from './FormgenContext';
 import ElementSwitch from './ElementSwitch';
 import { ElementTipsWrapper, ElementTipsWrapperProps } from './ElementTipsWrapper';
 import { ElementData } from './types';
@@ -20,6 +20,7 @@ const FormRenderer: React.FC<FormRendererProps> = ({
   className, elements, control, dateUtils, errors, context, showTips,
   elementTipsWrapperProps
 }) => {
+  const { adapterLocale } = useContext(FormgenContext);
   const sortedElements = useMemo(() => elements.sort((a, b) => a.order - b.order), [elements]);
 
   if (!elements.length) {
@@ -28,7 +29,10 @@ const FormRenderer: React.FC<FormRendererProps> = ({
 
   return (
     <div className={className}>
-      <LocalizationProvider dateAdapter={dateUtils || AdapterDateFns}>
+      <LocalizationProvider
+        adapterLocale={adapterLocale}
+        dateAdapter={dateUtils || AdapterDayjs}
+      >
         {showTips ? sortedElements.map((el) => {
           return (
             <ElementTipsWrapper

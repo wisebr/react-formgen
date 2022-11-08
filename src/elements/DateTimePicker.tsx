@@ -1,5 +1,6 @@
 import { TextField } from '@mui/material';
-import MuiDateTimePicker from '@mui/lab/DateTimePicker';
+import { DateTimePicker as MuiDateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import dayjs, { Dayjs } from "dayjs";
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { useCommonStyles } from '../styles';
@@ -22,18 +23,18 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
   error,
 }) => {
   const commonClasses = useCommonStyles();
-  const [renderVal, setRenderVal] = useState(new Date());
+  const [renderVal, setRenderVal] = useState(dayjs());
 
-  const handleChange = useCallback((date: Date) => {
+  const handleChange = useCallback((date: Dayjs) => {
     setRenderVal(date);
     if (onChange) {
-      onChange(date.getTime());
+      onChange(date ? date.valueOf() : 0);
     }
   }, [onChange]);
 
   useEffect(() => {
     if (scene === 'renderer' && onChange) {
-      onChange(renderVal.getTime());
+      onChange(renderVal ? renderVal.valueOf() : 0);
     }
   }, []);
 
@@ -42,7 +43,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
       <MuiDateTimePicker
         className={commonClasses.element}
         label={label}
-        value={scene === 'previewer' ? new Date() : renderVal}
+        value={scene === 'previewer' ? dayjs() : renderVal}
         renderInput={(params) => (
           <TextField
             {...params}
@@ -53,7 +54,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
         )}
         disabled={disabled}
         onChange={handleChange as any}
-        inputFormat="yyyy-MM-dd HH:mm:ss"
+        inputFormat="YYYY-MM-DD HH:mm:ss"
       />
       <input type="hidden" ref={inputRef} name={name} />
     </>

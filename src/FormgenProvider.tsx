@@ -11,6 +11,8 @@ import { ElementComponentMap, ObjectMap, SettingComponentMap } from './types';
 
 export interface FormgenProviderProps {
   locales?: ObjectMap;
+  adapterLocaleIsZh?: boolean;
+  adapterLocale?: ObjectMap;
   iconMap?: {[key: string]: React.ElementType};
   elementMap?: ElementComponentMap;
   settingMap?: SettingComponentMap;
@@ -19,6 +21,7 @@ export interface FormgenProviderProps {
 const FormgenProvider: React.FC<FormgenProviderProps> = ({
   children,
   locales,
+  adapterLocale = {},
   iconMap = ICON_MAP,
   elementMap = BASE_ELEMENT_MAP,
   settingMap = BASE_SETTING_MAP,
@@ -36,6 +39,7 @@ const FormgenProvider: React.FC<FormgenProviderProps> = ({
     <DndProvider backend={HTML5Backend}>
       <FormgenContext.Provider
         value={{
+          adapterLocale,
           locales: mergedLocales,
           getLocale,
           iconMap,
