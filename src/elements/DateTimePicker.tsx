@@ -1,4 +1,3 @@
-import { TextField } from '@mui/material';
 import { DateTimePicker as MuiDateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import dayjs, { Dayjs } from "dayjs";
 import React, { useCallback, useEffect, useState } from 'react';
@@ -44,17 +43,10 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
         className={commonClasses.element}
         label={label}
         value={scene === 'previewer' ? dayjs() : renderVal}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            required={required}
-            error={!!error}
-            margin="normal"
-          />
-        )}
+        slotProps={{ textField: { required: required, margin: 'normal', error: !!error } }}
         disabled={disabled}
         onChange={handleChange as any}
-        inputFormat="YYYY-MM-DD HH:mm:ss"
+        format="YYYY-MM-DD HH:mm:ss"
       />
       <input type="hidden" ref={inputRef} name={name} />
     </>
