@@ -1,17 +1,16 @@
 import { Typography } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { styled } from '@mui/material/styles';
 import React, { useContext } from 'react';
 
 import FormgenContext from './FormgenContext';
 import { ElementData } from './types';
 
-const useStyles = makeStyles({
-  root: {
-    padding: 10,
-  },
-  title: {
-    marginBottom: 15,
-  },
+const Root = styled('div')({
+  padding: 10,
+});
+
+const Title = styled(Typography)({
+  marginBottom: 15,
 });
 
 export interface SettingPanel {
@@ -20,7 +19,6 @@ export interface SettingPanel {
 }
 
 const SettingPanel: React.FC<SettingPanel> = ({element, onUpdateElement}) => {
-  const classes = useStyles();
   const { getLocale, settingMap } = useContext(FormgenContext);
   if (!element) {
     return null;
@@ -29,14 +27,14 @@ const SettingPanel: React.FC<SettingPanel> = ({element, onUpdateElement}) => {
   const Component: React.ComponentType<any> = settingMap[element.type];
 
   if (!Component) {
-    return <div className={classes.root}>{getLocale('noSettings')}</div>;
+    return <Root>{getLocale('noSettings')}</Root>;
   }
 
   return (
-    <div className={classes.root}>
-      <Typography className={classes.title}>{getLocale('formSettings')}</Typography>
+    <Root>
+      <Title>{getLocale('formSettings')}</Title>
       <Component data={element} onUpdateElement={onUpdateElement} />
-    </div>
+    </Root>
   );
 };
 

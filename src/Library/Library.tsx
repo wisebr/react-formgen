@@ -1,9 +1,9 @@
 import { ListItem, Typography } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { styled } from '@mui/material/styles';
 import React, { useContext } from 'react';
 
 import FormgenContext from '../FormgenContext';
-import { InjectFormgenTheme } from '../theme';
+import { getFormgenTheme } from '../theme';
 import { LibItemData } from '../types';
 import LibraryItem from './LibraryItem';
 
@@ -14,20 +14,17 @@ export interface ElementLibProps {
   dragType: string;
 }
 
-const useStyles = makeStyles<InjectFormgenTheme>(({formgen}) => ({
-  header: {
-    background: formgen.palette.background.head,
-  }
+const Header = styled(ListItem)(({ theme }) => ({
+  background: getFormgenTheme(theme).palette.background.head,
 }));
 
 const Library: React.FC<ElementLibProps> = ({ className, name, items, dragType }) => {
-  const classes = useStyles();
   const { getLocale } = useContext(FormgenContext);
   return (
     <div className={className}>
-      <ListItem className={classes.header}>
+      <Header>
         <Typography variant="subtitle1">{getLocale(`lib.${name}`)}</Typography>
-      </ListItem>
+      </Header>
       <div>
         {items.map((item) => (
           <LibraryItem key={item.id} data={item} dragType={dragType} />

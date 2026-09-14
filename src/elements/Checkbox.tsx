@@ -1,7 +1,7 @@
 import { Checkbox as MuiCheckbox, FormControl, FormControlLabel } from '@mui/material';
 import React from 'react';
 
-import { useCommonStyles } from '../styles';
+import { commonSx } from '../styles';
 import { BaseElementProps } from '../types';
 
 export interface CheckboxProps extends BaseElementProps<boolean> {
@@ -12,8 +12,6 @@ export interface CheckboxProps extends BaseElementProps<boolean> {
 const Checkbox: React.FC<CheckboxProps> = ({
   value, disabled, label, onChange, name, inputRef, error, scene
 }) => {
-  const commonClasses = useCommonStyles();
-
   const [inputVal, setInputVal] = React.useState(value);
 
   const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,7 +25,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
 
   return (
     <FormControl
-      className={commonClasses.element}
+      sx={commonSx.element}
       disabled={disabled}
       error={!!error}
     >

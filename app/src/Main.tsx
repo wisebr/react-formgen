@@ -1,5 +1,5 @@
-import { Button, CssBaseline, Divider, Theme, Typography } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { Button, CssBaseline, Divider, GlobalStyles, Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { grey } from '@mui/material/colors';
 import React, { useCallback, useState } from 'react';
 import { ElementData, useElementsState } from 'react-formgen';
@@ -8,34 +8,22 @@ import FormGenerator from './FormGenerator';
 import FormSubmission from './FormSubmission';
 import { generateElements } from './utils';
 
-const useStyles = makeStyles<Theme>(({palette}) => ({
-  '@global': {
-    html: {
-      height: '100%'
-    },
-    body: {
-      height: '100%'
-    },
-    '#root': {
-      height: '100%'
-    }
-  },
-  root: {
-    backgroundColor: palette.mode === 'dark' ? grey[800] : grey[200],
-  },
-  title: {
-    padding: 15,
-  },
-  renderBtn: {
-    position: 'relative',
-    width: '100%',
-    textAlign: 'center',
-    top: 15
-  }
+const Root = styled('div')(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? grey[800] : grey[200],
 }));
 
+const Title = styled(Typography)({
+  padding: 15,
+});
+
+const RenderBtn = styled('div')({
+  position: 'relative',
+  width: '100%',
+  textAlign: 'center',
+  top: 15
+});
+
 const Main = () => {
-  const classes = useStyles();
   const fgElementsState = useElementsState();
   const [elements, setElements] = useState<ElementData[]>([]);
 
@@ -47,19 +35,24 @@ const Main = () => {
     setElements(generateElements());
   }, []);
   return (
-    <div className={classes.root}>
+    <Root>
       <CssBaseline />
-      <Typography className={classes.title} variant="h5">FormGenerator</Typography>
+      <GlobalStyles styles={{
+        html: { height: '100%' },
+        body: { height: '100%' },
+        '#root': { height: '100%' },
+      }} />
+      <Title variant="h5">FormGenerator</Title>
       <FormGenerator state={fgElementsState} />
-      <div className={classes.renderBtn}>
+      <RenderBtn>
         <Button variant="contained" onClick={handleRender}>↓↓ Render To ↓↓</Button>
         &nbsp;OR&nbsp;
         <Button variant="contained" onClick={handleRandom}>Random Render</Button>
-      </div>
+      </RenderBtn>
       <Divider />
-      <Typography className={classes.title} variant="h5">FormRenderer</Typography>
+      <Title variant="h5">FormRenderer</Title>
       <FormSubmission elements={elements} />
-    </div>
+    </Root>
   );
 };
 

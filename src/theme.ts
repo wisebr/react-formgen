@@ -1,6 +1,6 @@
 import { Theme } from '@mui/material';
 import { blue, green, grey, lightBlue } from '@mui/material/colors';
-import { CSSProperties } from '@mui/styles';
+import { CSSProperties } from 'react';
 import { DeepPartial } from './types';
 
 type Color = CSSProperties['color'];
@@ -46,3 +46,6 @@ export const theme: FormgenTheme = {
     },
   },
 };
+
+export const getFormgenTheme = (muiTheme: Theme): FormgenTheme =>
+  (muiTheme as InjectFormgenTheme).formgen ?? theme;

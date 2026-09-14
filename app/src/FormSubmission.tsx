@@ -1,5 +1,4 @@
-import { Button, Grid, TextField } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { Box, Button, Grid, TextField } from '@mui/material';
 import React from 'react';
 import { useState } from 'react';
 import { ElementData, FormgenProvider, FormRenderer } from 'react-formgen';
@@ -12,14 +11,7 @@ interface FormSubmissionProps {
   elements: ElementData[];
 }
 
-const useStyles = makeStyles({
-  root: {
-    padding: 15
-  }
-});
-
 const FormSubmission = ({elements}: FormSubmissionProps) => {
-  const classes = useStyles();
   const formHook = useForm({mode: 'onChange'});
   const [data, setData] = useState<any>();
 
@@ -30,7 +22,7 @@ const FormSubmission = ({elements}: FormSubmissionProps) => {
   });
 
   return (
-    <div className={classes.root}>
+    <Box sx={{ p: '15px' }}>
       <Grid container>
         <Grid item xs={6}>
 
@@ -83,7 +75,7 @@ const FormSubmission = ({elements}: FormSubmissionProps) => {
           />
         </Grid>
       </Grid>
-    </div>
+    </Box>
   );
 };
 

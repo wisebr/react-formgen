@@ -2,7 +2,7 @@ import { DateTimePicker as MuiDateTimePicker } from '@mui/x-date-pickers/DateTim
 import dayjs, { Dayjs } from "dayjs";
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { useCommonStyles } from '../styles';
+import { commonSx } from '../styles';
 import { BaseElementProps } from '../types';
 
 export interface DateTimePickerProps extends BaseElementProps<string> {
@@ -21,7 +21,6 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
   inputRef,
   error,
 }) => {
-  const commonClasses = useCommonStyles();
   const [renderVal, setRenderVal] = useState(dayjs());
 
   const handleChange = useCallback((date: Dayjs) => {
@@ -40,7 +39,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
   return (
     <>
       <MuiDateTimePicker
-        className={commonClasses.element}
+        sx={commonSx.element}
         label={label}
         value={scene === 'previewer' ? dayjs() : renderVal}
         slotProps={{ textField: { required: required, margin: 'normal', error: !!error } }}

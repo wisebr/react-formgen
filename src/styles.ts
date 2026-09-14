@@ -1,6 +1,4 @@
-import { makeStyles } from '@mui/styles';
-
-export const useCommonStyles = makeStyles({
+export const commonSx = {
   settingField: {
     display: 'block',
     marginBottom: 15,
@@ -8,4 +6,4 @@ export const useCommonStyles = makeStyles({
   element: {
     marginRight: 10,
   },
-}, {name: 'fg-common'});
+};

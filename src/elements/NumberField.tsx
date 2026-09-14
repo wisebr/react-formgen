@@ -1,7 +1,7 @@
 import { TextField as MuiTextField } from '@mui/material';
 import React from 'react';
 
-import { useCommonStyles } from '../styles';
+import { commonSx } from '../styles';
 import { BaseElementProps } from '../types';
 
 export interface NumberFieldProps extends BaseElementProps<string> {
@@ -12,8 +12,6 @@ export interface NumberFieldProps extends BaseElementProps<string> {
 const NumberField: React.FC<NumberFieldProps> = ({
   value, required, disabled, label, onChange, name, inputRef, error, scene
 }) => {
-  const commonClasses = useCommonStyles();
-
   const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     if (onChange) {
       onChange(ev.target.value);
@@ -24,7 +22,7 @@ const NumberField: React.FC<NumberFieldProps> = ({
   return (
     <MuiTextField
       inputRef={inputRef}
-      className={commonClasses.element}
+      sx={commonSx.element}
       label={label}
       name={name}
       {...rest}

@@ -1,14 +1,12 @@
 import { TextField } from '@mui/material';
-import classNames from 'classnames';
 import React, { useContext } from 'react';
 
 import FormgenContext from '../../FormgenContext';
-import { useCommonStyles } from '../../styles';
+import { commonSx } from '../../styles';
 import { BaseSettingOptionProps } from '../../types';
 
 const NameSetting: React.FC<BaseSettingOptionProps> = ({data, className, update}) => {
   const { getLocale } = useContext(FormgenContext);
-  const commonClasses = useCommonStyles();
   if (data.settings.name === false) {
     return null;
   }
@@ -21,7 +19,8 @@ const NameSetting: React.FC<BaseSettingOptionProps> = ({data, className, update}
 
   return (
     <TextField
-      className={classNames(commonClasses.settingField, className)}
+      className={className}
+      sx={commonSx.settingField}
       label={getLocale('varName')}
       required
       value={data.name}

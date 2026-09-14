@@ -2,7 +2,6 @@ import React from 'react';
 import KeyPairInput, { ExternalKeyPairInputProps } from './KeyPairInput';
 import { BaseElementProps } from '../../types';
 import { Typography } from '@mui/material';
-import { makeStyles, DefaultTheme } from '@mui/styles';
 import { red } from '@mui/material/colors';
 
 export const KEY_PAIRS_INPUT_LIST = 'KeyPairsInputList';
@@ -17,20 +16,12 @@ export interface KeyPairsInputListProps extends BaseElementProps<string>, KeyPai
   inputRef?: React.Ref<any>;
 }
 
-const useStyles = makeStyles<DefaultTheme, KeyPairsInputListProps>(() => ({
-  title: {
-    color: ({error}) => error ? red[500] : 'inherit',
-  }
-}));
-
 const KeyPairsInputList: React.FC<KeyPairsInputListProps> = (props) => {
   const {
-    value, onChange, name, label, inputRef, disabled,
+    value, onChange, name, label, inputRef, disabled, error,
     // TODO: implement logic with required, scene,
     keys, inputPropsMap
   } = props;
-
-  const classes = useStyles(props);
 
   const [valueMap, setValueMap] = React.useState<{[key: string]: string}>({});
 
@@ -76,7 +67,7 @@ const KeyPairsInputList: React.FC<KeyPairsInputListProps> = (props) => {
 
   return (
     <div>
-      <Typography className={classes.title}>{label}</Typography>
+      <Typography sx={{ color: error ? red[500] : 'inherit' }}>{label}</Typography>
       {keys.map((key) => (
         <KeyPairInput
           disabled={disabled}

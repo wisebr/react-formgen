@@ -1,7 +1,7 @@
 import React from 'react';
 import { TextField, TextFieldProps, MenuItem } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { SelectOption } from '../../types';
-import { makeStyles } from '@mui/styles';
 
 export interface ExternalKeyPairInputProps {
   label?: string;
@@ -19,23 +19,22 @@ export interface KeyPairInputProps extends ExternalKeyPairInputProps {
   onChange?: (val: string, name?: string) => void;
 }
 
-const useStyles = makeStyles(() => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'nowrap'
-  },
-  valueInput: {
-    minWidth: 180,
-  },
-  select: {
-    minWidth: 120,
-  },
-}));
+const Root = styled('div')({
+  display: 'flex',
+  flexWrap: 'nowrap'
+});
+
+const ValueInput = styled(TextField)({
+  minWidth: 180,
+});
+
+const SelectInput = styled(TextField)({
+  minWidth: 120,
+});
 
 const KeyPairInput: React.FC<KeyPairInputProps> = ({
   name, label, selectLabel, type, value = '', onChange, options, disabled, required
 }) => {
-  const classes = useStyles();
   const [selected, input] = React.useMemo(() => {
     const res = value.split(':');
     return res.length > 1 ? res : ['', res[0]];
@@ -54,9 +53,8 @@ const KeyPairInput: React.FC<KeyPairInputProps> = ({
   }, [onChange, name]);
 
   return (
-    <div className={classes.root}>
-      <TextField
-        className={classes.valueInput}
+    <Root>
+      <ValueInput
         label={label || name}
         type={type}
         disabled={disabled}
@@ -65,8 +63,7 @@ const KeyPairInput: React.FC<KeyPairInputProps> = ({
         onChange={handleChangeValue}
       />
       {!!options && (
-        <TextField
-          className={classes.select}
+        <SelectInput
           select
           label={selectLabel}
           disabled={disabled}
@@ -78,9 +75,9 @@ const KeyPairInput: React.FC<KeyPairInputProps> = ({
               {opt.label}
             </MenuItem>
           ))}
-        </TextField>
+        </SelectInput>
       )}
-    </div>
+    </Root>
   );
 };
 

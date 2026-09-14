@@ -1,12 +1,12 @@
 import { IconButton } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import Clear from '@mui/icons-material/Clear';
-import { makeStyles } from '@mui/styles';
 import classNames from 'classnames';
 import React, { useCallback, useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 
 import { ElementSwitchProps } from './ElementSwitch';
-import { InjectFormgenTheme, theme } from './theme';
+import { getFormgenTheme } from './theme';
 
 export interface ElementWrapperProps {
   id: string;
@@ -19,8 +19,15 @@ export interface ElementWrapperProps {
   onMoveElement?: (index: number, target: number) => void;
 }
 
-const useStyles = makeStyles<InjectFormgenTheme, ElementWrapperProps>(({formgen = theme}) => ({
-  root: {
+const RemoveButton = styled(IconButton)(({ theme }) => ({
+  color: getFormgenTheme(theme).palette.text.clickable,
+}));
+
+const Root = styled('div', {
+  shouldForwardProp: (prop) => prop !== 'actived' && prop !== 'movable',
+})<{ actived?: boolean; movable?: boolean }>(({ theme, actived, movable }) => {
+  const formgen = getFormgenTheme(theme);
+  return {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -30,32 +37,28 @@ const useStyles = makeStyles<InjectFormgenTheme, ElementWrapperProps>(({formgen 
     borderRadius: 3,
     transition: 'all linear .25s',
     marginBottom: 8,
-    '& $btn': {
+    [`& ${RemoveButton}`]: {
       display: 'none',
     },
     '&:hover': {
       borderColor: formgen.palette.border.hover,
-      cursor: ({onMoveElement}) => onMoveElement ? 'move' : 'default',
-      '& $btn': {
+      cursor: movable ? 'move' : 'default',
+      [`& ${RemoveButton}`]: {
         display: 'inline-flex',
       },
     },
-    '&$actived': {
+    ...(actived && {
       borderColor: formgen.palette.border.selected,
       backgroundColor: formgen.palette.background.selected,
-      '& $btn': {
+      [`& ${RemoveButton}`]: {
         display: 'inline-flex',
       },
+    }),
+    '&.fg-dragging': {
+      opacity: .3
     },
-  },
-  btn: {
-    color: formgen.palette.text.clickable,
-  },
-  actived: {},
-  dragging: {
-    opacity: .3
-  },
-}));
+  };
+});
 
 interface WrapperDragItem {
   type: string;
@@ -73,7 +76,6 @@ const ElementWrapper: React.FC<ElementWrapperProps> = (props) => {
     onRemoveElement,
     onMoveElement,
   } = props;
-  const classes = useStyles(props);
   const ref = useRef<HTMLDivElement>(null);
   let isDragging = false;
 
@@ -112,19 +114,18 @@ const ElementWrapper: React.FC<ElementWrapperProps> = (props) => {
   }, []);
 
   return (
-    <div
+    <Root
       ref={ref}
-      className={classNames(classes.root, {
-        [classes.actived]: !!actived,
-        [classes.dragging]: isDragging,
-      })}
+      actived={!!actived}
+      movable={!!onMoveElement}
+      className={classNames({ 'fg-dragging': isDragging })}
       onClick={onClick}
     >
       <div>{children}</div>
-      <IconButton className={classes.btn} onClick={handleRemove}>
+      <RemoveButton onClick={handleRemove}>
         <Clear />
-      </IconButton>
-    </div>
+      </RemoveButton>
+    </Root>
   );
 };
 

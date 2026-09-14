@@ -1,10 +1,8 @@
 import { MenuItem, TextField } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import classNames from 'classnames';
 import React, { useContext } from 'react';
 
 import FormgenContext from '../../FormgenContext';
-import { useCommonStyles } from '../../styles';
+import { commonSx } from '../../styles';
 import { BaseSettingOptionProps, SelectOption } from '../../types';
 
 export interface DefaultValueSettingProps extends BaseSettingOptionProps {
@@ -14,17 +12,9 @@ export interface DefaultValueSettingProps extends BaseSettingOptionProps {
   transValueToBool?: boolean;
 }
 
-const useStyles = makeStyles({
-  control: {
-    minWidth: 166,
-  }
-}, {name: 'fg-DefaultValueSetting'});
-
 const DefaultValueSetting: React.FC<DefaultValueSettingProps> = ({
   data, className, update, type, select, options, transValueToBool
 }) => {
-  const classes = useStyles();
-  const commonClasses = useCommonStyles();
   const { getLocale } = useContext(FormgenContext);
   if (data.settings.value === false) {
     return null;
@@ -44,8 +34,8 @@ const DefaultValueSetting: React.FC<DefaultValueSettingProps> = ({
     <TextField
       type={type}
       select={select}
-      className={classNames(commonClasses.settingField, className)}
-      InputProps={{classes: {formControl: classes.control}}}
+      className={className}
+      sx={[commonSx.settingField, { minWidth: 166 }]}
       label={getLocale('defaultValue')}
       value={data.value}
       onChange={handleChange}

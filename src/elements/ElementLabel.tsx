@@ -1,7 +1,7 @@
 import { Tooltip } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import Info from '@mui/icons-material/Info';
-import { makeStyles } from '@mui/styles';
+import { styled } from '@mui/material/styles';
 import React from 'react';
 
 export interface ElementLabelProps {
@@ -9,16 +9,13 @@ export interface ElementLabelProps {
   tip?: string;
 }
 
-const useStyles = makeStyles({
-  icon: {
-    fontSize: 13,
-    marginLeft: 8,
-    color: grey[500],
-  }
-}, {name: 'fg-ElementLabel'});
+const TipIcon = styled(Info)({
+  fontSize: 13,
+  marginLeft: 8,
+  color: grey[500],
+});
 
 const ElementLabel: React.FC<ElementLabelProps> = ({text, tip}) => {
-  const classes = useStyles();
   if (!tip) {
     return <>{text}</>;
   }
@@ -26,7 +23,7 @@ const ElementLabel: React.FC<ElementLabelProps> = ({text, tip}) => {
     <>
       {text}
       <Tooltip title={tip} placement="top">
-        <Info className={classes.icon} />
+        <TipIcon />
       </Tooltip>
     </>
   );

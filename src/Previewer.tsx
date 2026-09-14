@@ -1,6 +1,6 @@
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { makeStyles } from '@mui/styles';
+import { styled } from '@mui/material/styles';
 import classNames from 'classnames';
 import React, { useContext } from 'react';
 import { useDrop } from 'react-dnd';
@@ -10,7 +10,7 @@ import { BASE_LIBRARY_TYPE } from './constants';
 import ElementSwitch from './ElementSwitch';
 import ElementWrapper from './ElementWrapper';
 import FormgenContext from './FormgenContext';
-import { InjectFormgenTheme } from './theme';
+import { getFormgenTheme } from './theme';
 import { ElementData, ElementOptions, LibraryDragItem } from './types';
 import { isSelectElement } from './utils';
 
@@ -31,19 +31,20 @@ export interface PreviewerProps<Ctx = any> {
   context?: Ctx;
 }
 
-const useStyles = makeStyles<InjectFormgenTheme>(({formgen}) => ({
-  root: {
+const Root = styled('div')(({ theme }) => {
+  const formgen = getFormgenTheme(theme);
+  return {
     paddingTop: 20,
     paddingBottom: 20,
     height: '100%',
-  },
-  dragging: {
-    backgroundColor: formgen.palette.background.active,
-  },
-  draggingOver: {
-    backgroundColor: formgen.palette.background.dragover,
-  },
-}), {name: 'fg-Previewer'});
+    '&.fg-dragging': {
+      backgroundColor: formgen.palette.background.active,
+    },
+    '&.fg-draggingOver': {
+      backgroundColor: formgen.palette.background.dragover,
+    },
+  };
+});
 
 const generateDefElement = (options: ElementOptions): ElementData => {
   const element = {
@@ -114,8 +115,6 @@ const Previewer: React.FC<PreviewerProps> = ({
     }),
   });
 
-  const classes = useStyles();
-
   const createElementClickHandler = (id: string) => () => {
     if (onActiveElement) {
       onActiveElement(id);
@@ -123,10 +122,10 @@ const Previewer: React.FC<PreviewerProps> = ({
   };
 
   return (
-    <div
-      className={classNames(classes.root, className, {
-        [classes.dragging]: canDrop,
-        [classes.draggingOver]: isOver,
+    <Root
+      className={classNames(className, {
+        'fg-dragging': canDrop,
+        'fg-draggingOver': isOver,
       })}
       ref={drop}
     >
@@ -149,7 +148,7 @@ const Previewer: React.FC<PreviewerProps> = ({
           </ElementWrapper>
         ))}
       </LocalizationProvider>
-    </div>
+    </Root>
   );
 };
 

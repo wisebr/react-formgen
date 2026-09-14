@@ -22,7 +22,12 @@ export function getConfig({
   return {
     input,
     output,
-    external: ['react', 'react-dom', '@mui/icons-material', '@mui/material', '@mui/styles'],
+    external: (id) => (
+      id === 'react' ||
+      id === 'react-dom' ||
+      id.startsWith('@mui/') ||
+      id.startsWith('@emotion/')
+    ),
     plugins: [
       json(),
       typescript({
