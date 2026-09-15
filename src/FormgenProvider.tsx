@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { DndProvider } from 'react-dnd';
+import { DndProvider as ReactDndProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
 import { ICON_MAP } from './constants';
@@ -9,7 +9,12 @@ import enUs from './locales/en_US.json';
 import { BASE_SETTING_MAP } from './settings';
 import { ElementComponentMap, ObjectMap, SettingComponentMap } from './types';
 
+const DndProvider = ReactDndProvider as React.ComponentType<
+  React.PropsWithChildren<{ backend: typeof HTML5Backend }>
+>;
+
 export interface FormgenProviderProps {
+  children?: React.ReactNode;
   locales?: ObjectMap;
   adapterLocaleIsZh?: boolean;
   adapterLocale?: ObjectMap;

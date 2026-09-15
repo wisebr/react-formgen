@@ -6,6 +6,7 @@ import { BaseLibrary } from './Library';
 
 export interface LibContainerProps {
   className?: string;
+  children?: React.ReactNode;
 }
 
 const LibContainer: React.FC<LibContainerProps> = ({ className, children }) => {

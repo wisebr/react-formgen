@@ -33,6 +33,7 @@ const Field = styled(Grid)(({ theme }) => ({
 export interface ElementTipsWrapperProps {
   name: string;
   helpTip: string;
+  children?: React.ReactNode;
   renderName?: (name: string) => React.ReactNode;
   classes?: Partial<Record<'field' | 'fieldInfo' | 'variable', string>>;
 }
