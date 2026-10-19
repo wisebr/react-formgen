@@ -65,14 +65,14 @@ const FormGenerator = ({state}: FormGeneratorProps) => {
       settingMap={SETTINGS_MAP}
     >
       <Grid container>
-        <Grid item xs={2}>
+        <Grid size={{ xs: 2 }}>
           <LibContainer>
             <BaseLibrary dragType="library" />
             <Library dragType="library" name="extends" items={[KEY_PAIRS_INPUT_LIST_LIB_ITEM]} />
             <Library dragType="library" name="custom" items={customLibItems} />
           </LibContainer>
         </Grid>
-        <Grid item xs={6}>
+        <Grid size={{ xs: 6 }}>
           <Previewer
             elements={elements}
             onAddElement={addElement}
@@ -83,7 +83,7 @@ const FormGenerator = ({state}: FormGeneratorProps) => {
             acceptDropType="library"
           />
         </Grid>
-        <Grid item xs={4}>
+        <Grid size={{ xs: 4 }}>
           <SettingPanel
             element={activedElement}
             onUpdateElement={updateElement}

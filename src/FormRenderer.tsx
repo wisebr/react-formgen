@@ -1,14 +1,15 @@
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import React, { useContext, useMemo } from 'react';
-import { Controller, FormContextValues } from 'react-hook-form';
+import { Control, Controller } from 'react-hook-form';
 import FormgenContext from './FormgenContext';
 import ElementSwitch from './ElementSwitch';
 import { ElementTipsWrapper, ElementTipsWrapperProps } from './ElementTipsWrapper';
 import { ElementData } from './types';
 
-export interface FormRendererProps<Ctx = any> extends FormContextValues {
+export interface FormRendererProps<Ctx = any> {
   className?: string;
+  control: Control;
   elements: ElementData[];
   dateUtils?: any;
   context?: Ctx;
@@ -17,7 +18,7 @@ export interface FormRendererProps<Ctx = any> extends FormContextValues {
 }
 
 const FormRenderer: React.FC<FormRendererProps> = ({
-  className, elements, control, dateUtils, errors, context, showTips,
+  className, elements, control, dateUtils, context, showTips,
   elementTipsWrapperProps
 }) => {
   const { adapterLocale } = useContext(FormgenContext);
@@ -42,28 +43,44 @@ const FormRenderer: React.FC<FormRendererProps> = ({
               {...elementTipsWrapperProps}
             >
               <Controller
+                name={el.name}
                 control={control}
-                as={ElementSwitch}
-                scene="renderer"
-                {...el}
-                error={errors[el.name]}
                 rules={{required: el.required}}
                 defaultValue={el.value}
-                context={context}
+                render={({field, fieldState}) => (
+                  <ElementSwitch
+                    scene="renderer"
+                    {...el}
+                    value={field.value}
+                    onChange={field.onChange}
+                    name={field.name}
+                    inputRef={field.ref}
+                    error={fieldState.error}
+                    context={context}
+                  />
+                )}
               />
             </ElementTipsWrapper>
           );
         }) : sortedElements.map((el) => (
           <Controller
             key={el.id}
+            name={el.name}
             control={control}
-            as={ElementSwitch}
-            scene="renderer"
-            {...el}
-            error={errors[el.name]}
             rules={{required: el.required}}
             defaultValue={el.value}
-            context={context}
+            render={({field, fieldState}) => (
+              <ElementSwitch
+                scene="renderer"
+                {...el}
+                value={field.value}
+                onChange={field.onChange}
+                name={field.name}
+                inputRef={field.ref}
+                error={fieldState.error}
+                context={context}
+              />
+            )}
           />
         ))}
       </LocalizationProvider>

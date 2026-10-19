@@ -1,5 +1,4 @@
-import StyledEngineProvider from '@mui/material/StyledEngineProvider';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { StyledEngineProvider, createTheme, ThemeProvider } from '@mui/material/styles';
 import React from 'react';
 import { theme as formgenTheme } from 'react-formgen';
 

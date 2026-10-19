@@ -24,7 +24,7 @@ const Field = styled(Grid)(({ theme }) => ({
   },
   '&:hover': {
     backgroundColor: theme.palette.action.hover,
-    [`& ${FieldInfo}`]: {
+    '& .formgen-field-info': {
       display: 'block'
     }
   }
@@ -43,10 +43,10 @@ export const ElementTipsWrapper: React.FC<ElementTipsWrapperProps> = ({
 }) => {
   return (
     <Field container spacing={2} className={classes?.field} alignItems="center">
-      <Grid item sm={4} lg={3}>
+      <Grid size={{ sm: 4, lg: 3 }}>
         {children}
       </Grid>
-      <FieldInfo item sm={3} lg={2} className={classes?.fieldInfo}>
+      <FieldInfo size={{ sm: 3, lg: 2 }} className={classNames('formgen-field-info', classes?.fieldInfo)}>
         {renderName ? renderName(name) : (
           <Chip
             className={classNames(classes?.variable)}
@@ -59,7 +59,7 @@ export const ElementTipsWrapper: React.FC<ElementTipsWrapperProps> = ({
         )}
       </FieldInfo>
       {!!helpTip && (
-        <FieldInfo item sm={5} lg={7} className={classes?.fieldInfo}>
+        <FieldInfo size={{ sm: 5, lg: 7 }} className={classNames('formgen-field-info', classes?.fieldInfo)}>
           <div><Info />{`${helpTip}`}</div>
         </FieldInfo>
       )}

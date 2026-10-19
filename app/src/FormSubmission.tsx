@@ -24,7 +24,7 @@ const FormSubmission = ({elements}: FormSubmissionProps) => {
   return (
     <Box sx={{ p: '15px' }}>
       <Grid container>
-        <Grid item xs={6}>
+        <Grid size={{ xs: 6 }}>
 
           <FormgenProvider
             locales={locales}
@@ -37,13 +37,16 @@ const FormSubmission = ({elements}: FormSubmissionProps) => {
             />
           </FormgenProvider>
           <Controller
-            control={formHook.control}
-            as={TextField}
-            onChange={([ev]) => ev.target.value}
             name="test"
-            label="External Input"
-            defaultValue="5"
+            control={formHook.control}
             rules={{required: true}}
+            defaultValue="5"
+            render={({field}) => (
+              <TextField
+                {...field}
+                label="External Input"
+              />
+            )}
           />
           <br />
           <br />
@@ -55,7 +58,7 @@ const FormSubmission = ({elements}: FormSubmissionProps) => {
             Submit
           </Button>
         </Grid>
-        <Grid item xs={6}>
+        <Grid size={{ xs: 6 }}>
           <TextField
             label="value"
             fullWidth
@@ -71,7 +74,7 @@ const FormSubmission = ({elements}: FormSubmissionProps) => {
             fullWidth
             multiline
             variant="outlined"
-            value={JSON.stringify(formHook.errors, undefined, 4)}
+            value={JSON.stringify(formHook.formState.errors, undefined, 4)}
           />
         </Grid>
       </Grid>
