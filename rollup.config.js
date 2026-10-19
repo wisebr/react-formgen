@@ -4,6 +4,23 @@ import visualizer from 'rollup-plugin-visualizer';
 
 import pkg from './package.json';
 
+const EXTERNAL = [
+  'react',
+  'react-dom',
+  'react-hook-form',
+  'react-dnd',
+  'react-dnd-html5-backend',
+  'classnames',
+  'dayjs',
+  'shortid',
+  '@mui/material',
+  '@mui/icons-material',
+  '@mui/x-date-pickers',
+  '@emotion/react',
+  '@emotion/styled',
+];
+const isExternal = (id) => EXTERNAL.some((dep) => id === dep || id.startsWith(`${dep}/`));
+
 export function getConfig({
   tsconfig = './tsconfig.json',
   input = 'src/index.ts',
@@ -22,12 +39,7 @@ export function getConfig({
   return {
     input,
     output,
-    external: (id) => (
-      id === 'react' ||
-      id === 'react-dom' ||
-      id.startsWith('@mui/') ||
-      id.startsWith('@emotion/')
-    ),
+    external: isExternal,
     plugins: [
       json(),
       typescript({

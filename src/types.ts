@@ -1,4 +1,4 @@
-import { FieldError, NestDataObject } from 'react-hook-form';
+import { FieldError } from 'react-hook-form';
 
 export interface ObjectMap<T = any> {
   [key: string]: T;
@@ -132,7 +132,7 @@ export type CheckboxElementOptions = ElementOptions<{}, boolean>;
 export type DateTimePickerElementData = ElementData<{}, string>;
 export type DateTimePickerElementOptions = ElementOptions<{}, string>;
 
-export type ElementError = FieldError | FieldError[] | NestDataObject<any, any> | NestDataObject<any, any>[];
+export type ElementError = FieldError;
 
 export type ElementComponentMap<T extends BaseElementProps = any> = ObjectMap<React.ComponentType<T>>;
 export type SettingComponentMap<T extends BaseSettingProps = any> = ObjectMap<React.ComponentType<T>>;
