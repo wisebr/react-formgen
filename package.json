@@ -18,7 +18,6 @@
   ],
   "scripts": {
     "prepare": "npm run build",
-    "postinstall": "node ./scripts/link-peers.js",
     "test": "jest",
     "build": "npm run build:modern",
     "build:modern": "rollup -c",
