@@ -94,8 +94,13 @@ const ElementWrapper: React.FC<ElementWrapperProps> = (props) => {
     }
   });
 
-  const [collect, drag] = useDrag({
-    item: { type: acceptDropType, index },
+  const [collect, drag] = useDrag<
+    { index: number },
+    unknown,
+    { isDragging: boolean }
+  >({
+    type: acceptDropType,
+    item: { index },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),

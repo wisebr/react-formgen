@@ -26,13 +26,16 @@ const RenderBtn = styled('div')({
 const Main = () => {
   const fgElementsState = useElementsState();
   const [elements, setElements] = useState<ElementData[]>([]);
+  const [renderKey, setRenderKey] = useState(0);
 
   const handleRender = useCallback(() => {
     setElements([...fgElementsState.elements]);
+    setRenderKey((key) => key + 1);
   }, [fgElementsState.elements]);
 
   const handleRandom = useCallback(() => {
     setElements(generateElements());
+    setRenderKey((key) => key + 1);
   }, []);
   return (
     <Root>
@@ -51,7 +54,7 @@ const Main = () => {
       </RenderBtn>
       <Divider />
       <Title variant="h5">FormRenderer</Title>
-      <FormSubmission elements={elements} />
+      <FormSubmission key={renderKey} elements={elements} />
     </Root>
   );
 };

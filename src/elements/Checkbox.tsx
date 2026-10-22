@@ -33,7 +33,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
         label={label}
         control={
           <MuiCheckbox
-            inputRef={inputRef}
+            slotProps={{ input: { ref: inputRef } }}
             name={name}
             {...rest}
             onChange={handleChange}

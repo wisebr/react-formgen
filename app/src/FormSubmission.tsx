@@ -65,7 +65,7 @@ const FormSubmission = ({elements}: FormSubmissionProps) => {
             multiline
             variant="outlined"
             value={JSON.stringify(data, undefined, 4)}
-            InputLabelProps={{shrink: !!data}}
+            slotProps={{ inputLabel: { shrink: !!data } }}
           />
           <br />
           <br />

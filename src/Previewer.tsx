@@ -127,7 +127,9 @@ const Previewer: React.FC<PreviewerProps> = ({
         'fg-dragging': canDrop,
         'fg-draggingOver': isOver,
       })}
-      ref={drop}
+      ref={(node) => {
+        drop(node);
+      }}
     >
       <LocalizationProvider
         adapterLocale={adapterLocale}

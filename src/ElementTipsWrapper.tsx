@@ -42,7 +42,7 @@ export const ElementTipsWrapper: React.FC<ElementTipsWrapperProps> = ({
   classes, name, helpTip, children, renderName
 }) => {
   return (
-    <Field container spacing={2} className={classes?.field} alignItems="center">
+    <Field container spacing={2} className={classes?.field} sx={{ alignItems: 'center' }}>
       <Grid size={{ sm: 4, lg: 3 }}>
         {children}
       </Grid>

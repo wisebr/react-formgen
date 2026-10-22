@@ -6,27 +6,34 @@
     "@date-io/date-fns": "^2.10.8",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
-    "@mui/icons-material": "^7.3.11",
-    "@mui/material": "^7.3.11",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^14.3.1",
-    "@testing-library/user-event": "^14.5.2",
+    "@mui/icons-material": "^9.5.0",
+    "@mui/material": "^9.5.0",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.8",
     "@types/jest": "^24.0.0",
     "@types/node": "^12.0.0",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
     "react-hook-form": "^7.90.0",
     "react-scripts": "^5.0.1",
-    "typescript": "5.3.3"
+    "typescript": "6.0.3"
   },
   "overrides": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
     "react-scripts": {
-      "typescript": "^5"
+      "typescript": "6.0.3"
     }
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\](?!(react-dnd|react-dnd-html5-backend|dnd-core|@react-dnd)[/\\\\]).+\\.(js|mjs|jsx|ts|tsx)$",
+      "^.+\\.module\\.(css|sass|scss)$"
+    ]
   },
   "scripts": {
     "start": "react-scripts start",
