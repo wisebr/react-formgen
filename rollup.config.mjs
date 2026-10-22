@@ -1,8 +1,10 @@
+import { readFileSync } from 'node:fs';
+
 import json from '@rollup/plugin-json';
 import typescript from 'rollup-plugin-typescript2';
-import visualizer from 'rollup-plugin-visualizer';
+import { visualizer } from 'rollup-plugin-visualizer';
 
-import pkg from './package.json';
+const pkg = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf8'));
 
 const EXTERNAL = [
   'react',
@@ -26,12 +28,7 @@ export function getConfig({
   input = 'src/index.ts',
   output = [
     {
-      file: `dist/${pkg.name}.js`,
-      format: 'cjs',
-      exports: 'named',
-    },
-    {
-      file: `dist/${pkg.name}.es.js`,
+      file: `dist/${pkg.name}.mjs`,
       format: 'esm',
     },
   ],

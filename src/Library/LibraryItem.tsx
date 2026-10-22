@@ -33,8 +33,13 @@ const Icon = styled('span')({
 
 const LibraryItem: React.FC<LibraryItemProps> = ({ data: {element, id, name, thumb}, dragType }) => {
   const { getLocale, iconMap } = useContext(FormgenContext);
-  const [{isDragging}, drag] = useDrag({
-    item: { element, type: dragType, id },
+  const [{isDragging}, drag] = useDrag<
+    { element: typeof element; id: string },
+    unknown,
+    { isDragging: boolean }
+  >({
+    type: dragType,
+    item: { element, id },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -51,7 +56,12 @@ const LibraryItem: React.FC<LibraryItemProps> = ({ data: {element, id, name, thu
   const label = name || getLocale(`lib.element.${element.type}`);
 
   return (
-    <Item isDragging={isDragging} ref={drag}>
+    <Item
+      isDragging={isDragging}
+      ref={(node) => {
+        drag(node);
+      }}
+    >
       <Icon>
         {icon}
       </Icon>
