@@ -18,8 +18,8 @@ export interface KeyPairsInputListProps extends BaseElementProps<string>, KeyPai
 
 const KeyPairsInputList: React.FC<KeyPairsInputListProps> = (props) => {
   const {
-    value, onChange, name, label, inputRef, disabled, error,
-    // TODO: implement logic with required, scene,
+    value, onChange, name, label, inputRef, disabled, error, scene,
+    // TODO: implement logic with required
     keys, inputPropsMap
   } = props;
 
@@ -66,8 +66,15 @@ const KeyPairsInputList: React.FC<KeyPairsInputListProps> = (props) => {
   }, [valueMap]);
 
   return (
-    <div>
-      <Typography sx={{ color: error ? red[500] : 'inherit' }}>{label}</Typography>
+    <div style={scene === 'renderer' ? { display: 'contents' } : undefined}>
+      <Typography
+        sx={{
+          color: error ? red[500] : 'inherit',
+          flex: scene === 'renderer' ? '0 0 100%' : undefined,
+          mb: 1,
+        }}>
+        {label}
+      </Typography>
       {keys.map((key) => (
         <KeyPairInput
           disabled={disabled}

@@ -1,34 +1,48 @@
-import { Chip, Grid } from '@mui/material';
-import { blueGrey } from '@mui/material/colors';
+import { Chip, Tooltip } from '@mui/material';
+import { grey } from '@mui/material/colors';
 import Info from '@mui/icons-material/Info';
 import { styled } from '@mui/material/styles';
 import classNames from 'classnames';
 import React from 'react';
 
-const FieldInfo = styled(Grid)({
-  display: 'none',
-  '& svg': {
-    position: 'relative',
-    top: 2,
-    fontSize: 14,
-    color: blueGrey[500],
-    marginRight: 8
-  }
+const Field = styled('div')(({ theme }) => ({
+  display: 'flex',
+  flexWrap: 'wrap',
+  alignItems: 'center',
+  columnGap: theme.spacing(0.5),
+  padding: theme.spacing(1, 2),
+  '&:not(:last-of-type)': {
+    marginBottom: theme.spacing(1),
+  },
+}));
+
+const FieldContent = styled('div')({
+  display: 'contents',
+  '& .MuiFormControl-root': {
+    marginRight: 0,
+  },
 });
 
-const Field = styled(Grid)(({ theme }) => ({
-  padding: 10,
-  marginBottom: 15,
-  '&:last-of-type': {
-    marginBottom: 30,
-  },
-  '&:hover': {
-    backgroundColor: theme.palette.action.hover,
-    '& .formgen-field-info': {
-      display: 'block'
-    }
-  }
+const TipContent = styled('div')(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  gap: theme.spacing(1),
+  maxWidth: 360,
+  padding: theme.spacing(0.5),
 }));
+
+const HelpTip = styled('div')({
+  lineHeight: 1.5,
+  overflowWrap: 'anywhere',
+});
+
+const TipIcon = styled(Info)({
+  flexShrink: 0,
+  fontSize: 18,
+  color: grey[400],
+  cursor: 'default',
+});
 
 export interface ElementTipsWrapperProps {
   name: string;
@@ -39,30 +53,41 @@ export interface ElementTipsWrapperProps {
 }
 
 export const ElementTipsWrapper: React.FC<ElementTipsWrapperProps> = ({
-  classes, name, helpTip, children, renderName
+  classes,
+  name,
+  helpTip,
+  children,
+  renderName,
 }) => {
   return (
-    <Field container spacing={2} className={classes?.field} sx={{ alignItems: 'center' }}>
-      <Grid size={{ sm: 4, lg: 3 }}>
-        {children}
-      </Grid>
-      <FieldInfo size={{ sm: 3, lg: 2 }} className={classNames('formgen-field-info', classes?.fieldInfo)}>
-        {renderName ? renderName(name) : (
-          <Chip
-            className={classNames(classes?.variable)}
-            size="small"
-            label={`${name}`}
-            clickable
-            color="primary"
-            sx={{ cursor: 'default' }}
-          />
-        )}
-      </FieldInfo>
-      {!!helpTip && (
-        <FieldInfo size={{ sm: 5, lg: 7 }} className={classNames('formgen-field-info', classes?.fieldInfo)}>
-          <div><Info />{`${helpTip}`}</div>
-        </FieldInfo>
-      )}
+    <Field className={classes?.field}>
+      <FieldContent>{children}</FieldContent>
+      <Tooltip
+        arrow
+        placement="top"
+        title={
+          <TipContent>
+            {renderName ? (
+              renderName(name)
+            ) : (
+              <Chip
+                className={classNames(classes?.variable)}
+                size="small"
+                label={`${name}`}
+                clickable
+                color="primary"
+                sx={{ cursor: 'default' }}
+              />
+            )}
+            {!!helpTip && <HelpTip>{helpTip}</HelpTip>}
+          </TipContent>
+        }>
+        <TipIcon
+          aria-label={name}
+          className={classNames('formgen-field-info', classes?.fieldInfo)}
+          tabIndex={0}
+        />
+      </Tooltip>
     </Field>
   );
 };

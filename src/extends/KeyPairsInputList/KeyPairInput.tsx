@@ -19,10 +19,17 @@ export interface KeyPairInputProps extends ExternalKeyPairInputProps {
   onChange?: (val: string, name?: string) => void;
 }
 
-const Root = styled('div')({
+const Root = styled('div')(({ theme }) => ({
   display: 'flex',
-  flexWrap: 'nowrap'
-});
+  flexWrap: 'wrap',
+  gap: theme.spacing(1),
+  width: '100%',
+  marginBottom: theme.spacing(1),
+  '&:last-of-type': {
+    width: 'auto',
+    marginBottom: 0,
+  },
+}));
 
 const ValueInput = styled(TextField)({
   minWidth: 180,
